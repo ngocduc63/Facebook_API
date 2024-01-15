@@ -4,20 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="23cb2c54-3c39-4df6-92f4-23e60e3d4d48" name="Changes" comment="update git ignore">
-      <change afterPath="$PROJECT_DIR$/library/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/library/config.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/library/extension.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/library/friends/controller.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/library/friends/services.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/library/model.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/library/posts/controller.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/library/posts/services.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/library/users/controller.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/library/users/services.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+    <list default="true" id="23cb2c54-3c39-4df6-92f4-23e60e3d4d48" name="Changes" comment="create db">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app.py" beforeDir="false" afterPath="$PROJECT_DIR$/app.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/library/config.py" beforeDir="false" afterPath="$PROJECT_DIR$/library/config.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -64,18 +53,18 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "ASKED_ADD_EXTERNAL_FILES": "true",
-    "Python.app.executor": "Run",
-    "Python.main.executor": "Run",
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "dev",
-    "last_opened_file_path": "C:/Python_Code/Facebook_API/library/friends",
-    "settings.editor.selected.configurable": "com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
+    &quot;Python.app.executor&quot;: &quot;Run&quot;,
+    &quot;Python.main.executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;dev&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Python_Code/Facebook_API/library/friends&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Python_Code\Facebook_API\library\friends" />
@@ -170,7 +159,15 @@
       <option name="project" value="LOCAL" />
       <updated>1705237602118</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="create db">
+      <option name="closed" value="true" />
+      <created>1705249092668</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1705249092668</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -187,6 +184,7 @@
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
     <MESSAGE value="update git ignore" />
-    <option name="LAST_COMMIT_MESSAGE" value="update git ignore" />
+    <MESSAGE value="create db" />
+    <option name="LAST_COMMIT_MESSAGE" value="create db" />
   </component>
 </project>
