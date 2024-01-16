@@ -6,14 +6,7 @@
   <component name="ChangeListManager">
     <list default="true" id="23cb2c54-3c39-4df6-92f4-23e60e3d4d48" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/library/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/library/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/library/extension.py" beforeDir="false" afterPath="$PROJECT_DIR$/library/extension.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/library/friends/controller.py" beforeDir="false" afterPath="$PROJECT_DIR$/library/friends/controller.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/library/friends/services.py" beforeDir="false" afterPath="$PROJECT_DIR$/library/friends/services.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/library/library_ma.py" beforeDir="false" afterPath="$PROJECT_DIR$/library/facebook_ma.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/library/model.py" beforeDir="false" afterPath="$PROJECT_DIR$/library/model.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/library/users/controller.py" beforeDir="false" afterPath="$PROJECT_DIR$/library/users/controller.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/library/users/services.py" beforeDir="false" afterPath="$PROJECT_DIR$/library/users/services.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/library/facebook_ma.py" beforeDir="false" afterPath="$PROJECT_DIR$/library/facebook_ma.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -191,7 +184,15 @@
       <option name="project" value="LOCAL" />
       <updated>1705336688762</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="add api add, get, get all : user, friend,">
+      <option name="closed" value="true" />
+      <created>1705399944850</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1705399944850</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -211,6 +212,7 @@
     <MESSAGE value="create db" />
     <MESSAGE value="fix create db" />
     <MESSAGE value="create api add user" />
-    <option name="LAST_COMMIT_MESSAGE" value="create api add user" />
+    <MESSAGE value="add api add, get, get all : user, friend," />
+    <option name="LAST_COMMIT_MESSAGE" value="add api add, get, get all : user, friend," />
   </component>
 </project>
