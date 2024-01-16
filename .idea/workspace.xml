@@ -4,11 +4,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="23cb2c54-3c39-4df6-92f4-23e60e3d4d48" name="Changes" comment="fix create db">
-      <change afterPath="$PROJECT_DIR$/library/library_ma.py" afterDir="false" />
+    <list default="true" id="23cb2c54-3c39-4df6-92f4-23e60e3d4d48" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/library/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/library/__init__.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/library/extension.py" beforeDir="false" afterPath="$PROJECT_DIR$/library/extension.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/library/friends/controller.py" beforeDir="false" afterPath="$PROJECT_DIR$/library/friends/controller.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/library/friends/services.py" beforeDir="false" afterPath="$PROJECT_DIR$/library/friends/services.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/library/library_ma.py" beforeDir="false" afterPath="$PROJECT_DIR$/library/facebook_ma.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/library/model.py" beforeDir="false" afterPath="$PROJECT_DIR$/library/model.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/library/users/controller.py" beforeDir="false" afterPath="$PROJECT_DIR$/library/users/controller.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/library/users/services.py" beforeDir="false" afterPath="$PROJECT_DIR$/library/users/services.py" afterDir="false" />
@@ -58,18 +60,19 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
-    &quot;Python.app.executor&quot;: &quot;Run&quot;,
-    &quot;Python.main.executor&quot;: &quot;Run&quot;,
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;dev&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Python_Code/Facebook_API/library/friends&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ASKED_ADD_EXTERNAL_FILES": "true",
+    "Python.app.executor": "Run",
+    "Python.main.executor": "Run",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "git-widget-placeholder": "dev",
+    "ignore.virus.scanning.warn.message": "true",
+    "last_opened_file_path": "C:/Python_Code/Facebook_API/library/friends",
+    "settings.editor.selected.configurable": "com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Python_Code\Facebook_API\library\friends" />
@@ -180,7 +183,15 @@
       <option name="project" value="LOCAL" />
       <updated>1705327673767</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="create api add user">
+      <option name="closed" value="true" />
+      <created>1705336688762</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1705336688762</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -199,6 +210,7 @@
     <MESSAGE value="update git ignore" />
     <MESSAGE value="create db" />
     <MESSAGE value="fix create db" />
-    <option name="LAST_COMMIT_MESSAGE" value="fix create db" />
+    <MESSAGE value="create api add user" />
+    <option name="LAST_COMMIT_MESSAGE" value="create api add user" />
   </component>
 </project>
