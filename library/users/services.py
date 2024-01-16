@@ -4,6 +4,7 @@ from library.model import Users
 from flask import request, jsonify
 from datetime import datetime
 import time
+from ..extension import my_json, obj_success
 
 user_schema = UserSchema()
 users_schema = UserSchema(many=True)
@@ -38,29 +39,32 @@ def add_user_service():
                              birth_date, avatar, cover_photo, gender, role, create_at)
             db.session.add(new_user)
             db.session.commit()
-            return "Add user success"
+            return my_json(data)
         except IndentationError:
             db.session.rollback()
-            return "Can not add user"
+            return my_json(error_code=1, mess="error in DB")
+        except Exception:
+            return my_json(error_code=2, mess="error data not match")
 
     else:
-        return "Request error"
-
+        return my_json(error_code=3, mess="error validate data")
 
 
 def get_user_by_id_service(id):
     user = Users.query.get(id)
 
     if user:
-        return user_schema.jsonify(user)
+        user_data = user_schema.dump(user)
+        return jsonify(obj_success(user_data))
     else:
-        return "Not found user"
+        return my_json(error_code=1, mess="Not found user")
 
 
 def get_all_user_service():
     users = Users.query.all()
 
     if users:
-        return users_schema.jsonify(users)
+        users_data = users_schema.dump(users)
+        return jsonify(obj_success(users_data))
     else:
-        return "Not found user"
+        return my_json(error_code=1, mess="Not found user")
