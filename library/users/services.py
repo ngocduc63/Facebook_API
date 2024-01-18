@@ -1,5 +1,5 @@
 import math
-from sqlalchemy import func
+from sqlalchemy import func, text
 from library.extension import db
 from library.facebook_ma import UserSchema
 from library.model import Users
@@ -17,10 +17,7 @@ users_schema = UserSchema(many=True)
 def add_user_service():
     data = request.json
     check_data = (data and ('username' in data) and ('email' in data) and
-                  ('password_hash' in data) and ('description' in data) and ('nickname' in data) and
-                  ('birth_date' in data) and ('avatar' in data) and ('cover_photo' in data) and
-                  ('gender' in data) and ('role' in data)
-                  )
+                  ('password_hash' in data) and ('birth_date' in data) and ('gender' in data))
 
     if check_data:
         try:
@@ -33,26 +30,26 @@ def add_user_service():
         username = data['username']
         email = data['email']
         password_hash = data['password_hash']
-        description = data['description']
-        nickname = data['nickname']
+        description = ""
+        nickname = ""
         birth_date = birth_date_timestamp
-        avatar = data['avatar']
-        cover_photo = data['cover_photo']
+        avatar = ""
+        cover_photo = ""
         gender = data['gender']
-        role = data['role']
+        role = 1
         create_at = int(time.time())
         try:
             new_user = Users(username, email, password_hash, description, nickname,
                              birth_date, avatar, cover_photo, gender, role, create_at)
             db.session.add(new_user)
             db.session.commit()
-            return my_json(data)
+            return my_json(user_schema.dump(new_user))
         except IndentationError:
             db.session.rollback()
             return my_json(error_code=1, mess="error in DB")
         except Exception as e:
             print(e)
-            return my_json(error_code=2, mess="error data not match")
+            # return my_json(error_code=2, mess="error data not match")
 
     else:
         return my_json(error_code=3, mess="error validate data")
@@ -137,14 +134,14 @@ def search_approximate(array, key, value):
 def search_user_service():
 
     data = request.json
-    if not (data and ("page" in data) and ("username" in data)): return my_json(error_code=2, mess="data not match")
+    if not data and ("page" in data) and ("username" in data):
+        return my_json(error_code=2, mess="data not match")
 
     page = data['page']
     username_input = data['username']
 
-    users = (Users.query.filter(func.lower(Users.username)
-                                .ilike(f'%{username_input.lower()}%'))
-                                .paginate(page=page, per_page=PER_PAGE_USER, error_out=False))
+    users = (Users.query.filter(func.lower(Users.username).ilike(f'%{username_input.lower()}%'))
+             .paginate(page=page, per_page=PER_PAGE_USER, error_out=False))
 
     cur_page = users.page
     max_page = math.ceil(users.total / PER_PAGE_USER)
@@ -156,3 +153,22 @@ def search_user_service():
         return jsonify(obj_success_paginate(users_data, cur_page, max_page))
     else:
         return my_json(error_code=1, mess="Not found user")
+
+
+def user_login_service():
+    data = request.json
+
+    if not data and ('email' in data) and ('password' in data):
+        return my_json(error_code=1, mess="data not match")
+
+    email_data = data['email']
+    user = Users.query.filter(text("(users.email) = (:email)")).params(email=email_data).first()
+    user_data = user_schema.dump(user)
+
+    if not user_data:
+        return my_json(error_code=2, mess="email not found")
+
+    if not user_data['password_hash'] == data['password']:
+        return my_json(error_code=3, mess="password fail")
+
+    return my_json(user_data)
