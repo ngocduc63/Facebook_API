@@ -7,6 +7,8 @@
     <list default="true" id="23cb2c54-3c39-4df6-92f4-23e60e3d4d48" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/instance/facebook.db" beforeDir="false" afterPath="$PROJECT_DIR$/instance/facebook.db" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/library/.env" beforeDir="false" afterPath="$PROJECT_DIR$/library/.env" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/library/extension.py" beforeDir="false" afterPath="$PROJECT_DIR$/library/extension.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/library/users/controller.py" beforeDir="false" afterPath="$PROJECT_DIR$/library/users/controller.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/library/users/services.py" beforeDir="false" afterPath="$PROJECT_DIR$/library/users/services.py" afterDir="false" />
     </list>
@@ -44,6 +46,9 @@
       </UrlAndAccount>
     </option>
   </component>
+  <component name="ProblemsViewState">
+    <option name="selectedTabId" value="CurrentFile" />
+  </component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 7
 }</component>
@@ -75,6 +80,7 @@
       <recent name="C:\Python_Code\Facebook_API" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Python_Code\Facebook_API\library\users" />
       <recent name="C:\Python_Code\Facebook_API\library" />
       <recent name="C:\Python_Code\Facebook_API" />
     </key>
@@ -213,7 +219,15 @@
       <option name="project" value="LOCAL" />
       <updated>1705509566271</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="update user: LOGIN, REGISTER">
+      <option name="closed" value="true" />
+      <created>1705588524283</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1705588524283</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -237,6 +251,7 @@
     <MESSAGE value="update" />
     <MESSAGE value="update format json user api" />
     <MESSAGE value="paginate, update api update, delete, search user" />
-    <option name="LAST_COMMIT_MESSAGE" value="paginate, update api update, delete, search user" />
+    <MESSAGE value="update user: LOGIN, REGISTER" />
+    <option name="LAST_COMMIT_MESSAGE" value="update user: LOGIN, REGISTER" />
   </component>
 </project>

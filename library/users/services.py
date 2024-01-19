@@ -1,14 +1,19 @@
 import math
+import os
+
 from sqlalchemy import func, text
 from library.extension import db
 from library.facebook_ma import UserSchema
 from library.model import Users
-from flask import request, jsonify
+from flask import request, jsonify, send_from_directory
 from datetime import datetime
 import time
-from ..extension import my_json, obj_success, obj_success_paginate
+from ..extension import my_json, obj_success, obj_success_paginate, allowed_file
 from unidecode import unidecode
 from ..config import PER_PAGE_USER
+from werkzeug.utils import secure_filename
+
+UPLOAD_AVATAR_FOLDER = "upload/avatar"
 
 user_schema = UserSchema()
 users_schema = UserSchema(many=True)
@@ -49,7 +54,7 @@ def add_user_service():
             return my_json(error_code=1, mess="error in DB")
         except Exception as e:
             print(e)
-            # return my_json(error_code=2, mess="error data not match")
+            return my_json(error_code=2, mess="error email existed or er db")
 
     else:
         return my_json(error_code=3, mess="error validate data")
@@ -172,3 +177,41 @@ def user_login_service():
         return my_json(error_code=3, mess="password fail")
 
     return my_json(user_data)
+
+
+def change_name_file(filename, user_id):
+    name = f"{filename.split('.')[0]}_{user_id}_{str(int(time.time()))}"
+    return f"{name}.{filename.split('.')[1]}"
+
+
+def upload_avatar_service(user_id):
+    data = request.files
+    user = Users.query.get(user_id)
+
+    if not user:
+        return my_json(error_code=3, mess="not found user")
+
+    if not data:
+        return my_json(error_code=1, mess="not found data request")
+
+    file = data['file']
+    if file.filename == '':
+        return my_json(error_code=2, mess="file null")
+
+    if file and allowed_file(file.filename):
+        try:
+            filename = secure_filename(file.filename)
+            filename = change_name_file(filename, user_id)
+            file.save(os.path.join(os.path.abspath(os.path.dirname(__file__)), UPLOAD_AVATAR_FOLDER, filename))
+
+            user.avatar = filename
+            db.session.commit()
+            users_data = user_schema.dump(user)
+            return jsonify(obj_success(users_data))
+        except Exception as e:
+            print(e)
+            return my_json(error_code=4, mess="error save data")
+
+
+def get_image_service(filename):
+    return send_from_directory(os.path.join(os.path.abspath(os.path.dirname(__file__)), UPLOAD_AVATAR_FOLDER), filename)

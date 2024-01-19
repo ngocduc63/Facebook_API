@@ -5,6 +5,8 @@ from flask import jsonify
 db = SQLAlchemy()
 ma = Marshmallow()
 
+ALLOWED_EXTENSIONS = ['png', 'jpg', 'jpeg', 'mp4']
+
 
 def my_json(data=None, error_code=0, mess="fail"):
     if error_code == 0:
@@ -35,3 +37,7 @@ def obj_success_paginate(data, cur_page, max_page):
             "currentPage": cur_page,
             "maxPage": max_page
         }
+
+
+def allowed_file(filename):
+    return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
