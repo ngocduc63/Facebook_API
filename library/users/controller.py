@@ -1,7 +1,8 @@
 from flask import Blueprint
 from .services import (add_user_service, get_user_by_id_service, get_all_user_service,
                        update_profile_by_id_service, delete_user_by_id_service, search_user_service,
-                       user_login_service, upload_avatar_service, get_image_service
+                       user_login_service, upload_avatar_service, get_avatar_from_filename_service,
+                       upload_cover_photo_service, get_cover_photo_from_filename_service
                        )
 
 users = Blueprint("users", __name__)
@@ -47,6 +48,16 @@ def upload_avatar(user_id):
     return upload_avatar_service(user_id)
 
 
+@users.route("/user-management/user/cover/<int:user_id>", methods=["POST"])
+def upload_cover_photo(user_id):
+    return upload_cover_photo_service(user_id)
+
+
 @users.route("/user-management/user/avatar/<string:filename>", methods=["GET"])
 def get_avatar(filename):
-    return get_image_service(filename)
+    return get_avatar_from_filename_service(filename)
+
+
+@users.route("/user-management/user/cover/<string:filename>", methods=["GET"])
+def get_cover_photo(filename):
+    return get_cover_photo_from_filename_service(filename)

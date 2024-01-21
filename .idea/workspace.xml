@@ -4,13 +4,15 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="23cb2c54-3c39-4df6-92f4-23e60e3d4d48" name="Changes" comment="">
+    <list default="true" id="23cb2c54-3c39-4df6-92f4-23e60e3d4d48" name="Changes" comment="update: upload avatar for user">
+      <change afterPath="$PROJECT_DIR$/library/upload/cover_photo/Gold_2_1705849656.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/instance/facebook.db" beforeDir="false" afterPath="$PROJECT_DIR$/instance/facebook.db" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/library/.env" beforeDir="false" afterPath="$PROJECT_DIR$/library/.env" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/library/extension.py" beforeDir="false" afterPath="$PROJECT_DIR$/library/extension.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/library/users/controller.py" beforeDir="false" afterPath="$PROJECT_DIR$/library/users/controller.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/library/users/services.py" beforeDir="false" afterPath="$PROJECT_DIR$/library/users/services.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/library/users/upload/avatar/Gold_2_1705676106.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/library/users/upload/avatar/avt_dn_1_1705676028.jpg" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -227,7 +229,15 @@
       <option name="project" value="LOCAL" />
       <updated>1705588524283</updated>
     </task>
-    <option name="localTasksCounter" value="11" />
+    <task id="LOCAL-00011" summary="update: upload avatar for user">
+      <option name="closed" value="true" />
+      <created>1705677223581</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1705677223581</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -252,6 +262,7 @@
     <MESSAGE value="update format json user api" />
     <MESSAGE value="paginate, update api update, delete, search user" />
     <MESSAGE value="update user: LOGIN, REGISTER" />
-    <option name="LAST_COMMIT_MESSAGE" value="update user: LOGIN, REGISTER" />
+    <MESSAGE value="update: upload avatar for user" />
+    <option name="LAST_COMMIT_MESSAGE" value="update: upload avatar for user" />
   </component>
 </project>
