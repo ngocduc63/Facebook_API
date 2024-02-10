@@ -12,6 +12,7 @@ from ..extension import (my_json, obj_success, obj_success_paginate, allowed_fil
 from unidecode import unidecode
 from ..config import PER_PAGE_USER
 from werkzeug.utils import secure_filename
+from flask_jwt_extended import create_access_token
 
 UPLOAD_AVATAR_FOLDER = "upload/avatar"
 UPLOAD_COVER_PHOTO_FOLDER = "upload/cover_photo"
@@ -178,7 +179,15 @@ def user_login_service():
     if not user_data['password_hash'] == data['password']:
         return my_json(error_code=3, mess="password fail")
 
-    return my_json(user_data)
+    access_token = create_access_token(user_data)
+
+    rs = {
+        "errorCode": 0,
+        "message": "success",
+        "data": user_data,
+        "access_token": access_token
+    }
+    return jsonify(rs)
 
 
 def change_name_file(filename, user_id):

@@ -4,6 +4,7 @@ from .friends.controller import friends
 from .extension import db, ma
 from .model import Users, Friends, Posts, Comments, Likes
 import os
+from flask_jwt_extended import JWTManager
 
 
 def create_db(app):
@@ -13,9 +14,14 @@ def create_db(app):
         print("Create DB!!!")
 
 
-def create_app(config_file = "config.py"):
+def create_app(config_file="config.py"):
     app = Flask(__name__)
     app.config.from_pyfile(config_file)
+
+    # Set up the Flask-JWT-Extended extension
+    app.config["JWT_SECRET_KEY"] = os.environ.get("JWT_SECRET_KEY")
+    jwt = JWTManager(app)
+
     db.init_app(app)
     ma.init_app(app)
     create_db(app)
