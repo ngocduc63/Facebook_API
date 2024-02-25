@@ -4,15 +4,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="23cb2c54-3c39-4df6-92f4-23e60e3d4d48" name="Changes" comment="update: upload cover photo for user&#10;auto add post when user update image">
-      <change afterPath="$PROJECT_DIR$/library/upload/avatar/avt_dn_3_1705850831.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/library/upload/avatar/pay_3_1705850236.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/library/upload/cover_photo/avt_dn_3_1705850284.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/library/upload/cover_photo/pay_2_1705849937.jpg" afterDir="false" />
+    <list default="true" id="23cb2c54-3c39-4df6-92f4-23e60e3d4d48" name="Changes" comment="The first commit in 2024: create access token when user login">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/instance/facebook.db" beforeDir="false" afterPath="$PROJECT_DIR$/instance/facebook.db" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/library/.env" beforeDir="false" afterPath="$PROJECT_DIR$/library/.env" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/library/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/library/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/library/extension.py" beforeDir="false" afterPath="$PROJECT_DIR$/library/extension.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/library/model.py" beforeDir="false" afterPath="$PROJECT_DIR$/library/model.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/library/users/controller.py" beforeDir="false" afterPath="$PROJECT_DIR$/library/users/controller.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/library/users/services.py" beforeDir="false" afterPath="$PROJECT_DIR$/library/users/services.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -246,7 +244,15 @@
       <option name="project" value="LOCAL" />
       <updated>1705850570080</updated>
     </task>
-    <option name="localTasksCounter" value="13" />
+    <task id="LOCAL-00013" summary="The first commit in 2024: create access token when user login">
+      <option name="closed" value="true" />
+      <created>1707528374605</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1707528374605</updated>
+    </task>
+    <option name="localTasksCounter" value="14" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -273,6 +279,7 @@
     <MESSAGE value="update user: LOGIN, REGISTER" />
     <MESSAGE value="update: upload avatar for user" />
     <MESSAGE value="update: upload cover photo for user&#10;auto add post when user update image" />
-    <option name="LAST_COMMIT_MESSAGE" value="update: upload cover photo for user&#10;auto add post when user update image" />
+    <MESSAGE value="The first commit in 2024: create access token when user login" />
+    <option name="LAST_COMMIT_MESSAGE" value="The first commit in 2024: create access token when user login" />
   </component>
 </project>

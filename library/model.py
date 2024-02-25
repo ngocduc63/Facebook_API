@@ -1,25 +1,25 @@
-from .extension import db
+from .extension import db, get_current_time
+from werkzeug.security import generate_password_hash, check_password_hash
 
 
 class Users(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(256), nullable=False)
-    email = db.Column(db.String(256), unique=True, nullable=False)
-    password_hash = db.Column(db.String(256), nullable=False)
+    email = db.Column(db.String(), unique=True, nullable=False)
+    password_hash = db.Column(db.String(), nullable=False)
     description = db.Column(db.String(256))
     nickname = db.Column(db.String(256))
     birth_date = db.Column(db.Integer)
-    avatar = db.Column(db.String(256))
-    cover_photo = db.Column(db.String(256))
+    avatar = db.Column(db.String())
+    cover_photo = db.Column(db.String())
     gender = db.Column(db.Integer, nullable=False)
     role = db.Column(db.Integer)
     create_at = db.Column(db.Integer, nullable=False)
 
-    def __init__(self, username, email, password_hash, description, nickname,
+    def __init__(self, username, email, description, nickname,
                  birth_date, avatar, cover_photo, gender, role, create_at):
         self.username = username
         self.email = email
-        self.password_hash = password_hash
         self.description = description
         self.nickname = nickname
         self.birth_date = birth_date
@@ -28,6 +28,12 @@ class Users(db.Model):
         self.gender = gender
         self.role = role
         self.create_at = create_at
+
+    def set_password(self, password):
+        self.password_hash = generate_password_hash(password)
+
+    def check_password(self, password):
+        return check_password_hash(self.password_hash, password)
 
 
 class Friends(db.Model):
@@ -44,8 +50,8 @@ class Friends(db.Model):
 
 class Posts(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    title = db.Column(db.String(256))
-    image = db.Column(db.String(256))
+    title = db.Column(db.String())
+    image = db.Column(db.String())
     user_id = db.Column(db.Integer, db.ForeignKey("users.id"))
     status = db.Column(db.Integer)
     isDeleted = db.Column(db.Integer)
@@ -64,7 +70,7 @@ class Comments(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey("users.id"))
     post_id = db.Column(db.Integer, db.ForeignKey("posts.id"))
-    content = db.Column(db.String(256))
+    content = db.Column(db.String())
     isDeleted = db.Column(db.Integer)
     create_at = db.Column(db.Integer, nullable=False)
 
@@ -89,3 +95,16 @@ class Likes(db.Model):
         self.post_id = post_id
         self.isLiked = isLiked
         self.create_at = create_at
+
+
+class TokenBlocklist(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    jti = db.Column(db.String(), nullable=True)
+    create_at = db.Column(db.Integer, default=get_current_time())
+
+    def __repr__(self):
+        return f"<Token {self.jti}>"
+
+    def save(self):
+        db.session.add(self)
+        db.session.commit()

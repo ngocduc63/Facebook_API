@@ -1,5 +1,4 @@
 import math
-import os
 
 from sqlalchemy import func, text
 from library.extension import db
@@ -37,18 +36,19 @@ def add_user_service():
 
         username = data['username']
         email = data['email']
-        password_hash = data['password_hash']
         description = ""
         nickname = ""
         birth_date = birth_date_timestamp
         avatar = ""
         cover_photo = ""
         gender = data['gender']
-        role = 1
+        role = 0
         create_at = get_current_time()
         try:
-            new_user = Users(username, email, password_hash, description, nickname,
+            new_user = Users(username, email, description, nickname,
                              birth_date, avatar, cover_photo, gender, role, create_at)
+
+            new_user.set_password(password=data['password_hash'])
             db.session.add(new_user)
             db.session.commit()
             return my_json(user_schema.dump(new_user))
@@ -73,7 +73,11 @@ def get_user_by_id_service(user_id):
         return my_json(error_code=1, mess="Not found user")
 
 
-def get_all_user_service(page):
+def get_all_user_service(page, claims):
+
+    if claims["is_staff"]:
+        return my_json(error_code=2, mess="User not admin")
+
     users = Users.query.paginate(page=page, per_page=PER_PAGE_USER, error_out=False)
 
     cur_page = users.page
@@ -83,7 +87,7 @@ def get_all_user_service(page):
         users_data = users_schema.dump(users)
         return jsonify(obj_success_paginate(users_data, cur_page, max_page))
     else:
-        return my_json(error_code=1, mess="Not found user")
+        return my_json(error_code=1, mess="Not found")
 
 
 def update_profile_by_id_service(user_id):
@@ -176,7 +180,7 @@ def user_login_service():
     if not user_data:
         return my_json(error_code=2, mess="email not found")
 
-    if not user_data['password_hash'] == data['password']:
+    if not user.check_password(password=data["password"]):
         return my_json(error_code=3, mess="password fail")
 
     access_token = create_access_token(user_data)
