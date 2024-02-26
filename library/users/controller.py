@@ -4,7 +4,7 @@ from .services import (add_user_service, get_user_by_id_service, get_all_user_se
                        user_login_service, upload_avatar_service, get_avatar_from_filename_service,
                        upload_cover_photo_service, get_cover_photo_from_filename_service
                        )
-from flask_jwt_extended import jwt_required, get_jwt
+from flask_jwt_extended import jwt_required, get_jwt, current_user
 
 users = Blueprint("users", __name__)
 
@@ -42,7 +42,7 @@ def get_user_by_id(user_id):
 @users.route("/user-management/user/<int:user_id>", methods=["PUT"])
 @jwt_required()
 def update_profile_by_id(user_id):
-    return update_profile_by_id_service(user_id)
+    return update_profile_by_id_service(user_id, current_user)
 
 
 @users.route("/user-management/user/<int:user_id>", methods=["DELETE"])

@@ -90,9 +90,13 @@ def get_all_user_service(page, claims):
         return my_json(error_code=1, mess="Not found")
 
 
-def update_profile_by_id_service(user_id):
+def update_profile_by_id_service(user_id, current_user):
     user = Users.query.get(user_id)
     data = request.json
+    current_usr_obj = user_schema.dump(current_user)
+
+    if not current_usr_obj["id"] == user_id:
+        return my_json(error_code=5, mess="token not match user id")
 
     if not user:
         return my_json(error_code=1, mess="Not found user")
@@ -183,7 +187,7 @@ def user_login_service():
     if not user.check_password(password=data["password"]):
         return my_json(error_code=3, mess="password fail")
 
-    access_token = create_access_token(user_data)
+    access_token = create_access_token(user_data["email"])
 
     rs = {
         "errorCode": 0,

@@ -13,13 +13,19 @@ def create_db(app):
         print("Create DB!!!")
 
 
-def jwt_error_handel():
+def jwt_handel():
     # additional claims
     @jwt.additional_claims_loader
     def make_additional_claims(identity):
-        if identity["role"] == 1:
-            return {"is_staff": False}
-        return {"is_staff": True}
+        if not identity == "admin@gmail.com":
+            return {"is_staff": True}
+        return {"is_staff": False}
+
+    # load user
+    @jwt.user_lookup_loader
+    def user_lookup_callback(_jwt_headers, jwt_data):
+        identity = jwt_data["sub"]
+        return Users.query.filter_by(email=identity).one_or_none()
 
     # jwt error handlers
     @jwt.expired_token_loader

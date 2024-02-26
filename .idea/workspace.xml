@@ -4,12 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="23cb2c54-3c39-4df6-92f4-23e60e3d4d48" name="Changes" comment="The first commit in 2024: create access token when user login">
+    <list default="true" id="23cb2c54-3c39-4df6-92f4-23e60e3d4d48" name="Changes" comment="update db, update jwt required">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/instance/facebook.db" beforeDir="false" afterPath="$PROJECT_DIR$/instance/facebook.db" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/library/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/library/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/library/extension.py" beforeDir="false" afterPath="$PROJECT_DIR$/library/extension.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/library/model.py" beforeDir="false" afterPath="$PROJECT_DIR$/library/model.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/library/users/controller.py" beforeDir="false" afterPath="$PROJECT_DIR$/library/users/controller.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/library/users/services.py" beforeDir="false" afterPath="$PROJECT_DIR$/library/users/services.py" afterDir="false" />
     </list>
@@ -252,7 +250,15 @@
       <option name="project" value="LOCAL" />
       <updated>1707528374605</updated>
     </task>
-    <option name="localTasksCounter" value="14" />
+    <task id="LOCAL-00014" summary="update db, update jwt required">
+      <option name="closed" value="true" />
+      <created>1708869363128</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1708869363128</updated>
+    </task>
+    <option name="localTasksCounter" value="15" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -280,6 +286,8 @@
     <MESSAGE value="update: upload avatar for user" />
     <MESSAGE value="update: upload cover photo for user&#10;auto add post when user update image" />
     <MESSAGE value="The first commit in 2024: create access token when user login" />
-    <option name="LAST_COMMIT_MESSAGE" value="The first commit in 2024: create access token when user login" />
+    <MESSAGE value="update db, update jwt requird" />
+    <MESSAGE value="update db, update jwt required" />
+    <option name="LAST_COMMIT_MESSAGE" value="update db, update jwt required" />
   </component>
 </project>
