@@ -69,6 +69,6 @@ def create_app(config_file="config.py"):
     print("Set up jwt")
     jwt.init_app(app)
 
-    jwt_error_handel()
+    jwt_handel()
 
     return app

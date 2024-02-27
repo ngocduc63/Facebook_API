@@ -7,7 +7,8 @@ from library.model import Users, Posts
 from flask import request, jsonify, send_from_directory
 from datetime import datetime
 from ..extension import (my_json, obj_success, obj_success_paginate, allowed_file,
-                         get_current_time, get_path_upload, get_path_local)
+                         get_current_time, get_path_upload, get_path_local, check_current_user,
+                         is_admin)
 from unidecode import unidecode
 from ..config import PER_PAGE_USER
 from werkzeug.utils import secure_filename
@@ -75,7 +76,7 @@ def get_user_by_id_service(user_id):
 
 def get_all_user_service(page, claims):
 
-    if claims["is_staff"]:
+    if not is_admin(claims):
         return my_json(error_code=2, mess="User not admin")
 
     users = Users.query.paginate(page=page, per_page=PER_PAGE_USER, error_out=False)
@@ -93,9 +94,8 @@ def get_all_user_service(page, claims):
 def update_profile_by_id_service(user_id, current_user):
     user = Users.query.get(user_id)
     data = request.json
-    current_usr_obj = user_schema.dump(current_user)
 
-    if not current_usr_obj["id"] == user_id:
+    if not check_current_user(user_schema, current_user, user_id):
         return my_json(error_code=5, mess="token not match user id")
 
     if not user:
@@ -127,8 +127,11 @@ def update_profile_by_id_service(user_id, current_user):
         return my_json(error_code=2, mess="Data user not match")
 
 
-def delete_user_by_id_service(user_id):
+def delete_user_by_id_service(user_id, claims):
     user = Users.query.get(user_id)
+
+    if not is_admin(claims):
+        return my_json(error_code=3, mess="user not admin")
 
     if not user:
         return my_json(error_code=1, mess="Not found user")
@@ -139,7 +142,7 @@ def delete_user_by_id_service(user_id):
         return jsonify(obj_success({}))
     except Exception as e:
         print(e)
-        return my_json(error_code=3, mess="error in DB")
+        return my_json(error_code=2, mess="error in DB")
 
 
 def search_approximate(array, key, value):
@@ -203,9 +206,12 @@ def change_name_file(filename, user_id):
     return f"{name}.{filename.split('.')[1]}"
 
 
-def upload_avatar_service(user_id):
+def upload_avatar_service(user_id, current_user):
     data = request.files
     user = Users.query.get(user_id)
+
+    if not check_current_user(user_schema, current_user, user_id):
+        return my_json(error_code=5, mess="token not match user id")
 
     if not user:
         return my_json(error_code=3, mess="not found user")
@@ -241,9 +247,12 @@ def upload_avatar_service(user_id):
             return my_json(error_code=4, mess="error save data")
 
 
-def upload_cover_photo_service(user_id):
+def upload_cover_photo_service(user_id, current_user):
     data = request.files
     user = Users.query.get(user_id)
+
+    if not check_current_user(user_schema, current_user, user_id):
+        return my_json(error_code=5, mess="token not match user id")
 
     if not user:
         return my_json(error_code=3, mess="not found user")

@@ -58,3 +58,19 @@ def get_path_upload(path_name, filename):
 
 def get_path_local(path_name):
     return os.path.join(os.path.abspath(os.path.dirname(__file__)), path_name)
+
+
+def check_current_user(user_schema, current_user, user_id):
+    current_usr_obj = user_schema.dump(current_user)
+
+    if current_usr_obj["id"] == user_id:
+        return True
+    else:
+        return False
+
+
+def is_admin(claims):
+    if claims["is_staff"]:
+        return False
+    else:
+        return True
