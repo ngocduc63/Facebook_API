@@ -1,8 +1,8 @@
-from flask import Flask, redirect, Blueprint, jsonify
+from flask import Flask, jsonify
 from .users.controller import users
 from .friends.controller import friends
 from .extension import db, ma, jwt
-from .model import Users, Friends, Posts, Comments, Likes
+from .model import Users, Friends, Posts, Comments, Likes, TokenBlocklist
 import os
 
 
@@ -52,6 +52,14 @@ def jwt_handel():
             ),
             401,
         )
+
+    @jwt.token_in_blocklist_loader
+    def token_in_blocklist_callback(jwt_header, jwt_data):
+        jti = jwt_data['jti']
+
+        token = db.session.query(TokenBlocklist).filter(TokenBlocklist.jti == jti).scalar()
+
+        return token is not None
 
 
 def create_app(config_file="config.py"):

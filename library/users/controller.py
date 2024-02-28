@@ -2,7 +2,7 @@ from flask import Blueprint
 from .services import (add_user_service, get_user_by_id_service, get_all_user_service,
                        update_profile_by_id_service, delete_user_by_id_service, search_user_service,
                        user_login_service, upload_avatar_service, get_avatar_from_filename_service,
-                       upload_cover_photo_service, get_cover_photo_from_filename_service
+                       upload_cover_photo_service, get_cover_photo_from_filename_service, logout_user
                        )
 from flask_jwt_extended import jwt_required, get_jwt, current_user
 
@@ -74,3 +74,10 @@ def get_avatar(filename):
 @jwt_required()
 def get_cover_photo(filename):
     return get_cover_photo_from_filename_service(filename)
+
+
+@users.route("/user-management/user/logout", methods=["POST"])
+@jwt_required()
+def user_logout():
+    claims = get_jwt()
+    return logout_user(claims)

@@ -3,7 +3,7 @@ import math
 from sqlalchemy import func, text
 from library.extension import db
 from library.facebook_ma import UserSchema, PostSchema
-from library.model import Users, Posts
+from library.model import Users, Posts, TokenBlocklist
 from flask import request, jsonify, send_from_directory
 from datetime import datetime
 from ..extension import (my_json, obj_success, obj_success_paginate, allowed_file,
@@ -294,3 +294,12 @@ def get_avatar_from_filename_service(filename):
 
 def get_cover_photo_from_filename_service(filename):
     return send_from_directory(get_path_local(UPLOAD_COVER_PHOTO_FOLDER), filename)
+
+
+def logout_user(claims):
+    jti = claims['jti']
+
+    token_b = TokenBlocklist(jti=jti)
+    token_b.save()
+
+    return my_json("logout success")
