@@ -1,6 +1,6 @@
-from library.extension import db
-from library.facebook_ma import FriendSchema
-from library.model import Friends
+from facebook.extension import db
+from facebook.facebook_ma import FriendSchema
+from facebook.model import Friends
 from flask import request, jsonify
 import time
 

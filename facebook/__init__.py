@@ -1,6 +1,7 @@
 from flask import Flask, jsonify
 from .users.controller import users
 from .friends.controller import friends
+from .posts.controller import posts
 from .extension import db, ma, jwt
 from .model import Users, Friends, Posts, Comments, Likes, TokenBlocklist
 import os
@@ -71,6 +72,7 @@ def create_app(config_file="config.py"):
     create_db(app)
     app.register_blueprint(users)
     app.register_blueprint(friends)
+    app.register_blueprint(posts)
 
     # Set up the Flask-JWT-Extended extension
     app.config["JWT_SECRET_KEY"] = os.environ.get("JWT_SECRET_KEY")

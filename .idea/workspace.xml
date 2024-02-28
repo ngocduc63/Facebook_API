@@ -5,12 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="23cb2c54-3c39-4df6-92f4-23e60e3d4d48" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/library/upload/avatar/avt_dn_4_1709024611.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/library/upload/cover_photo/avt_dn_4_1709024687.jpg" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/instance/facebook.db" beforeDir="false" afterPath="$PROJECT_DIR$/instance/facebook.db" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/library/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/library/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/library/users/controller.py" beforeDir="false" afterPath="$PROJECT_DIR$/library/users/controller.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/library/posts/controller.py" beforeDir="false" afterPath="$PROJECT_DIR$/library/posts/controller.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/library/users/services.py" beforeDir="false" afterPath="$PROJECT_DIR$/library/users/services.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -276,7 +273,15 @@
       <option name="project" value="LOCAL" />
       <updated>1709024950812</updated>
     </task>
-    <option name="localTasksCounter" value="17" />
+    <task id="LOCAL-00017" summary="update user api: logout api block token">
+      <option name="closed" value="true" />
+      <created>1709124568527</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1709124568527</updated>
+    </task>
+    <option name="localTasksCounter" value="18" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -308,6 +313,7 @@
     <MESSAGE value="update db, update jwt required" />
     <MESSAGE value="update jwt handel: load current user from token" />
     <MESSAGE value="update call api update for only 1 user" />
-    <option name="LAST_COMMIT_MESSAGE" value="update call api update for only 1 user" />
+    <MESSAGE value="update user api: logout api block token" />
+    <option name="LAST_COMMIT_MESSAGE" value="update user api: logout api block token" />
   </component>
 </project>

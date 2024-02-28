@@ -1,9 +1,8 @@
 import math
-
 from sqlalchemy import func, text
-from library.extension import db
-from library.facebook_ma import UserSchema, PostSchema
-from library.model import Users, Posts, TokenBlocklist
+from facebook.extension import db
+from facebook.facebook_ma import UserSchema, PostSchema
+from facebook.model import Users, Posts, TokenBlocklist
 from flask import request, jsonify, send_from_directory
 from datetime import datetime
 from ..extension import (my_json, obj_success, obj_success_paginate, allowed_file,
