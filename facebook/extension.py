@@ -44,6 +44,11 @@ def obj_success_paginate(data, cur_page, max_page):
         }
 
 
+def change_name_file(filename, name_id):
+    name = f"{filename.split('.')[0]}_{name_id}_{str(get_current_time())}"
+    return f"{name}.{filename.split('.')[1]}"
+
+
 def allowed_file(filename):
     return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 

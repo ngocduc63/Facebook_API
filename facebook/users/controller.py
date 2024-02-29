@@ -1,6 +1,6 @@
 from flask import Blueprint
 from .services import (add_user_service, get_user_by_id_service, get_all_user_service,
-                       update_profile_by_id_service, delete_user_by_id_service, search_user_service,
+                       update_profile_by_id_service, block_user_by_id_service, search_user_service,
                        user_login_service, upload_avatar_service, get_avatar_from_filename_service,
                        upload_cover_photo_service, get_cover_photo_from_filename_service, logout_user
                        )
@@ -39,17 +39,17 @@ def get_user_by_id(user_id):
     return get_user_by_id_service(user_id)
 
 
-@users.route("/user-management/user/<int:user_id>", methods=["PUT"])
+@users.route("/user-management/user/update/<int:user_id>", methods=["PUT"])
 @jwt_required()
 def update_profile_by_id(user_id):
     return update_profile_by_id_service(user_id, current_user)
 
 
-@users.route("/user-management/user/<int:user_id>", methods=["DELETE"])
+@users.route("/user-management/user/block/<int:user_id>", methods=["PUT"])
 @jwt_required()
-def delete_user_by_id(user_id):
+def block_user_by_id(user_id):
     claims = get_jwt()
-    return delete_user_by_id_service(user_id, claims)
+    return block_user_by_id_service(user_id, claims)
 
 
 @users.route("/user-management/user/avatar/<int:user_id>", methods=["POST"])

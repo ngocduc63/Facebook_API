@@ -14,10 +14,11 @@ class Users(db.Model):
     cover_photo = db.Column(db.String())
     gender = db.Column(db.Integer, nullable=False)
     role = db.Column(db.Integer)
+    is_block = db.Column(db.Integer)
     create_at = db.Column(db.Integer, nullable=False)
 
     def __init__(self, username, email, description, nickname,
-                 birth_date, avatar, cover_photo, gender, role, create_at):
+                 birth_date, avatar, cover_photo, gender, create_at):
         self.username = username
         self.email = email
         self.description = description
@@ -26,8 +27,9 @@ class Users(db.Model):
         self.avatar = avatar
         self.cover_photo = cover_photo
         self.gender = gender
-        self.role = role
+        self.role = 0
         self.create_at = create_at
+        self.is_block = 0
 
     def set_password(self, password):
         self.password_hash = generate_password_hash(password)

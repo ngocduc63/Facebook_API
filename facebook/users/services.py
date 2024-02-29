@@ -7,9 +7,9 @@ from flask import request, jsonify, send_from_directory
 from datetime import datetime
 from ..extension import (my_json, obj_success, obj_success_paginate, allowed_file,
                          get_current_time, get_path_upload, get_path_local, check_current_user,
-                         is_admin)
+                         is_admin, change_name_file)
 from unidecode import unidecode
-from ..config import PER_PAGE_USER
+from ..config import PER_PAGE_LIST_USER
 from werkzeug.utils import secure_filename
 from flask_jwt_extended import create_access_token
 
@@ -42,11 +42,10 @@ def add_user_service():
         avatar = ""
         cover_photo = ""
         gender = data['gender']
-        role = 0
         create_at = get_current_time()
         try:
             new_user = Users(username, email, description, nickname,
-                             birth_date, avatar, cover_photo, gender, role, create_at)
+                             birth_date, avatar, cover_photo, gender, create_at)
 
             new_user.set_password(password=data['password_hash'])
             db.session.add(new_user)
@@ -78,10 +77,10 @@ def get_all_user_service(page, claims):
     if not is_admin(claims):
         return my_json(error_code=2, mess="User not admin")
 
-    users = Users.query.paginate(page=page, per_page=PER_PAGE_USER, error_out=False)
+    users = Users.query.paginate(page=page, per_page=PER_PAGE_LIST_USER, error_out=False)
 
     cur_page = users.page
-    max_page = math.ceil(users.total / PER_PAGE_USER)
+    max_page = math.ceil(users.total / PER_PAGE_LIST_USER)
 
     if users:
         users_data = users_schema.dump(users)
@@ -126,7 +125,7 @@ def update_profile_by_id_service(user_id, current_user):
         return my_json(error_code=2, mess="Data user not match")
 
 
-def delete_user_by_id_service(user_id, claims):
+def block_user_by_id_service(user_id, claims):
     user = Users.query.get(user_id)
 
     if not is_admin(claims):
@@ -136,9 +135,13 @@ def delete_user_by_id_service(user_id, claims):
         return my_json(error_code=1, mess="Not found user")
 
     try:
-        db.session.delete(user)
-        db.session.commit()
-        return jsonify(obj_success({}))
+        user.is_block = 1
+
+        jti = claims['jti']
+        token_b = TokenBlocklist(jti=jti)
+        token_b.save()
+
+        return my_json(f"block user {user_id} success")
     except Exception as e:
         print(e)
         return my_json(error_code=2, mess="error in DB")
@@ -159,10 +162,10 @@ def search_user_service():
     username_input = data['username']
 
     users = (Users.query.filter(func.lower(Users.username).ilike(f'%{username_input.lower()}%'))
-             .paginate(page=page, per_page=PER_PAGE_USER, error_out=False))
+             .paginate(page=page, per_page=PER_PAGE_LIST_USER, error_out=False))
 
     cur_page = users.page
-    max_page = math.ceil(users.total / PER_PAGE_USER)
+    max_page = math.ceil(users.total / PER_PAGE_LIST_USER)
 
     if users:
         users_data = users_schema.dump(users)
@@ -183,6 +186,9 @@ def user_login_service():
     user = Users.query.filter(text("(users.email) = (:email)")).params(email=email_data).first()
     user_data = user_schema.dump(user)
 
+    if user.is_block == 1:
+        return my_json(error_code=4, mess="user was blocked")
+
     if not user_data:
         return my_json(error_code=2, mess="email not found")
 
@@ -198,11 +204,6 @@ def user_login_service():
         "access_token": access_token
     }
     return jsonify(rs)
-
-
-def change_name_file(filename, user_id):
-    name = f"{filename.split('.')[0]}_{user_id}_{str(get_current_time())}"
-    return f"{name}.{filename.split('.')[1]}"
 
 
 def upload_avatar_service(user_id, current_user):
