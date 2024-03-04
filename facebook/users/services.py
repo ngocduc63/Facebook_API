@@ -56,7 +56,7 @@ def add_user_service():
             return my_json(error_code=1, mess="error in DB")
         except Exception as e:
             print(e)
-            return my_json(error_code=2, mess="error email existed or er db")
+            return my_json(error_code=2, mess="error email existed or error db")
 
     else:
         return my_json(error_code=3, mess="error validate data")

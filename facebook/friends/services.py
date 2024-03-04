@@ -1,6 +1,6 @@
 import math
 from facebook.extension import db
-from facebook.facebook_ma import FriendSchema
+from facebook.facebook_ma import FriendSchema, UserSchema
 from facebook.model import Friends, Users
 from flask import request
 import time
@@ -10,74 +10,61 @@ from sqlalchemy import or_, and_
 from sqlalchemy.orm import aliased
 
 friend_schema = FriendSchema()
+user_schema = UserSchema()
 friends_schema = FriendSchema(many=True)
 user_alias = aliased(Users)
 friend_alias = aliased(Users)
 
 
-def add_friend_service():
-    data = request.json
-    check_data = (data and ('friend_id' in data) and ('user_id' in data))
+def add_friend_service(friend_id, current_user):
+    user_id = user_schema.dump(current_user)['id']
+    friend_id = friend_id
 
-    if check_data:
+    if user_id == friend_id:
+        return my_json(error_code=2, mess="Can not add yourself")
 
-        user_id = data['user_id']
-        friend_id = data['friend_id']
+    check_exits = (db.session.query(Friends).
+                   filter(or_(
+                              and_(Friends.user_id == user_id, Friends.friend_id == friend_id),
+                              and_(Friends.user_id == friend_id, Friends.friend_id == user_id))
+                          ).
+                   first())
 
-        if user_id == friend_id:
-            return my_json(error_code=3, mess="Can not add yourself")
+    if check_exits:
+        return my_json(error_code=3, mess="Can not add because They were friend")
 
-        check_exits = (db.session.query(Friends).
-                       filter(or_(
-                                  and_(Friends.user_id == user_id, Friends.friend_id == friend_id),
-                                  and_(Friends.user_id == friend_id, Friends.friend_id == user_id))
-                              ).
-                       first())
+    create_at = int(time.time())
+    try:
+        new_friend = Friends(user_id, friend_id, create_at)
 
-        if check_exits:
-            return my_json(error_code=4, mess="Can not add because They were friend")
-
-        create_at = int(time.time())
-        try:
-            new_friend = Friends(user_id, friend_id, create_at)
-
-            db.session.add(new_friend)
-            db.session.commit()
-            return my_json("add friend success")
-        except IndentationError:
-            db.session.rollback()
-            return my_json(error_code=1, mess="error query database")
-
-    else:
-        return my_json(error_code=2, mess="data submit error")
+        db.session.add(new_friend)
+        db.session.commit()
+        return my_json("add friend success")
+    except IndentationError:
+        db.session.rollback()
+        return my_json(error_code=1, mess="error query database")
 
 
-def unfriend_service():
-    data = request.json
-    check_data = (data and ('friend_id' in data) and ('user_id' in data))
-    if check_data:
+def unfriend_service(friend_id, current_user):
+    user_id = user_schema.dump(current_user)['id']
+    friend_id = friend_id
 
-        user_id = data['user_id']
-        friend_id = data['friend_id']
-        friend = (db.session.query(Friends).
-                  filter(or_(
-                          and_(Friends.user_id == user_id, Friends.friend_id == friend_id),
-                          and_(Friends.user_id == friend_id, Friends.friend_id == user_id))
-                         ).
-                  first())
-        if not friend:
-            return my_json(error_code=3, mess="not found friend")
+    friend = (db.session.query(Friends).
+              filter(or_(
+                      and_(Friends.user_id == user_id, Friends.friend_id == friend_id),
+                      and_(Friends.user_id == friend_id, Friends.friend_id == user_id))
+                     ).
+              first())
+    if not friend:
+        return my_json(error_code=3, mess="not found friend")
 
-        try:
-            db.session.delete(friend)
-            db.session.commit()
-            return my_json("delete friend success")
-        except IndentationError:
-            db.session.rollback()
-            return my_json(error_code=1, mess="error query database")
-
-    else:
-        return my_json(error_code=2, mess="data submit error")
+    try:
+        db.session.delete(friend)
+        db.session.commit()
+        return my_json("delete friend success")
+    except IndentationError:
+        db.session.rollback()
+        return my_json(error_code=1, mess="error query database")
 
 
 def get_friend_by_id_service(user_id):
@@ -120,5 +107,3 @@ def get_friend_by_id_service(user_id):
         return my_json(obj_success_paginate(data_rs, cur_page, max_page))
     else:
         return my_json(error_code=1, mess="not found friend")
-
-

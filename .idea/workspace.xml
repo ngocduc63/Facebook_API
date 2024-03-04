@@ -4,21 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="23cb2c54-3c39-4df6-92f4-23e60e3d4d48" name="Changes" comment="create api post, change folder library to facebook">
+    <list default="true" id="23cb2c54-3c39-4df6-92f4-23e60e3d4d48" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/facebook/config.py" beforeDir="false" afterPath="$PROJECT_DIR$/facebook/config.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/facebook/extension.py" beforeDir="false" afterPath="$PROJECT_DIR$/facebook/extension.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/facebook/friends/controller.py" beforeDir="false" afterPath="$PROJECT_DIR$/facebook/friends/controller.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/facebook/friends/services.py" beforeDir="false" afterPath="$PROJECT_DIR$/facebook/friends/services.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/facebook/model.py" beforeDir="false" afterPath="$PROJECT_DIR$/facebook/model.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/facebook/upload/avatar/avt_dn_3_1705850831.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/facebook/upload/avatar/avt_dn_4_1709024611.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/facebook/upload/avatar/pay_3_1705850236.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/facebook/upload/cover_photo/Gold_2_1705849656.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/facebook/upload/cover_photo/avt_dn_3_1705850284.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/facebook/upload/cover_photo/avt_dn_4_1709024687.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/facebook/upload/cover_photo/pay_2_1705849937.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/facebook/users/controller.py" beforeDir="false" afterPath="$PROJECT_DIR$/facebook/users/controller.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/facebook/users/services.py" beforeDir="false" afterPath="$PROJECT_DIR$/facebook/users/services.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/instance/facebook.db" beforeDir="false" afterPath="$PROJECT_DIR$/instance/facebook.db" afterDir="false" />
     </list>
@@ -301,7 +290,15 @@
       <option name="project" value="LOCAL" />
       <updated>1709125364500</updated>
     </task>
-    <option name="localTasksCounter" value="19" />
+    <task id="LOCAL-00019" summary="api user: update delete user to block user, move function change name file.&#10;Model: tb_user(update properties is_block).&#10;Friend: update api(get list friend, add friend), add api unfriend">
+      <option name="closed" value="true" />
+      <created>1709219458573</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1709219458573</updated>
+    </task>
+    <option name="localTasksCounter" value="20" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -335,6 +332,7 @@
     <MESSAGE value="update call api update for only 1 user" />
     <MESSAGE value="update user api: logout api block token" />
     <MESSAGE value="create api post, change folder library to facebook" />
-    <option name="LAST_COMMIT_MESSAGE" value="create api post, change folder library to facebook" />
+    <MESSAGE value="api user: update delete user to block user, move function change name file.&#10;Model: tb_user(update properties is_block).&#10;Friend: update api(get list friend, add friend), add api unfriend" />
+    <option name="LAST_COMMIT_MESSAGE" value="api user: update delete user to block user, move function change name file.&#10;Model: tb_user(update properties is_block).&#10;Friend: update api(get list friend, add friend), add api unfriend" />
   </component>
 </project>
