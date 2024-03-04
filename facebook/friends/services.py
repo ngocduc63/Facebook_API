@@ -104,6 +104,8 @@ def get_friend_by_id_service(user_id):
             }
             data_rs.append(data)
 
+        data_rs.sort(key=lambda x: x["name"])
+
         return my_json(obj_success_paginate(data_rs, cur_page, max_page))
     else:
         return my_json(error_code=1, mess="not found friend")
