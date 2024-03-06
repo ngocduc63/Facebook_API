@@ -6,7 +6,7 @@ from facebook.model import Users, Posts, TokenBlocklist
 from flask import request, jsonify, send_from_directory
 from datetime import datetime
 from ..extension import (my_json, obj_success, obj_success_paginate, allowed_file,
-                         get_current_time, get_path_upload, get_path_local, check_current_user,
+                         get_current_time, get_path_upload, get_path_local,
                          is_admin, change_name_file)
 from unidecode import unidecode
 from ..config import PER_PAGE_LIST_USER
@@ -89,12 +89,15 @@ def get_all_user_service(page, claims):
         return my_json(error_code=1, mess="Not found")
 
 
-def update_profile_by_id_service(user_id, current_user):
+def update_profile_by_id_service(current_user):
+    try:
+        user_id = user_schema.dump(current_user)['id']
+    except Exception as e:
+        print(e)
+        return my_json(error_code=5, mess="token not match user id")
+
     user = Users.query.get(user_id)
     data = request.json
-
-    if not check_current_user(user_schema, current_user, user_id):
-        return my_json(error_code=5, mess="token not match user id")
 
     if not user:
         return my_json(error_code=1, mess="Not found user")
@@ -206,12 +209,15 @@ def user_login_service():
     return jsonify(rs)
 
 
-def upload_avatar_service(user_id, current_user):
+def upload_avatar_service(current_user):
+    try:
+        user_id = user_schema.dump(current_user)['id']
+    except Exception as e:
+        print(e)
+        return my_json(error_code=5, mess="token not match user id")
+
     data = request.files
     user = Users.query.get(user_id)
-
-    if not check_current_user(user_schema, current_user, user_id):
-        return my_json(error_code=5, mess="token not match user id")
 
     if not user:
         return my_json(error_code=3, mess="not found user")
@@ -247,12 +253,16 @@ def upload_avatar_service(user_id, current_user):
             return my_json(error_code=4, mess="error save data")
 
 
-def upload_cover_photo_service(user_id, current_user):
+def upload_cover_photo_service(current_user):
+    try:
+        user_id = user_schema.dump(current_user)['id']
+    except Exception as e:
+        print(e)
+        return my_json(error_code=5, mess="token not match user id")
+
     data = request.files
     user = Users.query.get(user_id)
 
-    if not check_current_user(user_schema, current_user, user_id):
-        return my_json(error_code=5, mess="token not match user id")
 
     if not user:
         return my_json(error_code=3, mess="not found user")
