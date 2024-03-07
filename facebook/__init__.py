@@ -5,6 +5,11 @@ from .posts.controller import posts
 from .extension import db, ma, jwt
 from .model import Users, Friends, Posts, Comments, Likes, TokenBlocklist
 import os
+from datetime import timedelta
+
+
+TIME_EXPIRES_ACCESS_TOKEN = 5
+TIME_EXPIRES_REFRESH_TOKEN = 30
 
 
 def create_db(app):
@@ -56,11 +61,12 @@ def jwt_handel():
 
     @jwt.token_in_blocklist_loader
     def token_in_blocklist_callback(jwt_header, jwt_data):
+        type_token = jwt_data['type']
         jti = jwt_data['jti']
 
-        token = db.session.query(TokenBlocklist).filter(TokenBlocklist.jti == jti).scalar()
-
-        return token is not None
+        if type_token == 'refresh' and jti:
+            token = db.session.query(TokenBlocklist).filter(TokenBlocklist.jti == jti).scalar()
+            return token is not None
 
 
 def create_app(config_file="config.py"):
@@ -76,6 +82,8 @@ def create_app(config_file="config.py"):
 
     # Set up the Flask-JWT-Extended extension
     app.config["JWT_SECRET_KEY"] = os.environ.get("JWT_SECRET_KEY")
+    app.config["JWT_ACCESS_TOKEN_EXPIRES"] = timedelta(minutes=TIME_EXPIRES_ACCESS_TOKEN)
+    app.config["JWT_REFRESH_TOKEN_EXPIRES"] = timedelta(days=TIME_EXPIRES_REFRESH_TOKEN)
     print("Set up jwt")
     jwt.init_app(app)
 

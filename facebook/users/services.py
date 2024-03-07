@@ -11,7 +11,7 @@ from ..extension import (my_json, obj_success, obj_success_paginate, allowed_fil
 from unidecode import unidecode
 from ..config import PER_PAGE_LIST_USER
 from werkzeug.utils import secure_filename
-from flask_jwt_extended import create_access_token
+from flask_jwt_extended import create_access_token, create_refresh_token
 
 UPLOAD_AVATAR_FOLDER = "upload/avatar"
 UPLOAD_COVER_PHOTO_FOLDER = "upload/cover_photo"
@@ -179,6 +179,11 @@ def search_user_service():
         return my_json(error_code=1, mess="Not found user")
 
 
+def refresh_service(identity):
+    new_access_token = create_access_token(identity=identity)
+    return my_json({"access_token": new_access_token})
+
+
 def user_login_service():
     data = request.json
 
@@ -199,12 +204,16 @@ def user_login_service():
         return my_json(error_code=3, mess="password fail")
 
     access_token = create_access_token(user_data["email"])
+    refresh_token = create_refresh_token(user_data["email"])
 
     rs = {
         "errorCode": 0,
         "message": "success",
         "data": user_data,
-        "access_token": access_token
+        "token": {
+            "access_token": access_token,
+            "refresh_token": refresh_token
+        }
     }
     return jsonify(rs)
 
@@ -263,7 +272,6 @@ def upload_cover_photo_service(current_user):
     data = request.files
     user = Users.query.get(user_id)
 
-
     if not user:
         return my_json(error_code=3, mess="not found user")
 
@@ -307,9 +315,14 @@ def get_cover_photo_from_filename_service(filename):
 
 
 def logout_user(claims):
+    print(claims)
+    type_token = claims['type']
     jti = claims['jti']
 
-    token_b = TokenBlocklist(jti=jti)
-    token_b.save()
+    if type_token == 'refresh' and jti:
+        token_b = TokenBlocklist(jti=jti)
+        token_b.save()
+        return my_json("logout success")
+    else:
+        return my_json(error_code=1, mess="login fail")
 
-    return my_json("logout success")
