@@ -1,6 +1,6 @@
 from facebook.extension import db
-from facebook.facebook_ma import PostSchema, UserSchema
-from facebook.model import Posts
+from facebook.facebook_ma import PostSchema, UserSchema, LikeSchema, CommentSchema
+from facebook.model import Posts, Likes, Comments
 from ..extension import (my_json, obj_success_paginate, get_current_time, change_name_file, get_path_upload,
                          allowed_file)
 from ..config import PER_PAGE_POST
@@ -12,6 +12,8 @@ UPLOAD_POST_FOLDER = "upload/post"
 post_schema = PostSchema()
 posts_schema = PostSchema(many=True)
 user_schema = UserSchema()
+like_schema = LikeSchema()
+comment_schema = CommentSchema()
 
 
 def get_new_feed_service(page, current_user):
@@ -129,3 +131,129 @@ def delete_post_service(id_post, current_user):
             return my_json(error_code=1, mess="error in DB")
     else:
         return my_json(error_code=2, mess="error validate data")
+
+
+def user_like_post_service(current_user):
+    try:
+        user_id = user_schema.dump(current_user)['id']
+    except Exception as e:
+        print(e)
+        return my_json(error_code=6, mess="token not match user id")
+
+    data = request.json
+    check_data = data and ('id_post' in data) and ('category' in data)
+
+    if check_data:
+        id_post = data['id_post']
+        category = data['category']
+
+        post = db.session.query(Posts).filter(Posts.id == id_post).first()
+        if not post:
+            return my_json(error_code=4, mess="not found post")
+
+        like = db.session.query(Likes).filter(Likes.user_id == user_id, Likes.post_id == id_post).first()
+        if like:
+            return my_json(error_code=5, mess="pos was liked")
+
+        if id_post and user_id:
+            try:
+                create_at = get_current_time()
+                new_like = Likes(user_id, id_post, category, create_at)
+                db.session.add(new_like)
+                db.session.commit()
+
+                data_like = like_schema.dump(new_like)
+                return my_json(data_like)
+            except IndentationError:
+                db.session.rollback()
+                return my_json(error_code=1, mess="error in DB")
+        else:
+            return my_json(error_code=2, mess="error data request")
+    else:
+        return my_json(error_code=3, mess="error data request")
+
+
+def user_unlike_post_service(id_post, current_user):
+    try:
+        user_id = user_schema.dump(current_user)['id']
+    except Exception as e:
+        print(e)
+        return my_json(error_code=4, mess="token not match user id")
+
+    if id_post and user_id:
+        like = db.session.query(Likes).filter(Likes.user_id == user_id, Likes.post_id == id_post).first()
+
+        if not like:
+            return my_json(error_code=3, mess="not found like post")
+
+        try:
+            db.session.delete(like)
+            db.session.commit()
+            return my_json("unlike success")
+        except IndentationError:
+            db.session.rollback()
+            return my_json(error_code=1, mess="error in DB")
+    else:
+        return my_json(error_code=2, mess="error data request")
+
+
+def user_comment_post_service(current_user):
+    try:
+        user_id = user_schema.dump(current_user)['id']
+    except Exception as e:
+        print(e)
+        return my_json(error_code=5, mess="token not match user id")
+
+    data = request.json
+    check_data = data and ('id_post' in data) and ('content' in data)
+
+    if check_data:
+        id_post = data['id_post']
+        content = data['content']
+
+        post = db.session.query(Posts).filter(Posts.id == id_post).first()
+
+        if not post:
+            return my_json(error_code=4, mess="not found post")
+
+        if id_post and user_id:
+            try:
+                create_at = get_current_time()
+                new_comment = Comments(user_id, id_post, content, 0, create_at)
+                db.session.add(new_comment)
+                db.session.commit()
+
+                data_like = like_schema.dump(new_comment)
+                return my_json(data_like)
+            except IndentationError:
+                db.session.rollback()
+                return my_json(error_code=1, mess="error in DB")
+        else:
+            return my_json(error_code=2, mess="error data request")
+    else:
+        return my_json(error_code=3, mess="error data request")
+
+
+def user_delete_comment_post_service(id_post, current_user):
+    try:
+        user_id = user_schema.dump(current_user)['id']
+    except Exception as e:
+        print(e)
+        return my_json(error_code=4, mess="token not match user id")
+
+    if id_post and user_id:
+        comment = db.session.query(Comments).filter(Likes.user_id == user_id, Likes.post_id == id_post).first()
+
+        if not comment:
+            return my_json(error_code=3, mess="not found comment post")
+
+        try:
+            comment.isDelete = 1
+
+            db.session.commit()
+            return my_json("delete comment success")
+        except IndentationError:
+            db.session.rollback()
+            return my_json(error_code=1, mess="error in DB")
+    else:
+        return my_json(error_code=2, mess="error data request")

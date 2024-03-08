@@ -29,6 +29,6 @@ class CommentSchema(ma.Schema):
 
 class LikeSchema(ma.Schema):
     class Meta:
-        fields = ("id", "user_id", "post_id", "isLiked", "create_at")
+        fields = ('_sa_instance_state', "id", "user_id", "post_id", "category", "create_at")
         exclude = ('_sa_instance_state',)
 

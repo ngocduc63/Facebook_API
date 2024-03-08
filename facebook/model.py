@@ -76,8 +76,7 @@ class Comments(db.Model):
     isDeleted = db.Column(db.Integer)
     create_at = db.Column(db.Integer, nullable=False)
 
-    def __init__(self, title, user_id, post_id, content, isDeleted, create_at):
-        self.title = title
+    def __init__(self, user_id, post_id, content, isDeleted, create_at):
         self.user_id = user_id
         self.post_id = post_id
         self.content = content
@@ -89,13 +88,13 @@ class Likes(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey("users.id"))
     post_id = db.Column(db.Integer, db.ForeignKey("posts.id"))
-    isLiked = db.Column(db.Integer)
+    category = db.Column(db.Integer)
     create_at = db.Column(db.Integer, nullable=False)
 
-    def __init__(self,  user_id, post_id, isLiked, create_at):
+    def __init__(self,  user_id, post_id, category, create_at):
         self.user_id = user_id
         self.post_id = post_id
-        self.isLiked = isLiked
+        self.category = category
         self.create_at = create_at
 
 

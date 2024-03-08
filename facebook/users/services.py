@@ -144,6 +144,7 @@ def block_user_by_id_service(user_id, claims):
         token_b = TokenBlocklist(jti=jti)
         token_b.save()
 
+        db.session.commit()
         return my_json(f"block user {user_id} success")
     except Exception as e:
         print(e)
@@ -194,11 +195,11 @@ def user_login_service():
     user = Users.query.filter(text("(users.email) = (:email)")).params(email=email_data).first()
     user_data = user_schema.dump(user)
 
-    if user.is_block == 1:
-        return my_json(error_code=4, mess="user was blocked")
-
     if not user_data:
         return my_json(error_code=2, mess="email not found")
+
+    if user.is_block == 1:
+        return my_json(error_code=4, mess="user was blocked")
 
     if not user.check_password(password=data["password"]):
         return my_json(error_code=3, mess="password fail")
