@@ -52,5 +52,5 @@ def comment_post():
 
 @posts.route("/post-management/post/delete-comment/<int:id_post>", methods=["DELETE"])
 @jwt_required()
-def delete_post(id_post):
+def delete_comment_post(id_post):
     return user_delete_comment_post_service(id_post, current_user)

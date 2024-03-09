@@ -6,11 +6,8 @@
   <component name="ChangeListManager">
     <list default="true" id="23cb2c54-3c39-4df6-92f4-23e60e3d4d48" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/facebook/facebook_ma.py" beforeDir="false" afterPath="$PROJECT_DIR$/facebook/facebook_ma.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/facebook/model.py" beforeDir="false" afterPath="$PROJECT_DIR$/facebook/model.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/facebook/posts/controller.py" beforeDir="false" afterPath="$PROJECT_DIR$/facebook/posts/controller.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/facebook/posts/services.py" beforeDir="false" afterPath="$PROJECT_DIR$/facebook/posts/services.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/facebook/users/services.py" beforeDir="false" afterPath="$PROJECT_DIR$/facebook/users/services.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/instance/facebook.db" beforeDir="false" afterPath="$PROJECT_DIR$/instance/facebook.db" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -356,7 +353,15 @@
       <option name="project" value="LOCAL" />
       <updated>1709825881783</updated>
     </task>
-    <option name="localTasksCounter" value="27" />
+    <task id="LOCAL-00027" summary="post api: create api for comment, like post">
+      <option name="closed" value="true" />
+      <created>1709910120953</created>
+      <option name="number" value="00027" />
+      <option name="presentableId" value="LOCAL-00027" />
+      <option name="project" value="LOCAL" />
+      <updated>1709910120953</updated>
+    </task>
+    <option name="localTasksCounter" value="28" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -372,7 +377,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="create db" />
     <MESSAGE value="fix create db" />
     <MESSAGE value="create api add user" />
     <MESSAGE value="add api add, get, get all : user, friend," />
@@ -397,6 +401,7 @@
     <MESSAGE value="update post api: fix api create, create api update, delete" />
     <MESSAGE value="create file setup and tuturial" />
     <MESSAGE value="user api: update refresh token, expries token" />
-    <option name="LAST_COMMIT_MESSAGE" value="user api: update refresh token, expries token" />
+    <MESSAGE value="post api: create api for comment, like post" />
+    <option name="LAST_COMMIT_MESSAGE" value="post api: create api for comment, like post" />
   </component>
 </project>

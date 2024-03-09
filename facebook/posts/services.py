@@ -223,8 +223,8 @@ def user_comment_post_service(current_user):
                 db.session.add(new_comment)
                 db.session.commit()
 
-                data_like = like_schema.dump(new_comment)
-                return my_json(data_like)
+                data_comment = comment_schema.dump(new_comment)
+                return my_json(data_comment)
             except IndentationError:
                 db.session.rollback()
                 return my_json(error_code=1, mess="error in DB")
@@ -234,21 +234,24 @@ def user_comment_post_service(current_user):
         return my_json(error_code=3, mess="error data request")
 
 
-def user_delete_comment_post_service(id_post, current_user):
+def user_delete_comment_post_service(id_comment, current_user):
     try:
         user_id = user_schema.dump(current_user)['id']
     except Exception as e:
         print(e)
-        return my_json(error_code=4, mess="token not match user id")
+        return my_json(error_code=5, mess="token not match user id")
 
-    if id_post and user_id:
-        comment = db.session.query(Comments).filter(Likes.user_id == user_id, Likes.post_id == id_post).first()
+    if id_comment and user_id:
+        comment = db.session.query(Comments).filter(Comments.id == id_comment).first()
 
         if not comment:
             return my_json(error_code=3, mess="not found comment post")
 
+        if comment.isDeleted == 1:
+            return my_json(error_code=4, mess="comment was deleted")
+
         try:
-            comment.isDelete = 1
+            comment.isDeleted = 1
 
             db.session.commit()
             return my_json("delete comment success")
