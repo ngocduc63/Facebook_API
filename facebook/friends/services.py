@@ -1,6 +1,6 @@
 import math
 from facebook.extension import db
-from facebook.facebook_ma import FriendSchema, UserSchema
+from facebook.facebook_ma import FriendSchema
 from facebook.model import Friends, Users
 from flask import request
 import time
@@ -10,14 +10,13 @@ from sqlalchemy import or_, and_
 from sqlalchemy.orm import aliased
 
 friend_schema = FriendSchema()
-user_schema = UserSchema()
 friends_schema = FriendSchema(many=True)
 user_alias = aliased(Users)
 friend_alias = aliased(Users)
 
 
 def add_friend_service(friend_id, current_user):
-    user_id = user_schema.dump(current_user)['id']
+    user_id = current_user.id
     friend_id = friend_id
 
     if user_id == friend_id:
@@ -46,7 +45,7 @@ def add_friend_service(friend_id, current_user):
 
 
 def unfriend_service(friend_id, current_user):
-    user_id = user_schema.dump(current_user)['id']
+    user_id = current_user.id
     friend_id = friend_id
 
     friend = (db.session.query(Friends).

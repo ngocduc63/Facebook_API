@@ -91,7 +91,7 @@ def get_all_user_service(page, claims):
 
 def update_profile_by_id_service(current_user):
     try:
-        user_id = user_schema.dump(current_user)['id']
+        user_id = current_user.id
     except Exception as e:
         print(e)
         return my_json(error_code=5, mess="token not match user id")
@@ -221,7 +221,7 @@ def user_login_service():
 
 def upload_avatar_service(current_user):
     try:
-        user_id = user_schema.dump(current_user)['id']
+        user_id = current_user.id
     except Exception as e:
         print(e)
         return my_json(error_code=5, mess="token not match user id")
@@ -265,7 +265,7 @@ def upload_avatar_service(current_user):
 
 def upload_cover_photo_service(current_user):
     try:
-        user_id = user_schema.dump(current_user)['id']
+        user_id = current_user.id
     except Exception as e:
         print(e)
         return my_json(error_code=5, mess="token not match user id")
@@ -326,4 +326,3 @@ def logout_user(claims):
         return my_json("logout success")
     else:
         return my_json(error_code=1, mess="login fail")
-

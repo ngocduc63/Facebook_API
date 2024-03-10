@@ -1,5 +1,5 @@
 from facebook.extension import db
-from facebook.facebook_ma import PostSchema, UserSchema, LikeSchema, CommentSchema
+from facebook.facebook_ma import PostSchema, LikeSchema, CommentSchema
 from facebook.model import Posts, Likes, Comments
 from ..extension import (my_json, obj_success_paginate, get_current_time, change_name_file, get_path_upload,
                          allowed_file)
@@ -11,7 +11,6 @@ UPLOAD_POST_FOLDER = "upload/post"
 
 post_schema = PostSchema()
 posts_schema = PostSchema(many=True)
-user_schema = UserSchema()
 like_schema = LikeSchema()
 comment_schema = CommentSchema()
 
@@ -22,7 +21,7 @@ def get_new_feed_service(page, current_user):
 
 def create_post_service(current_user):
     try:
-        user_id = user_schema.dump(current_user)['id']
+        user_id = current_user.id
     except Exception as e:
         print(e)
         return my_json(error_code=4, mess="token not match user id")
@@ -67,7 +66,7 @@ def create_post_service(current_user):
 
 def update_post_service(current_user):
     try:
-        user_id = user_schema.dump(current_user)['id']
+        user_id = current_user.id
     except Exception as e:
         print(e)
         return my_json(error_code=4, mess="token not match user id")
@@ -113,7 +112,7 @@ def update_post_service(current_user):
 
 def delete_post_service(id_post, current_user):
     try:
-        user_id = user_schema.dump(current_user)['id']
+        user_id = current_user.id
     except Exception as e:
         print(e)
         return my_json(error_code=3, mess="token not match user id")
@@ -135,7 +134,7 @@ def delete_post_service(id_post, current_user):
 
 def user_like_post_service(current_user):
     try:
-        user_id = user_schema.dump(current_user)['id']
+        user_id = current_user.id
     except Exception as e:
         print(e)
         return my_json(error_code=6, mess="token not match user id")
@@ -175,7 +174,7 @@ def user_like_post_service(current_user):
 
 def user_unlike_post_service(id_post, current_user):
     try:
-        user_id = user_schema.dump(current_user)['id']
+        user_id = current_user.id
     except Exception as e:
         print(e)
         return my_json(error_code=4, mess="token not match user id")
@@ -199,7 +198,7 @@ def user_unlike_post_service(id_post, current_user):
 
 def user_comment_post_service(current_user):
     try:
-        user_id = user_schema.dump(current_user)['id']
+        user_id = current_user.id
     except Exception as e:
         print(e)
         return my_json(error_code=5, mess="token not match user id")
@@ -236,7 +235,7 @@ def user_comment_post_service(current_user):
 
 def user_delete_comment_post_service(id_comment, current_user):
     try:
-        user_id = user_schema.dump(current_user)['id']
+        user_id = current_user.id
     except Exception as e:
         print(e)
         return my_json(error_code=5, mess="token not match user id")
