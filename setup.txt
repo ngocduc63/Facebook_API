@@ -19,3 +19,4 @@ pip
 python-dotenv
 six
 typing_extension
+pymongo

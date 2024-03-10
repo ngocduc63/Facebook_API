@@ -5,10 +5,13 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="23cb2c54-3c39-4df6-92f4-23e60e3d4d48" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/facebook/chat/db_chat.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/facebook/posts/controller.py" beforeDir="false" afterPath="$PROJECT_DIR$/facebook/posts/controller.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/facebook/friends/services.py" beforeDir="false" afterPath="$PROJECT_DIR$/facebook/friends/services.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/facebook/posts/services.py" beforeDir="false" afterPath="$PROJECT_DIR$/facebook/posts/services.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/facebook/users/services.py" beforeDir="false" afterPath="$PROJECT_DIR$/facebook/users/services.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/instance/facebook.db" beforeDir="false" afterPath="$PROJECT_DIR$/instance/facebook.db" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/setup.txt" beforeDir="false" afterPath="$PROJECT_DIR$/setup.txt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -58,19 +61,20 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
-    &quot;Python.app.executor&quot;: &quot;Run&quot;,
-    &quot;Python.main.executor&quot;: &quot;Run&quot;,
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;dev&quot;,
-    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;D:/game/HandGestRecog_CNN&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ASKED_ADD_EXTERNAL_FILES": "true",
+    "Python.app.executor": "Run",
+    "Python.db_chat.executor": "Run",
+    "Python.main.executor": "Run",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "git-widget-placeholder": "dev",
+    "ignore.virus.scanning.warn.message": "true",
+    "last_opened_file_path": "D:/game/HandGestRecog_CNN",
+    "settings.editor.selected.configurable": "com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Python_Code\Facebook_API\library\friends" />
@@ -106,6 +110,28 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
+    <configuration name="db_chat" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="Facebook_API" />
+      <option name="ENV_FILES" value="" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/facebook/chat" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/facebook/chat/db_chat.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
     <configuration name="main" type="PythonConfigurationType" factoryName="Python" nameIsGenerated="true">
       <module name="Facebook_API" />
       <option name="ENV_FILES" value="" />
@@ -128,6 +154,11 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Python.db_chat" />
+      </list>
+    </recent_temporary>
   </component>
   <component name="SharedIndexes">
     <attachedChunks>
@@ -361,7 +392,15 @@
       <option name="project" value="LOCAL" />
       <updated>1709910120953</updated>
     </task>
-    <option name="localTasksCounter" value="28" />
+    <task id="LOCAL-00028" summary="post api: fix api comment">
+      <option name="closed" value="true" />
+      <created>1709965175001</created>
+      <option name="number" value="00028" />
+      <option name="presentableId" value="LOCAL-00028" />
+      <option name="project" value="LOCAL" />
+      <updated>1709965175001</updated>
+    </task>
+    <option name="localTasksCounter" value="29" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -377,7 +416,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="fix create db" />
     <MESSAGE value="create api add user" />
     <MESSAGE value="add api add, get, get all : user, friend," />
     <MESSAGE value="update" />
@@ -402,6 +440,7 @@
     <MESSAGE value="create file setup and tuturial" />
     <MESSAGE value="user api: update refresh token, expries token" />
     <MESSAGE value="post api: create api for comment, like post" />
-    <option name="LAST_COMMIT_MESSAGE" value="post api: create api for comment, like post" />
+    <MESSAGE value="post api: fix api comment" />
+    <option name="LAST_COMMIT_MESSAGE" value="post api: fix api comment" />
   </component>
 </project>
