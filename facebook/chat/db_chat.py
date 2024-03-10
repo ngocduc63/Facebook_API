@@ -1,22 +1,74 @@
-from pymongo import MongoClient
+from pymongo import MongoClient, DESCENDING
 from ..extension import get_current_time
 from bson import ObjectId
+from ..config import MESSAGE_FETCH_LIMIT
 
 client = MongoClient("mongodb+srv://test:123@facebook.7yqdc0f.mongodb.net/?retryWrites=true&w=majority&appName=facebook")
 
 chat_db = client.get_database("ChatDB")
 rooms_collection = chat_db.get_collection("rooms")
 room_members_collection = chat_db.get_collection("room_members")
+messages_collection = chat_db.get_collection("room_members")
 
 
 def save_room(room_name, created_by):
     room_id = rooms_collection.insert_one(
         {'name': room_name, 'created_by': created_by, 'created_at': get_current_time()}).inserted_id
-    add_room_member(room_id, room_name, created_by, created_by, is_room_admin=True)
+    add_room_member(room_id, room_name, created_by, created_by, is_creator=True)
     return room_id
 
 
-def add_room_member(room_id, room_name, username, added_by, is_room_admin=False):
+def add_room_member(room_id, room_name, username, added_by, is_creator=False):
     room_members_collection.insert_one(
         {'_id': {'room_id': ObjectId(room_id), 'username': username}, 'room_name': room_name, 'added_by': added_by,
-         'added_at': get_current_time(), 'is_room_admin': is_room_admin})
+         'added_at': get_current_time(), 'is_room_admin': is_creator})
+
+
+def update_room(room_id, room_name):
+    rooms_collection.update_one({'_id': ObjectId(room_id)}, {'$set': {'name': room_name}})
+    room_members_collection.update_many({'_id.room_id': ObjectId(room_id)}, {'$set': {'room_name': room_name}})
+
+
+def get_room(room_id):
+    return rooms_collection.find_one({'_id': ObjectId(room_id)})
+
+
+def add_room_members(room_id, room_name, usernames, added_by):
+    room_members_collection.insert_many(
+        [{'_id': {'room_id': ObjectId(room_id), 'username': username}, 'room_name': room_name, 'added_by': added_by,
+          'added_at': get_current_time(), 'is_room_admin': False} for username in usernames])
+
+
+def remove_room_members(room_id, usernames):
+    room_members_collection.delete_many(
+        {'_id': {'$in': [{'room_id': ObjectId(room_id), 'username': username} for username in usernames]}})
+
+
+def get_room_members(room_id):
+    return list(room_members_collection.find({'_id.room_id': ObjectId(room_id)}))
+
+
+def get_rooms_for_user(username):
+    return list(room_members_collection.find({'_id.username': username}))
+
+
+def is_room_member(room_id, username):
+    return room_members_collection.count_documents({'_id': {'room_id': ObjectId(room_id), 'username': username}})
+
+
+def is_room_admin(room_id, username):
+    return room_members_collection.count_documents(
+        {'_id': {'room_id': ObjectId(room_id), 'username': username}, 'is_room_admin': True})
+
+
+def save_message(room_id, text, sender):
+    (messages_collection.
+        insert_one({'room_id': room_id, 'text': text, 'sender': sender, 'created_at': get_current_time()}))
+
+
+def get_messages(room_id, page=0):
+    offset = page * MESSAGE_FETCH_LIMIT
+    messages = list(
+        messages_collection.find({'room_id': room_id}).sort('_id', DESCENDING).limit(MESSAGE_FETCH_LIMIT).skip(offset))
+
+    return messages[::-1]
