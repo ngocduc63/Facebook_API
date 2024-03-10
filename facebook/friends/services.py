@@ -8,6 +8,7 @@ from ..extension import my_json, obj_success_paginate
 from ..config import PER_PAGE_LIST_FRIEND
 from sqlalchemy import or_, and_
 from sqlalchemy.orm import aliased
+from ..chat.controller import create_room
 
 friend_schema = FriendSchema()
 friends_schema = FriendSchema(many=True)
@@ -38,6 +39,9 @@ def add_friend_service(friend_id, current_user):
 
         db.session.add(new_friend)
         db.session.commit()
+
+        create_room(current_user.username, user_id, friend_id)
+
         return my_json("add friend success")
     except IndentationError:
         db.session.rollback()

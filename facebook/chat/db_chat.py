@@ -8,20 +8,20 @@ client = MongoClient("mongodb+srv://test:123@facebook.7yqdc0f.mongodb.net/?retry
 chat_db = client.get_database("ChatDB")
 rooms_collection = chat_db.get_collection("rooms")
 room_members_collection = chat_db.get_collection("room_members")
-messages_collection = chat_db.get_collection("room_members")
+messages_collection = chat_db.get_collection("messages")
 
 
 def save_room(room_name, created_by):
     room_id = rooms_collection.insert_one(
         {'name': room_name, 'created_by': created_by, 'created_at': get_current_time()}).inserted_id
-    add_room_member(room_id, room_name, created_by, created_by, is_creator=True)
+    add_room_member(room_id, room_name, created_by, created_by)
     return room_id
 
 
-def add_room_member(room_id, room_name, username, added_by, is_creator=False):
+def add_room_member(room_id, room_name, username, added_by):
     room_members_collection.insert_one(
         {'_id': {'room_id': ObjectId(room_id), 'username': username}, 'room_name': room_name, 'added_by': added_by,
-         'added_at': get_current_time(), 'is_room_admin': is_creator})
+         'added_at': get_current_time()})
 
 
 def update_room(room_id, room_name):
@@ -36,7 +36,7 @@ def get_room(room_id):
 def add_room_members(room_id, room_name, usernames, added_by):
     room_members_collection.insert_many(
         [{'_id': {'room_id': ObjectId(room_id), 'username': username}, 'room_name': room_name, 'added_by': added_by,
-          'added_at': get_current_time(), 'is_room_admin': False} for username in usernames])
+          'added_at': get_current_time()} for username in usernames])
 
 
 def remove_room_members(room_id, usernames):
@@ -54,11 +54,6 @@ def get_rooms_for_user(username):
 
 def is_room_member(room_id, username):
     return room_members_collection.count_documents({'_id': {'room_id': ObjectId(room_id), 'username': username}})
-
-
-def is_room_admin(room_id, username):
-    return room_members_collection.count_documents(
-        {'_id': {'room_id': ObjectId(room_id), 'username': username}, 'is_room_admin': True})
 
 
 def save_message(room_id, text, sender):

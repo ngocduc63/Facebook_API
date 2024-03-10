@@ -20,3 +20,4 @@ python-dotenv
 six
 typing_extension
 pymongo
+flask-socketio

@@ -5,9 +5,15 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="23cb2c54-3c39-4df6-92f4-23e60e3d4d48" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/facebook/chat/controller.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app.py" beforeDir="false" afterPath="$PROJECT_DIR$/app.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/facebook/.env" beforeDir="false" afterPath="$PROJECT_DIR$/facebook/.env" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/facebook/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/facebook/__init__.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/facebook/chat/db_chat.py" beforeDir="false" afterPath="$PROJECT_DIR$/facebook/chat/db_chat.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/facebook/config.py" beforeDir="false" afterPath="$PROJECT_DIR$/facebook/config.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/facebook/friends/services.py" beforeDir="false" afterPath="$PROJECT_DIR$/facebook/friends/services.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/instance/facebook.db" beforeDir="false" afterPath="$PROJECT_DIR$/instance/facebook.db" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/setup.txt" beforeDir="false" afterPath="$PROJECT_DIR$/setup.txt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -60,6 +66,7 @@
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
     "ASKED_ADD_EXTERNAL_FILES": "true",
+    "Python.__init__.executor": "Run",
     "Python.app.executor": "Run",
     "Python.db_chat.executor": "Run",
     "Python.main.executor": "Run",
@@ -78,12 +85,35 @@
       <recent name="C:\Python_Code\Facebook_API" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Python_Code\Facebook_API" />
+      <recent name="C:\Python_Code\Facebook_API\facebook" />
       <recent name="C:\Python_Code\Facebook_API\library\users" />
       <recent name="C:\Python_Code\Facebook_API\library" />
-      <recent name="C:\Python_Code\Facebook_API" />
     </key>
   </component>
   <component name="RunManager" selected="Python.app">
+    <configuration name="__init__" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="Facebook_API" />
+      <option name="ENV_FILES" value="" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/facebook" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/facebook/__init__.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
     <configuration name="app" type="PythonConfigurationType" factoryName="Python" nameIsGenerated="true">
       <module name="Facebook_API" />
       <option name="ENV_FILES" value="" />
@@ -97,7 +127,7 @@
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/app.py" />
+      <option name="SCRIPT_NAME" value="C:\Python_Code\Facebook_API\app.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -152,6 +182,7 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Python.__init__" />
         <item itemvalue="Python.db_chat" />
       </list>
     </recent_temporary>
@@ -412,7 +443,15 @@
       <option name="project" value="LOCAL" />
       <updated>1710080942416</updated>
     </task>
-    <option name="localTasksCounter" value="31" />
+    <task id="LOCAL-00031" summary="Feature chat: update logic chat">
+      <option name="closed" value="true" />
+      <created>1710082578838</created>
+      <option name="number" value="00031" />
+      <option name="presentableId" value="LOCAL-00031" />
+      <option name="project" value="LOCAL" />
+      <updated>1710082578838</updated>
+    </task>
+    <option name="localTasksCounter" value="32" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -428,7 +467,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="update" />
     <MESSAGE value="update format json user api" />
     <MESSAGE value="paginate, update api update, delete, search user" />
     <MESSAGE value="update user: LOGIN, REGISTER" />
@@ -453,6 +491,7 @@
     <MESSAGE value="post api: fix api comment" />
     <MESSAGE value="fix all api: get current user id" />
     <MESSAGE value="Feature chat: import pymongo" />
-    <option name="LAST_COMMIT_MESSAGE" value="Feature chat: import pymongo" />
+    <MESSAGE value="Feature chat: update logic chat" />
+    <option name="LAST_COMMIT_MESSAGE" value="Feature chat: update logic chat" />
   </component>
 </project>

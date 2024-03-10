@@ -7,7 +7,6 @@ from .model import Users, Friends, Posts, Comments, Likes, TokenBlocklist
 import os
 from datetime import timedelta
 
-
 TIME_EXPIRES_ACCESS_TOKEN = 5
 TIME_EXPIRES_REFRESH_TOKEN = 30
 
@@ -88,5 +87,7 @@ def create_app(config_file="config.py"):
     jwt.init_app(app)
 
     jwt_handel()
+
+    app.config['SECRET_KEY'] = os.environ.get("SECRET_KEY")
 
     return app
