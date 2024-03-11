@@ -5,15 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="23cb2c54-3c39-4df6-92f4-23e60e3d4d48" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/facebook/chat/controller.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app.py" beforeDir="false" afterPath="$PROJECT_DIR$/app.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/facebook/.env" beforeDir="false" afterPath="$PROJECT_DIR$/facebook/.env" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/facebook/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/facebook/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/facebook/chat/db_chat.py" beforeDir="false" afterPath="$PROJECT_DIR$/facebook/chat/db_chat.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/facebook/friends/services.py" beforeDir="false" afterPath="$PROJECT_DIR$/facebook/friends/services.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/instance/facebook.db" beforeDir="false" afterPath="$PROJECT_DIR$/instance/facebook.db" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/setup.txt" beforeDir="false" afterPath="$PROJECT_DIR$/setup.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/facebook/chat/controller.py" beforeDir="false" afterPath="$PROJECT_DIR$/facebook/chat/controller.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -63,21 +57,21 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "ASKED_ADD_EXTERNAL_FILES": "true",
-    "Python.__init__.executor": "Run",
-    "Python.app.executor": "Run",
-    "Python.db_chat.executor": "Run",
-    "Python.main.executor": "Run",
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "dev",
-    "ignore.virus.scanning.warn.message": "true",
-    "last_opened_file_path": "D:/game/HandGestRecog_CNN",
-    "settings.editor.selected.configurable": "com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
+    &quot;Python.__init__.executor&quot;: &quot;Run&quot;,
+    &quot;Python.app.executor&quot;: &quot;Run&quot;,
+    &quot;Python.db_chat.executor&quot;: &quot;Run&quot;,
+    &quot;Python.main.executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;dev&quot;,
+    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;D:/game/HandGestRecog_CNN&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Python_Code\Facebook_API\library\friends" />
@@ -451,7 +445,15 @@
       <option name="project" value="LOCAL" />
       <updated>1710082578838</updated>
     </task>
-    <option name="localTasksCounter" value="32" />
+    <task id="LOCAL-00032" summary="Feature chat: add socketio, update logic add friend: create chat room">
+      <option name="closed" value="true" />
+      <created>1710089840690</created>
+      <option name="number" value="00032" />
+      <option name="presentableId" value="LOCAL-00032" />
+      <option name="project" value="LOCAL" />
+      <updated>1710089840690</updated>
+    </task>
+    <option name="localTasksCounter" value="33" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -467,7 +469,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="update format json user api" />
     <MESSAGE value="paginate, update api update, delete, search user" />
     <MESSAGE value="update user: LOGIN, REGISTER" />
     <MESSAGE value="update: upload avatar for user" />
@@ -492,6 +493,7 @@
     <MESSAGE value="fix all api: get current user id" />
     <MESSAGE value="Feature chat: import pymongo" />
     <MESSAGE value="Feature chat: update logic chat" />
-    <option name="LAST_COMMIT_MESSAGE" value="Feature chat: update logic chat" />
+    <MESSAGE value="Feature chat: add socketio, update logic add friend: create chat room" />
+    <option name="LAST_COMMIT_MESSAGE" value="Feature chat: add socketio, update logic add friend: create chat room" />
   </component>
 </project>

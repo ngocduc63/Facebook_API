@@ -7,7 +7,7 @@ if __name__ == "__main__":
     socketio = SocketIO(app)
     socket_handel(socketio)
 
-    socketio.run(app, allow_unsafe_werkzeug=True, log_output=True, use_reloader=False)
+    socketio.run(app, allow_unsafe_werkzeug=True, log_output=True, use_reloader=False, debug=True)
 
 
 

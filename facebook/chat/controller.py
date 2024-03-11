@@ -2,12 +2,13 @@ from ..extension import get_current_time
 from .db_chat import (save_room, add_room_members, get_rooms_for_user, get_room, is_room_member, add_room_member,
                       get_room_members, update_room, remove_room_members, save_message, get_messages)
 from flask_socketio import SocketIO, join_room, leave_room
+from datetime import datetime
 
 
 def socket_handel(socketio):
     @socketio.on('send_message')
     def handle_send_message_event(data):
-        data['created_at'] = get_current_time().strftime("%d %b, %H:%M")
+        data['created_at'] = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
         save_message(data['room'], data['message'], data['username'])
         socketio.emit('receive_message', data, room=data['room'])
 
