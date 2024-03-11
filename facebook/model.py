@@ -42,11 +42,13 @@ class Friends(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey("users.id"))
     friend_id = db.Column(db.Integer, db.ForeignKey("users.id"))
+    is_accept = db.Column(db.Integer, nullable=False)
     create_at = db.Column(db.Integer, nullable=False)
 
-    def __init__(self, user_id, friend_id,  create_at):
+    def __init__(self, user_id, friend_id, is_accept, create_at):
         self.user_id = user_id
         self.friend_id = friend_id
+        self.is_accept = is_accept
         self.create_at = create_at
 
 

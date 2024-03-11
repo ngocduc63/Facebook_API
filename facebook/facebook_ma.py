@@ -11,7 +11,7 @@ class UserSchema(ma.Schema):
 
 class FriendSchema(ma.Schema):
     class Meta:
-        fields = ('_sa_instance_state', "id", "user_id", "friend_id", "create_at")
+        fields = ('_sa_instance_state', "id", "user_id", "friend_id", "is_accept", "create_at")
         exclude = ('_sa_instance_state',)
 
 

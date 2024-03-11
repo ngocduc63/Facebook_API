@@ -13,7 +13,7 @@ jwt = JWTManager()
 ALLOWED_EXTENSIONS = ['png', 'jpg', 'jpeg', 'mp4']
 
 
-def my_json(data=None, error_code=0, mess="fail"):
+def my_json(data=None, error_code=0, mess="error"):
     if error_code == 0:
         rs = obj_success(data)
         return jsonify(rs)

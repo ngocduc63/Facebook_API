@@ -6,8 +6,13 @@
   <component name="ChangeListManager">
     <list default="true" id="23cb2c54-3c39-4df6-92f4-23e60e3d4d48" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app.py" beforeDir="false" afterPath="$PROJECT_DIR$/app.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/facebook/chat/controller.py" beforeDir="false" afterPath="$PROJECT_DIR$/facebook/chat/controller.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/facebook/extension.py" beforeDir="false" afterPath="$PROJECT_DIR$/facebook/extension.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/facebook/facebook_ma.py" beforeDir="false" afterPath="$PROJECT_DIR$/facebook/facebook_ma.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/facebook/friends/controller.py" beforeDir="false" afterPath="$PROJECT_DIR$/facebook/friends/controller.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/facebook/friends/services.py" beforeDir="false" afterPath="$PROJECT_DIR$/facebook/friends/services.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/facebook/model.py" beforeDir="false" afterPath="$PROJECT_DIR$/facebook/model.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/instance/facebook.db" beforeDir="false" afterPath="$PROJECT_DIR$/instance/facebook.db" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -453,7 +458,15 @@
       <option name="project" value="LOCAL" />
       <updated>1710089840690</updated>
     </task>
-    <option name="localTasksCounter" value="33" />
+    <task id="LOCAL-00033" summary="Feature chat: fix socket chat">
+      <option name="closed" value="true" />
+      <created>1710146107111</created>
+      <option name="number" value="00033" />
+      <option name="presentableId" value="LOCAL-00033" />
+      <option name="project" value="LOCAL" />
+      <updated>1710146107111</updated>
+    </task>
+    <option name="localTasksCounter" value="34" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -469,7 +482,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="paginate, update api update, delete, search user" />
     <MESSAGE value="update user: LOGIN, REGISTER" />
     <MESSAGE value="update: upload avatar for user" />
     <MESSAGE value="update: upload cover photo for user&#10;auto add post when user update image" />
@@ -494,6 +506,7 @@
     <MESSAGE value="Feature chat: import pymongo" />
     <MESSAGE value="Feature chat: update logic chat" />
     <MESSAGE value="Feature chat: add socketio, update logic add friend: create chat room" />
-    <option name="LAST_COMMIT_MESSAGE" value="Feature chat: add socketio, update logic add friend: create chat room" />
+    <MESSAGE value="Feature chat: fix socket chat" />
+    <option name="LAST_COMMIT_MESSAGE" value="Feature chat: fix socket chat" />
   </component>
 </project>

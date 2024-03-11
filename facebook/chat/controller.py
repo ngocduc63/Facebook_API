@@ -27,9 +27,9 @@ def create_room(room_name, user_id_create, user_id_added):
     if len(room_name) and user_id_added and user_id_create:
         room_id = save_room(room_name, user_id_create)
         add_room_member(room_id, room_name, user_id_added, user_id_create)
-        return True
+        return room_id
     else:
-        return False
+        return ""
 
 
 def view_messages_room(room_id, user_id):
