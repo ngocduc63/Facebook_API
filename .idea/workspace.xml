@@ -6,13 +6,11 @@
   <component name="ChangeListManager">
     <list default="true" id="23cb2c54-3c39-4df6-92f4-23e60e3d4d48" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/facebook/chat/controller.py" beforeDir="false" afterPath="$PROJECT_DIR$/facebook/chat/controller.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/facebook/extension.py" beforeDir="false" afterPath="$PROJECT_DIR$/facebook/extension.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/facebook/facebook_ma.py" beforeDir="false" afterPath="$PROJECT_DIR$/facebook/facebook_ma.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/facebook/friends/controller.py" beforeDir="false" afterPath="$PROJECT_DIR$/facebook/friends/controller.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/facebook/friends/services.py" beforeDir="false" afterPath="$PROJECT_DIR$/facebook/friends/services.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/facebook/model.py" beforeDir="false" afterPath="$PROJECT_DIR$/facebook/model.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app.py" beforeDir="false" afterPath="$PROJECT_DIR$/app.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/facebook/users/controller.py" beforeDir="false" afterPath="$PROJECT_DIR$/facebook/users/controller.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/facebook/users/services.py" beforeDir="false" afterPath="$PROJECT_DIR$/facebook/users/services.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/instance/facebook.db" beforeDir="false" afterPath="$PROJECT_DIR$/instance/facebook.db" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/setup.txt" beforeDir="false" afterPath="$PROJECT_DIR$/setup.txt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -466,7 +464,15 @@
       <option name="project" value="LOCAL" />
       <updated>1710146107111</updated>
     </task>
-    <option name="localTasksCounter" value="34" />
+    <task id="LOCAL-00034" summary="Api friends: update api acp friend">
+      <option name="closed" value="true" />
+      <created>1710149215241</created>
+      <option name="number" value="00034" />
+      <option name="presentableId" value="LOCAL-00034" />
+      <option name="project" value="LOCAL" />
+      <updated>1710149215241</updated>
+    </task>
+    <option name="localTasksCounter" value="35" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -482,7 +488,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="update user: LOGIN, REGISTER" />
     <MESSAGE value="update: upload avatar for user" />
     <MESSAGE value="update: upload cover photo for user&#10;auto add post when user update image" />
     <MESSAGE value="The first commit in 2024: create access token when user login" />
@@ -507,6 +512,7 @@
     <MESSAGE value="Feature chat: update logic chat" />
     <MESSAGE value="Feature chat: add socketio, update logic add friend: create chat room" />
     <MESSAGE value="Feature chat: fix socket chat" />
-    <option name="LAST_COMMIT_MESSAGE" value="Feature chat: fix socket chat" />
+    <MESSAGE value="Api friends: update api acp friend" />
+    <option name="LAST_COMMIT_MESSAGE" value="Api friends: update api acp friend" />
   </component>
 </project>

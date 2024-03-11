@@ -21,3 +21,4 @@ six
 typing_extension
 pymongo
 flask-socketio
+flask-cors

@@ -28,7 +28,7 @@ def add_user():
     return add_user_service()
 
 
-@users.route("/user-management/user/login", methods=["GET"])
+@users.route("/user-management/user/login", methods=["POST"])
 def user_login():
     return user_login_service()
 
@@ -72,13 +72,11 @@ def upload_cover_photo():
 
 
 @users.route("/user-management/user/avatar/<string:filename>", methods=["GET"])
-@jwt_required()
 def get_avatar(filename):
     return get_avatar_from_filename_service(filename)
 
 
 @users.route("/user-management/user/cover/<string:filename>", methods=["GET"])
-@jwt_required()
 def get_cover_photo(filename):
     return get_cover_photo_from_filename_service(filename)
 
