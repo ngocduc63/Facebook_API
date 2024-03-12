@@ -1,11 +1,13 @@
 from facebook.extension import db
 from facebook.facebook_ma import PostSchema, LikeSchema, CommentSchema
-from facebook.model import Posts, Likes, Comments
+from facebook.model import Posts, Likes, Comments, Users
 from ..extension import (my_json, obj_success_paginate, get_current_time, change_name_file, get_path_upload,
-                         allowed_file)
-from ..config import PER_PAGE_POST
-from flask import request, json
+                         allowed_file, get_path_local)
+from ..config import PER_PAGE_POST, PER_PAGE_LIKE_POST, PER_PAGE_COMMENT_POST
+from flask import request, json, send_from_directory
 from werkzeug.utils import secure_filename
+from sqlalchemy import func
+import math
 
 UPLOAD_POST_FOLDER = "upload/post"
 
@@ -15,8 +17,144 @@ like_schema = LikeSchema()
 comment_schema = CommentSchema()
 
 
-def get_new_feed_service(page, current_user):
-    return my_json(f"new feed: page {page}")
+def get_total_comment(post_id):
+    if post_id:
+        rs = (db.session.query(Posts.id, func.count(Comments.id).label("count_comment"))
+              .outerjoin(Comments, Posts.id == Comments.post_id)
+              .filter(Posts.id == post_id)
+              .group_by(Posts.id))
+        return rs[0].count_comment
+    else:
+        return -1
+
+
+def get_new_feed_service(page_num, current_user):
+    try:
+        user_id = current_user.id
+    except Exception as e:
+        print(e)
+        return my_json(error_code=1, mess="token not match user id")
+
+    posts = (db.session.
+             query(Posts, Users, func.count(Likes.id).label("count_like"))
+             .outerjoin(Likes, Posts.id == Likes.post_id)
+             .outerjoin(Users, Users.id == Posts.user_id)
+             .filter(Posts.user_id == user_id)
+             .group_by(Posts.id)
+             .order_by(Posts.create_at.desc())
+             .paginate(page=page_num, per_page=PER_PAGE_POST, error_out=False)
+             )
+
+    cur_page = posts.page
+    max_page = math.ceil(posts.total / PER_PAGE_POST)
+
+    if posts:
+        data_rs = []
+        for result in posts:
+            data = {
+                "id": result[0].id,
+                "user": {
+                    "id": result[1].id,
+                    "username": result[1].username,
+                    "avatar": result[1].avatar
+                },
+                "title": result[0].title,
+                "image": result[0].image,
+                "create_at": result[0].create_at,
+                "num_like": result[2],
+                "num_comment": get_total_comment(result[0].id)
+            }
+            data_rs.append(data)
+
+        return my_json(obj_success_paginate(data_rs, cur_page, max_page))
+    else:
+        return my_json(error_code=1, mess="not found post")
+
+
+def get_users_like_post_service():
+    data = request.json
+
+    check_data = data and ('post_id' in data) and ('page' in data)
+
+    if check_data:
+        post_id = data['post_id']
+        page_num = data['page']
+
+        likes = (db.session.query(Likes, Users)
+                 .outerjoin(Users, Users.id == Likes.user_id)
+                 .filter(Likes.post_id == post_id)
+                 .group_by(Likes.id)
+                 .order_by(Likes.create_at.desc())
+                 .paginate(page=page_num, per_page=PER_PAGE_LIKE_POST, error_out=False)
+                 )
+
+        cur_page = likes.page
+        max_page = math.ceil(likes.total / PER_PAGE_LIKE_POST)
+
+        if likes:
+            data_rs = []
+            for result in likes:
+                data = {
+                    "id": result[0].id,
+                    "user": {
+                        "id": result[1].id,
+                        "username": result[1].username,
+                        "avatar": result[1].avatar
+                    },
+                    "create_at": result[0].create_at,
+                }
+                data_rs.append(data)
+
+            return my_json(obj_success_paginate(data_rs, cur_page, max_page))
+        else:
+            return my_json(error_code=2, mess="not found like")
+
+    else:
+        return my_json(error_code=1, mess="not found data request")
+
+
+def get_users_comment_post_service():
+    data = request.json
+
+    check_data = data and ('post_id' in data) and ('page' in data)
+
+    if check_data:
+        post_id = data['post_id']
+        page_num = data['page']
+
+        comments = (db.session.query(Comments, Users)
+                    .outerjoin(Users, Users.id == Comments.user_id)
+                    .filter(Comments.post_id == post_id)
+                    .group_by(Comments.id)
+                    .order_by(Comments.create_at.desc())
+                    .paginate(page=page_num, per_page=PER_PAGE_LIKE_POST, error_out=False)
+                    )
+
+        cur_page = comments.page
+        max_page = math.ceil(comments.total / PER_PAGE_LIKE_POST)
+
+        if comments:
+            data_rs = []
+            for result in comments:
+                data = {
+                    "id": result[0].id,
+                    "user": {
+                        "id": result[1].id,
+                        "username": result[1].username,
+                        "avatar": result[1].avatar
+                    },
+                    "content": result[0].content,
+                    "create_at": result[0].create_at
+                }
+                data_rs.append(data)
+
+            return my_json(obj_success_paginate(data_rs, cur_page, max_page))
+        else:
+            return my_json(error_code=2, mess="not found comment")
+
+    else:
+        return my_json(error_code=1, mess="not found data request")
+
 
 
 def create_post_service(current_user):
@@ -259,3 +397,7 @@ def user_delete_comment_post_service(id_comment, current_user):
             return my_json(error_code=1, mess="error in DB")
     else:
         return my_json(error_code=2, mess="error data request")
+
+
+def image_post_service(filename):
+    return send_from_directory(get_path_local(UPLOAD_POST_FOLDER), filename)
