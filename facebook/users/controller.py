@@ -17,7 +17,7 @@ def get_all_user(page):
     return get_all_user_service(page, claims)
 
 
-@users.route("/user-management/user/search/", methods=["GET"])
+@users.route("/user-management/user/search/", methods=["POST"])
 @jwt_required()
 def search_user():
     return search_user_service()
@@ -33,14 +33,14 @@ def user_login():
     return user_login_service()
 
 
-@users.route("/user-management/user/refresh", methods=["GET"])
+@users.route("/user-management/user/refresh", methods=["POST"])
 @jwt_required(refresh=True)
 def user_refresh():
     identity = get_jwt_identity()
     return refresh_service(identity)
 
 
-@users.route("/user-management/user/<int:user_id>", methods=["GET"])
+@users.route("/user-management/user/<int:user_id>", methods=["POST"])
 @jwt_required()
 def get_user_by_id(user_id):
     return get_user_by_id_service(user_id)

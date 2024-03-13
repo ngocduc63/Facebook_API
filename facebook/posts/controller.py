@@ -21,13 +21,13 @@ def create_post():
     return create_post_service(current_user)
 
 
-@posts.route("/post-management/post/likes", methods=["GET"])
+@posts.route("/post-management/post/likes", methods=["POST"])
 @jwt_required()
 def get_users_like_post():
     return get_users_like_post_service()
 
 
-@posts.route("/post-management/post/comments", methods=["GET"])
+@posts.route("/post-management/post/comments", methods=["POST"])
 @jwt_required()
 def get_users_comment_post():
     return get_users_comment_post_service()
