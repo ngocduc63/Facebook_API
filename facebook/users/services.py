@@ -12,7 +12,9 @@ from unidecode import unidecode
 from ..config import PER_PAGE_LIST_USER
 from werkzeug.utils import secure_filename
 from flask_jwt_extended import create_access_token, create_refresh_token
+import re
 
+regex_email = r'\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,7}\b'
 UPLOAD_AVATAR_FOLDER = "upload/avatar"
 UPLOAD_COVER_PHOTO_FOLDER = "upload/cover_photo"
 
@@ -24,9 +26,17 @@ users_schema = UserSchema(many=True)
 def add_user_service():
     data = request.json
     check_data = (data and ('username' in data) and ('email' in data) and
-                  ('password_hash' in data) and ('birth_date' in data) and ('gender' in data))
+                  ('password' in data) and ('birth_date' in data) and ('gender' in data))
 
     if check_data:
+        email = data['email']
+        password = data['password']
+        if not re.fullmatch(regex_email, email):
+            return my_json(error_code=5, mess="error email format")
+
+        if len(password) < 6:
+            return my_json(error_code=6, mess="error password format")
+
         try:
             birth_date_str = data['birth_date']
             birth_date_timestamp = int(datetime.strptime(birth_date_str, '%m/%d/%Y').timestamp())
@@ -35,7 +45,6 @@ def add_user_service():
             return my_json(error_code=4, mess="error date not match")
 
         username = data['username']
-        email = data['email']
         description = ""
         nickname = ""
         birth_date = birth_date_timestamp
@@ -47,7 +56,7 @@ def add_user_service():
             new_user = Users(username, email, description, nickname,
                              birth_date, avatar, cover_photo, gender, create_at)
 
-            new_user.set_password(password=data['password_hash'])
+            new_user.set_password(password)
             db.session.add(new_user)
             db.session.commit()
             return my_json(user_schema.dump(new_user))
