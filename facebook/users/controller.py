@@ -17,7 +17,7 @@ def get_all_user(page):
     return get_all_user_service(page, claims)
 
 
-@users.route("/user-management/user/search/", methods=["POST"])
+@users.route("/user-management/user/search/", methods=["GET"])
 @jwt_required()
 def search_user():
     return search_user_service()

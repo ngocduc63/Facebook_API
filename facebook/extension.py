@@ -23,7 +23,7 @@ def my_json(data=None, error_code=0, mess="error"):
             "message": mess,
             "data": {}
         }
-        return jsonify(rs)
+        return jsonify(rs), 400
 
 
 def obj_success(data):
