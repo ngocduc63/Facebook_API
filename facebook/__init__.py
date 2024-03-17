@@ -43,7 +43,7 @@ def jwt_handel():
             jsonify(
                 {"message": "Signature verification failed", "error": "invalid_token"}
             ),
-            401,
+            402,
         )
 
     @jwt.unauthorized_loader
@@ -55,7 +55,7 @@ def jwt_handel():
                     "error": "authorization_header",
                 }
             ),
-            401,
+            403,
         )
 
     @jwt.token_in_blocklist_loader
