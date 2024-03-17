@@ -2,7 +2,7 @@ from flask import Flask, jsonify
 from .users.controller import users
 from .friends.controller import friends
 from .posts.controller import posts
-from .extension import db, ma, jwt
+from .extension import db, ma, jwt, migrate
 from .model import Users, Friends, Posts, Comments, Likes, TokenBlocklist
 import os
 from datetime import timedelta
@@ -72,9 +72,9 @@ def create_app(config_file="config.py"):
     app = Flask(__name__)
     app.config.from_pyfile(config_file)
     db.init_app(app)
-
+    migrate.init_app(app, db)
     ma.init_app(app)
-    create_db(app)
+    # create_db(app)
     app.register_blueprint(users)
     app.register_blueprint(friends)
     app.register_blueprint(posts)

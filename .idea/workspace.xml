@@ -5,10 +5,18 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="23cb2c54-3c39-4df6-92f4-23e60e3d4d48" name="Changes" comment="Update api login, register">
-      <change afterPath="$PROJECT_DIR$/facebook/upload/post/gojo3_1_1710173155.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/migrations/README" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/migrations/alembic.ini" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/migrations/env.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/migrations/script.py.mako" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/migrations/versions/6c0b5b6fdd62_initial_db.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/facebook/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/facebook/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/facebook/extension.py" beforeDir="false" afterPath="$PROJECT_DIR$/facebook/extension.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/facebook/upload/post/Gold_1_1709733329.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/facebook/upload/post/Gold_1_1709733370.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/facebook/upload/post/avt_dn_1_1709733296.jpg" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/instance/facebook.db" beforeDir="false" afterPath="$PROJECT_DIR$/instance/facebook.db" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/setup.txt" beforeDir="false" afterPath="$PROJECT_DIR$/setup.txt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -518,7 +526,15 @@
       <option name="project" value="LOCAL" />
       <updated>1710483436808</updated>
     </task>
-    <option name="localTasksCounter" value="41" />
+    <task id="LOCAL-00041" summary="Add flask-migrate">
+      <option name="closed" value="true" />
+      <created>1710682788949</created>
+      <option name="number" value="00041" />
+      <option name="presentableId" value="LOCAL-00041" />
+      <option name="project" value="LOCAL" />
+      <updated>1710682788949</updated>
+    </task>
+    <option name="localTasksCounter" value="42" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -534,7 +550,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="update call api update for only 1 user" />
     <MESSAGE value="update user api: logout api block token" />
     <MESSAGE value="create api post, change folder library to facebook" />
     <MESSAGE value="api user: update delete user to block user, move function change name file.&#10;Model: tb_user(update properties is_block).&#10;Friend: update api(get list friend, add friend), add api unfriend" />
@@ -557,8 +572,9 @@
     <MESSAGE value="change method some get api to post" />
     <MESSAGE value="Fix bug: api register" />
     <MESSAGE value="Update api register: format email, password" />
-    <MESSAGE value="Update api login, register" />
     <MESSAGE value="Fix responsive error is http 400, update api post to get" />
-    <option name="LAST_COMMIT_MESSAGE" value="Fix responsive error is http 400, update api post to get" />
+    <MESSAGE value="Add flask-migrate" />
+    <MESSAGE value="Update api login, register" />
+    <option name="LAST_COMMIT_MESSAGE" value="Update api login, register" />
   </component>
 </project>
