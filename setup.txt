@@ -10,7 +10,6 @@ blinker
 click
 colorama
 flask-marshmallow
-greenIet
 itsdangerous
 marshmallow
 marshmallow-sqlalchemy
@@ -22,3 +21,4 @@ typing_extension
 pymongo
 flask-socketio
 flask-cors
+Flask-Migrate

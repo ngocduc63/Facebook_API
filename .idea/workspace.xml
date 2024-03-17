@@ -7,8 +7,8 @@
     <list default="true" id="23cb2c54-3c39-4df6-92f4-23e60e3d4d48" name="Changes" comment="Update api login, register">
       <change afterPath="$PROJECT_DIR$/facebook/upload/post/gojo3_1_1710173155.jpg" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/facebook/users/services.py" beforeDir="false" afterPath="$PROJECT_DIR$/facebook/users/services.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/instance/facebook.db" beforeDir="false" afterPath="$PROJECT_DIR$/instance/facebook.db" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/setup.txt" beforeDir="false" afterPath="$PROJECT_DIR$/setup.txt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -502,7 +502,23 @@
       <option name="project" value="LOCAL" />
       <updated>1710343684331</updated>
     </task>
-    <option name="localTasksCounter" value="39" />
+    <task id="LOCAL-00039" summary="Update api register: format email, password">
+      <option name="closed" value="true" />
+      <created>1710406323700</created>
+      <option name="number" value="00039" />
+      <option name="presentableId" value="LOCAL-00039" />
+      <option name="project" value="LOCAL" />
+      <updated>1710406323700</updated>
+    </task>
+    <task id="LOCAL-00040" summary="Fix responsive error is http 400, update api post to get">
+      <option name="closed" value="true" />
+      <created>1710483436808</created>
+      <option name="number" value="00040" />
+      <option name="presentableId" value="LOCAL-00040" />
+      <option name="project" value="LOCAL" />
+      <updated>1710483436808</updated>
+    </task>
+    <option name="localTasksCounter" value="41" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -518,8 +534,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="update db, update jwt required" />
-    <MESSAGE value="update jwt handel: load current user from token" />
     <MESSAGE value="update call api update for only 1 user" />
     <MESSAGE value="update user api: logout api block token" />
     <MESSAGE value="create api post, change folder library to facebook" />
@@ -541,8 +555,10 @@
     <MESSAGE value="Api friends: update api acp friend" />
     <MESSAGE value="Api posts: update api new feed, list likes, list comments" />
     <MESSAGE value="change method some get api to post" />
-    <MESSAGE value="Update api login, register" />
     <MESSAGE value="Fix bug: api register" />
-    <option name="LAST_COMMIT_MESSAGE" value="Fix bug: api register" />
+    <MESSAGE value="Update api register: format email, password" />
+    <MESSAGE value="Update api login, register" />
+    <MESSAGE value="Fix responsive error is http 400, update api post to get" />
+    <option name="LAST_COMMIT_MESSAGE" value="Fix responsive error is http 400, update api post to get" />
   </component>
 </project>
