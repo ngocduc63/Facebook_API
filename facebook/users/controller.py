@@ -9,7 +9,7 @@ from flask_jwt_extended import jwt_required, get_jwt, current_user, get_jwt_iden
 users = Blueprint("users", __name__)
 
 
-@users.route("/user-management/user/get-all-user/<int:page>")
+@users.route("/user-management/user/get-all-user/<int:page>", methods=["GET"])
 @jwt_required()
 def get_all_user(page):
     claims = get_jwt()
