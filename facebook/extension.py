@@ -37,14 +37,10 @@ def obj_success(data):
 
 def obj_success_paginate(data, cur_page, max_page):
     return {
-            "errorCode": 0,
-            "message": "success",
-            "data": {
                 "datas": data,
                 "currentPage": cur_page,
                 "maxPage": max_page
             }
-        }
 
 
 def change_name_file(filename, name_id):

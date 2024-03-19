@@ -17,17 +17,6 @@ like_schema = LikeSchema()
 comment_schema = CommentSchema()
 
 
-def get_total_comment(post_id):
-    if post_id:
-        rs = (db.session.query(Posts.id, func.count(Comments.id).label("count_comment"))
-              .outerjoin(Comments, Posts.id == Comments.post_id)
-              .filter(Posts.id == post_id)
-              .group_by(Posts.id))
-        return rs[0].count_comment
-    else:
-        return -1
-
-
 def get_new_feed_service(page_num, current_user):
     try:
         user_id = current_user.id
@@ -36,11 +25,9 @@ def get_new_feed_service(page_num, current_user):
         return my_json(error_code=1, mess="token not match user id")
 
     posts = (db.session.
-             query(Posts, Users, func.count(Likes.id).label("count_like"))
-             .outerjoin(Likes, Posts.id == Likes.post_id)
+             query(Posts, Users)
              .outerjoin(Users, Users.id == Posts.user_id)
              .filter(Posts.user_id == user_id)
-             .group_by(Posts.id)
              .order_by(Posts.create_at.desc())
              .paginate(page=page_num, per_page=PER_PAGE_POST, error_out=False)
              )
@@ -61,8 +48,8 @@ def get_new_feed_service(page_num, current_user):
                 "title": result[0].title,
                 "image": result[0].image,
                 "create_at": result[0].create_at,
-                "num_like": result[2],
-                "num_comment": get_total_comment(result[0].id)
+                "num_like": result[0].count_like,
+                "num_comment": result[0].count_comment
             }
             data_rs.append(data)
 
@@ -154,7 +141,6 @@ def get_users_comment_post_service():
 
     else:
         return my_json(error_code=1, mess="not found data request")
-
 
 
 def create_post_service(current_user):
@@ -296,6 +282,7 @@ def user_like_post_service(current_user):
             try:
                 create_at = get_current_time()
                 new_like = Likes(user_id, id_post, category, create_at)
+                post.count_like = post.count_like + 1
                 db.session.add(new_like)
                 db.session.commit()
 
@@ -315,15 +302,20 @@ def user_unlike_post_service(id_post, current_user):
         user_id = current_user.id
     except Exception as e:
         print(e)
-        return my_json(error_code=4, mess="token not match user id")
+        return my_json(error_code=5, mess="token not match user id")
 
     if id_post and user_id:
-        like = db.session.query(Likes).filter(Likes.user_id == user_id, Likes.post_id == id_post).first()
 
+        post = db.session.query(Posts).filter(Posts.id == id_post).first()
+        if not post:
+            return my_json(error_code=4, mess="not found post")
+
+        like = db.session.query(Likes).filter(Likes.user_id == user_id, Likes.post_id == id_post).first()
         if not like:
             return my_json(error_code=3, mess="not found like post")
 
         try:
+            post.count_like = post.count_like - 1
             db.session.delete(like)
             db.session.commit()
             return my_json("unlike success")
@@ -349,7 +341,6 @@ def user_comment_post_service(current_user):
         content = data['content']
 
         post = db.session.query(Posts).filter(Posts.id == id_post).first()
-
         if not post:
             return my_json(error_code=4, mess="not found post")
 
@@ -357,6 +348,7 @@ def user_comment_post_service(current_user):
             try:
                 create_at = get_current_time()
                 new_comment = Comments(user_id, id_post, content, 0, create_at)
+                post.count_comment = post.count_comment + 1
                 db.session.add(new_comment)
                 db.session.commit()
 
@@ -371,24 +363,37 @@ def user_comment_post_service(current_user):
         return my_json(error_code=3, mess="error data request")
 
 
-def user_delete_comment_post_service(id_comment, current_user):
+def user_delete_comment_post_service(current_user):
     try:
         user_id = current_user.id
     except Exception as e:
         print(e)
-        return my_json(error_code=5, mess="token not match user id")
+        return my_json(error_code=7, mess="token not match user id")
 
-    if id_comment and user_id:
+    data = request.json
+    check_data = data and ('id_post' in data) and ('id_comment' in data)
+
+    if check_data:
+        id_post = data['id_post']
+        id_comment = data['id_comment']
+
+        post = db.session.query(Posts).filter(Posts.id == id_post).first()
+        if not post:
+            return my_json(error_code=6, mess="not found post")
+
         comment = db.session.query(Comments).filter(Comments.id == id_comment).first()
-
         if not comment:
-            return my_json(error_code=3, mess="not found comment post")
+            return my_json(error_code=5, mess="not found comment post")
 
         if comment.isDeleted == 1:
             return my_json(error_code=4, mess="comment was deleted")
 
+        if post.user_id != user_id:
+            return my_json(error_code=3, mess="user can't delete comment")
+
         try:
             comment.isDeleted = 1
+            post.count_comment = post.count_comment - 1
 
             db.session.commit()
             return my_json("delete comment success")

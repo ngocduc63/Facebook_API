@@ -68,7 +68,7 @@ def comment_post():
     return user_comment_post_service(current_user)
 
 
-@posts.route("/post-management/post/delete-comment/<int:id_post>", methods=["DELETE"])
+@posts.route("/post-management/post/delete-comment", methods=["DELETE"])
 @jwt_required()
-def delete_comment_post(id_post):
-    return user_delete_comment_post_service(id_post, current_user)
+def delete_comment_post():
+    return user_delete_comment_post_service(current_user)

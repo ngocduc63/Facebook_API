@@ -93,7 +93,7 @@ def get_all_user_service(page, claims):
 
     if users:
         users_data = users_schema.dump(users)
-        return jsonify(obj_success_paginate(users_data, cur_page, max_page))
+        return my_json(obj_success_paginate(users_data, cur_page, max_page))
     else:
         return my_json(error_code=1, mess="Not found")
 

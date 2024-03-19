@@ -59,6 +59,8 @@ class Posts(db.Model):
     user_id = db.Column(db.Integer, db.ForeignKey("users.id"))
     status = db.Column(db.Integer)
     isDeleted = db.Column(db.Integer)
+    count_like = db.Column(db.Integer)
+    count_comment = db.Column(db.Integer)
     create_at = db.Column(db.Integer, nullable=False)
 
     def __init__(self, title, image, user_id, status, isDeleted, create_at):
@@ -67,6 +69,8 @@ class Posts(db.Model):
         self.user_id = user_id
         self.status = status
         self.isDeleted = isDeleted
+        self.count_like = 0
+        self.count_comment = 0
         self.create_at = create_at
 
 
