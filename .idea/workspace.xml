@@ -4,14 +4,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="23cb2c54-3c39-4df6-92f4-23e60e3d4d48" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/migrations/versions/fecc739ea2d9_update_table_friend.py" afterDir="false" />
+    <list default="true" id="23cb2c54-3c39-4df6-92f4-23e60e3d4d48" name="Changes" comment="Update socket notifi:">
+      <change afterPath="$PROJECT_DIR$/facebook/socketio_instance.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/facebook/extension.py" beforeDir="false" afterPath="$PROJECT_DIR$/facebook/extension.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/facebook/model.py" beforeDir="false" afterPath="$PROJECT_DIR$/facebook/model.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app.py" beforeDir="false" afterPath="$PROJECT_DIR$/app.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/facebook/chat/controller.py" beforeDir="false" afterPath="$PROJECT_DIR$/facebook/chat/controller.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/facebook/posts/controller.py" beforeDir="false" afterPath="$PROJECT_DIR$/facebook/posts/controller.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/facebook/posts/services.py" beforeDir="false" afterPath="$PROJECT_DIR$/facebook/posts/services.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/facebook/users/services.py" beforeDir="false" afterPath="$PROJECT_DIR$/facebook/users/services.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/instance/facebook.db" beforeDir="false" afterPath="$PROJECT_DIR$/instance/facebook.db" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -538,7 +537,15 @@
       <option name="project" value="LOCAL" />
       <updated>1710745757599</updated>
     </task>
-    <option name="localTasksCounter" value="43" />
+    <task id="LOCAL-00043" summary="Update db: count comment, like; fix api post, fix obj paginate">
+      <option name="closed" value="true" />
+      <created>1710831535012</created>
+      <option name="number" value="00043" />
+      <option name="presentableId" value="LOCAL-00043" />
+      <option name="project" value="LOCAL" />
+      <updated>1710831535012</updated>
+    </task>
+    <option name="localTasksCounter" value="44" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -554,8 +561,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="api user: update delete user to block user, move function change name file.&#10;Model: tb_user(update properties is_block).&#10;Friend: update api(get list friend, add friend), add api unfriend" />
-    <MESSAGE value="friend-manager(api): update auth token" />
     <MESSAGE value="update api get friend by id: update sort responsive" />
     <MESSAGE value="update post api: create new post api" />
     <MESSAGE value="update user api: change logic check user_id from token" />
@@ -579,6 +584,8 @@
     <MESSAGE value="Update api login, register" />
     <MESSAGE value="update responsive error code with token" />
     <MESSAGE value="update responsive with paginate" />
-    <option name="LAST_COMMIT_MESSAGE" value="update responsive with paginate" />
+    <MESSAGE value="Update db: count comment, like; fix api post, fix obj paginate" />
+    <MESSAGE value="Update socket notifi:" />
+    <option name="LAST_COMMIT_MESSAGE" value="Update socket notifi:" />
   </component>
 </project>

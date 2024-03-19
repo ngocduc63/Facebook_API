@@ -4,11 +4,13 @@ from .services import (get_new_feed_service, create_post_service, update_post_se
                        user_like_post_service, user_unlike_post_service, user_comment_post_service,
                        user_delete_comment_post_service, image_post_service, get_users_like_post_service,
                        get_users_comment_post_service)
-
+from flask_socketio import join_room, leave_room
+from facebook.socketio_instance import socketio
 
 posts = Blueprint("posts", __name__)
 
 
+# api
 @posts.route("/post-management/post/get-new-feed/<int:page>", methods=["GET"])
 @jwt_required()
 def get_new_feed(page):
@@ -72,3 +74,16 @@ def comment_post():
 @jwt_required()
 def delete_comment_post():
     return user_delete_comment_post_service(current_user)
+
+
+# socket
+@socketio.on('join_notification_post')
+def handle_join_post_notification_event(data):
+    join_room(f'post_{data['id_post']}')
+    socketio.emit('join_notification_post', data, room=f'post_{data['id_post']}')
+
+
+@socketio.on('leave_notification_post')
+def handle_leave_post_notification_event(data):
+    leave_room(f'post_{data['id_post']}')
+    socketio.emit('join_notification_post', data, room=f'post_{data['id_post']}')

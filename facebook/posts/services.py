@@ -6,8 +6,8 @@ from ..extension import (my_json, obj_success_paginate, get_current_time, change
 from ..config import PER_PAGE_POST, PER_PAGE_LIKE_POST, PER_PAGE_COMMENT_POST
 from flask import request, json, send_from_directory
 from werkzeug.utils import secure_filename
-from sqlalchemy import func
 import math
+from ..socketio_instance import socketio
 
 UPLOAD_POST_FOLDER = "upload/post"
 
@@ -114,11 +114,11 @@ def get_users_comment_post_service():
                     .filter(Comments.post_id == post_id)
                     .group_by(Comments.id)
                     .order_by(Comments.create_at.desc())
-                    .paginate(page=page_num, per_page=PER_PAGE_LIKE_POST, error_out=False)
+                    .paginate(page=page_num, per_page=PER_PAGE_COMMENT_POST, error_out=False)
                     )
 
         cur_page = comments.page
-        max_page = math.ceil(comments.total / PER_PAGE_LIKE_POST)
+        max_page = math.ceil(comments.total / PER_PAGE_COMMENT_POST)
 
         if comments:
             data_rs = []
@@ -287,6 +287,16 @@ def user_like_post_service(current_user):
                 db.session.commit()
 
                 data_like = like_schema.dump(new_like)
+                data_notification = {
+                    "mess": f"{current_user.username} đã thả cảm xúc bài viết của bạn",
+                    "user_name": current_user.username,
+                    "avatar": current_user.avatar,
+                    "category_react": category,
+                    "num_like": post.count_like,
+                    "create_at": create_at
+                }
+                socketio.emit('receive_notification_post', data_notification, room=f'post_{data_like['post_id']}')
+
                 return my_json(data_like)
             except IndentationError:
                 db.session.rollback()
@@ -353,6 +363,14 @@ def user_comment_post_service(current_user):
                 db.session.commit()
 
                 data_comment = comment_schema.dump(new_comment)
+                data_notification = {
+                    "mess": f"{current_user.username} đã bình luận bài viết của bạn",
+                    "avatar": current_user.avatar,
+                    "user_name": current_user.username,
+                    "create_at": create_at
+                }
+                socketio.emit('receive_notification_post', data_notification, room=f'post_{data_comment['post_id']}')
+
                 return my_json(data_comment)
             except IndentationError:
                 db.session.rollback()
