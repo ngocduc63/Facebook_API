@@ -8,7 +8,8 @@ from ..config import PER_PAGE_LIST_FRIEND
 from sqlalchemy import or_, and_
 from sqlalchemy.orm import aliased
 from ..chat.controller import create_room
-from bson import ObjectId
+from ..config_error_code import (ERROR_SAVE_DB,  ERROR_FRIEND_NOT_FOUND, ERROR_CAN_NOT_ADD_FRIEND,
+                                 ERROR_CAN_NOT_ADD_YOURSELF, ERROR_CAN_NOT_CREATE_ROOM, ERROR_PAGE_NUM_NULL)
 
 friend_schema = FriendSchema()
 friends_schema = FriendSchema(many=True)
@@ -21,12 +22,12 @@ def add_friend_service(friend_id, current_user):
     friend_id = friend_id
 
     if user_id == friend_id:
-        return my_json(error_code=2, mess="Can not add yourself")
+        return my_json(ERROR_CAN_NOT_ADD_YOURSELF)
 
     check_friend = db.session.query(Users).filter(Users.id == friend_id).first()
 
     if not check_friend:
-        return my_json(error_code=3, mess="not found friend")
+        return my_json(ERROR_FRIEND_NOT_FOUND)
 
     check_exits = (db.session.query(Friends).
                    filter(
@@ -38,7 +39,7 @@ def add_friend_service(friend_id, current_user):
                    first())
 
     if check_exits:
-        return my_json(error_code=4, mess="Can not add because you were followed")
+        return my_json(ERROR_CAN_NOT_ADD_FRIEND)
 
     create_at = get_current_time()
     try:
@@ -51,14 +52,14 @@ def add_friend_service(friend_id, current_user):
         return my_json("add friend success")
     except IndentationError:
         db.session.rollback()
-        return my_json(error_code=1, mess="error query database")
+        return my_json(ERROR_SAVE_DB)
 
 
 def accept_service(user_id, current_user):
     friend_id = current_user.id
 
     if user_id == friend_id:
-        return my_json(error_code=2, mess="Can not add yourself")
+        return my_json(ERROR_CAN_NOT_ADD_YOURSELF)
 
     check_exits = (db.session.query(Friends).
                    filter(
@@ -68,20 +69,20 @@ def accept_service(user_id, current_user):
                    first())
 
     if not check_exits:
-        return my_json(error_code=3, mess="Not found friend")
+        return my_json(ERROR_FRIEND_NOT_FOUND)
 
     try:
         check_exits.is_accept = 1
-        db.session.commit()
 
         room_id = create_room(current_user.username, user_id, friend_id)
         if room_id == "":
-            return my_json(error_code=4, mess="create room socket fail")
+            return my_json(ERROR_CAN_NOT_CREATE_ROOM)
         else:
+            db.session.commit()
             return my_json({"room_id": str(room_id)})
     except IndentationError:
         db.session.rollback()
-        return my_json(error_code=1, mess="error query database")
+        return my_json(ERROR_SAVE_DB)
 
 
 def unfriend_service(friend_id, current_user):
@@ -95,7 +96,7 @@ def unfriend_service(friend_id, current_user):
                      ).
               first())
     if not friend:
-        return my_json(error_code=3, mess="not found friend")
+        return my_json(ERROR_FRIEND_NOT_FOUND)
 
     try:
         db.session.delete(friend)
@@ -103,14 +104,14 @@ def unfriend_service(friend_id, current_user):
         return my_json("delete friend success")
     except IndentationError:
         db.session.rollback()
-        return my_json(error_code=1, mess="error query database")
+        return my_json(ERROR_SAVE_DB)
 
 
 def get_friend_by_id_service(user_id):
     page_num = request.json["page"]
 
     if not page_num:
-        return my_json(error_code=2, mess="not found page number")
+        return my_json(ERROR_PAGE_NUM_NULL)
 
     friends = (db.session.query(Friends, user_alias, friend_alias).
                join(user_alias, Friends.user_id == user_alias.id).
@@ -150,4 +151,4 @@ def get_friend_by_id_service(user_id):
 
         return my_json(obj_success_paginate(data_rs, cur_page, max_page))
     else:
-        return my_json(error_code=1, mess="not found friend")
+        return my_json(ERROR_FRIEND_NOT_FOUND)

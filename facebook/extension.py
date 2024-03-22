@@ -14,14 +14,14 @@ jwt = JWTManager()
 ALLOWED_EXTENSIONS = ['png', 'jpg', 'jpeg', 'mp4']
 
 
-def my_json(data=None, error_code=0, mess="error"):
-    if error_code == 0:
+def my_json(data):
+    if not ('error_code' in data):
         rs = obj_success(data)
         return jsonify(rs)
     else:
         rs = {
-            "errorCode": error_code,
-            "message": mess,
+            "errorCode": data['error_code'],
+            "message": data['mess'],
             "data": {}
         }
         return jsonify(rs), 400

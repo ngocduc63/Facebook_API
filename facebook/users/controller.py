@@ -17,7 +17,7 @@ def get_all_user(page):
     return get_all_user_service(page, claims)
 
 
-@users.route("/user-management/user/search/", methods=["GET"])
+@users.route("/user-management/user/search", methods=["GET"])
 @jwt_required()
 def search_user():
     return search_user_service()
@@ -46,7 +46,7 @@ def get_user_by_id(user_id):
     return get_user_by_id_service(user_id)
 
 
-@users.route("/user-management/user/update/", methods=["PUT"])
+@users.route("/user-management/user/update", methods=["PUT"])
 @jwt_required()
 def update_profile_by_id():
     return update_profile_by_id_service(current_user)
@@ -59,13 +59,13 @@ def block_user_by_id(user_id):
     return block_user_by_id_service(user_id, claims)
 
 
-@users.route("/user-management/user/avatar/", methods=["POST"])
+@users.route("/user-management/user/avatar", methods=["POST"])
 @jwt_required()
 def upload_avatar():
     return upload_avatar_service(current_user)
 
 
-@users.route("/user-management/user/cover/", methods=["POST"])
+@users.route("/user-management/user/cover", methods=["POST"])
 @jwt_required()
 def upload_cover_photo():
     return upload_cover_photo_service(current_user)

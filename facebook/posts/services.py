@@ -8,6 +8,9 @@ from flask import request, json, send_from_directory
 from werkzeug.utils import secure_filename
 import math
 from ..socketio_instance import socketio
+from ..config_error_code import (ERROR_DATA_NOT_MATCH, ERROR_FILE_NULL, ERROR_UPLOAD_FILE, ERROR_CHECK_TOKEN,
+                                 ERROR_SAVE_DB, ERROR_USER_HAVE_NOT_ROLE, ERROR_POST_NOT_FOUND, ERROR_LIKE_NOT_FOUND,
+                                 ERROR_COMMENT_NOT_FOUND, ERROR_LIKE_IN_POST_EXIST)
 
 UPLOAD_POST_FOLDER = "upload/post"
 
@@ -22,7 +25,7 @@ def get_new_feed_service(page_num, current_user):
         user_id = current_user.id
     except Exception as e:
         print(e)
-        return my_json(error_code=1, mess="token not match user id")
+        return my_json(ERROR_CHECK_TOKEN)
 
     posts = (db.session.
              query(Posts, Users)
@@ -55,7 +58,7 @@ def get_new_feed_service(page_num, current_user):
 
         return my_json(obj_success_paginate(data_rs, cur_page, max_page))
     else:
-        return my_json(error_code=1, mess="not found post")
+        return my_json(ERROR_POST_NOT_FOUND)
 
 
 def get_users_like_post_service():
@@ -94,10 +97,10 @@ def get_users_like_post_service():
 
             return my_json(obj_success_paginate(data_rs, cur_page, max_page))
         else:
-            return my_json(error_code=2, mess="not found like")
+            return my_json(ERROR_LIKE_NOT_FOUND)
 
     else:
-        return my_json(error_code=1, mess="not found data request")
+        return my_json(ERROR_DATA_NOT_MATCH)
 
 
 def get_users_comment_post_service():
@@ -137,10 +140,10 @@ def get_users_comment_post_service():
 
             return my_json(obj_success_paginate(data_rs, cur_page, max_page))
         else:
-            return my_json(error_code=2, mess="not found comment")
+            return my_json(ERROR_COMMENT_NOT_FOUND)
 
     else:
-        return my_json(error_code=1, mess="not found data request")
+        return my_json(ERROR_DATA_NOT_MATCH)
 
 
 def create_post_service(current_user):
@@ -148,7 +151,7 @@ def create_post_service(current_user):
         user_id = current_user.id
     except Exception as e:
         print(e)
-        return my_json(error_code=4, mess="token not match user id")
+        return my_json(ERROR_CHECK_TOKEN)
 
     data = json.loads(request.form['data'])
 
@@ -173,7 +176,9 @@ def create_post_service(current_user):
                     image_str = filename
                 except Exception as e:
                     print(e)
-                    return my_json(error_code=2, mess="error upload file")
+                    return my_json(ERROR_UPLOAD_FILE)
+            else:
+                return my_json(ERROR_FILE_NULL)
 
         try:
             new_post = Posts(title, image_str, user_id, status, is_delete, create_at)
@@ -183,9 +188,9 @@ def create_post_service(current_user):
             return my_json(post_schema.dump(new_post))
         except IndentationError:
             db.session.rollback()
-            return my_json(error_code=1, mess="error in DB")
+            return my_json(ERROR_SAVE_DB)
     else:
-        return my_json(error_code=3, mess="error validate data")
+        return my_json(ERROR_DATA_NOT_MATCH)
 
 
 def update_post_service(current_user):
@@ -193,7 +198,7 @@ def update_post_service(current_user):
         user_id = current_user.id
     except Exception as e:
         print(e)
-        return my_json(error_code=4, mess="token not match user id")
+        return my_json(ERROR_CHECK_TOKEN)
 
     data = json.loads(request.form['data'])
 
@@ -203,7 +208,6 @@ def update_post_service(current_user):
         id_post = data["id"]
         title_new = data["title"]
         status_new = data['status']
-        image_str_new = ""
 
         data_image = request.files
         if data_image:
@@ -214,24 +218,27 @@ def update_post_service(current_user):
                     filename = change_name_file(filename_full, user_id)
                     file.save(get_path_upload(UPLOAD_POST_FOLDER, filename))
                     image_str_new = filename
+
+                    post = db.session.query(Posts).filter(Posts.id == id_post).first()
+                    post.title = title_new
+                    post.status = status_new
+                    post.image = image_str_new
+
+                    post_data = post_schema.dump(post)
+                    db.session.commit()
+                    return my_json(post_data)
+                except IndentationError:
+                    db.session.rollback()
+                    return my_json(ERROR_SAVE_DB)
                 except Exception as e:
                     print(e)
-                    return my_json(error_code=2, mess="error upload file")
-
-        try:
-            post = db.session.query(Posts).filter(Posts.id == id_post).first()
-            post.title = title_new
-            post.status = status_new
-            post.image = image_str_new
-
-            post_data = post_schema.dump(post)
-            db.session.commit()
-            return my_json(post_data)
-        except IndentationError:
-            db.session.rollback()
-            return my_json(error_code=1, mess="error in DB")
+                    return my_json(ERROR_UPLOAD_FILE)
+            else:
+                return my_json(ERROR_FILE_NULL)
+        else:
+            return my_json(ERROR_FILE_NULL)
     else:
-        return my_json(error_code=3, mess="error validate data")
+        return my_json(ERROR_DATA_NOT_MATCH)
 
 
 def delete_post_service(id_post, current_user):
@@ -239,7 +246,7 @@ def delete_post_service(id_post, current_user):
         user_id = current_user.id
     except Exception as e:
         print(e)
-        return my_json(error_code=3, mess="token not match user id")
+        return my_json(ERROR_CHECK_TOKEN)
 
     if id_post and user_id:
         try:
@@ -251,9 +258,9 @@ def delete_post_service(id_post, current_user):
             return my_json(post_data)
         except IndentationError:
             db.session.rollback()
-            return my_json(error_code=1, mess="error in DB")
+            return my_json(ERROR_SAVE_DB)
     else:
-        return my_json(error_code=2, mess="error validate data")
+        return my_json(ERROR_DATA_NOT_MATCH)
 
 
 def user_like_post_service(current_user):
@@ -261,7 +268,7 @@ def user_like_post_service(current_user):
         user_id = current_user.id
     except Exception as e:
         print(e)
-        return my_json(error_code=6, mess="token not match user id")
+        return my_json(ERROR_CHECK_TOKEN)
 
     data = request.json
     check_data = data and ('id_post' in data) and ('category' in data)
@@ -272,39 +279,36 @@ def user_like_post_service(current_user):
 
         post = db.session.query(Posts).filter(Posts.id == id_post).first()
         if not post:
-            return my_json(error_code=4, mess="not found post")
+            return my_json(ERROR_POST_NOT_FOUND)
 
         like = db.session.query(Likes).filter(Likes.user_id == user_id, Likes.post_id == id_post).first()
         if like:
-            return my_json(error_code=5, mess="pos was liked")
+            return my_json(ERROR_LIKE_IN_POST_EXIST)
 
-        if id_post and user_id:
-            try:
-                create_at = get_current_time()
-                new_like = Likes(user_id, id_post, category, create_at)
-                post.count_like = post.count_like + 1
-                db.session.add(new_like)
-                db.session.commit()
+        try:
+            create_at = get_current_time()
+            new_like = Likes(user_id, id_post, category, create_at)
+            post.count_like = post.count_like + 1
+            db.session.add(new_like)
+            db.session.commit()
 
-                data_like = like_schema.dump(new_like)
-                data_notification = {
-                    "mess": f"{current_user.username} đã thả cảm xúc bài viết của bạn",
-                    "user_name": current_user.username,
-                    "avatar": current_user.avatar,
-                    "category_react": category,
-                    "num_like": post.count_like,
-                    "create_at": create_at
-                }
-                socketio.emit('receive_notification_post', data_notification, room=f'post_{data_like['post_id']}')
+            data_like = like_schema.dump(new_like)
+            data_notification = {
+                "mess": f"{current_user.username} đã thả cảm xúc bài viết của bạn",
+                "user_name": current_user.username,
+                "avatar": current_user.avatar,
+                "category_react": category,
+                "num_like": post.count_like,
+                "create_at": create_at
+            }
+            socketio.emit('receive_notification_post', data_notification, room=f'post_{data_like['post_id']}')
 
-                return my_json(data_like)
-            except IndentationError:
-                db.session.rollback()
-                return my_json(error_code=1, mess="error in DB")
-        else:
-            return my_json(error_code=2, mess="error data request")
+            return my_json(data_like)
+        except IndentationError:
+            db.session.rollback()
+            return my_json(ERROR_SAVE_DB)
     else:
-        return my_json(error_code=3, mess="error data request")
+        return my_json(ERROR_DATA_NOT_MATCH)
 
 
 def user_unlike_post_service(id_post, current_user):
@@ -312,17 +316,17 @@ def user_unlike_post_service(id_post, current_user):
         user_id = current_user.id
     except Exception as e:
         print(e)
-        return my_json(error_code=5, mess="token not match user id")
+        return my_json(ERROR_CHECK_TOKEN)
 
     if id_post and user_id:
 
         post = db.session.query(Posts).filter(Posts.id == id_post).first()
         if not post:
-            return my_json(error_code=4, mess="not found post")
+            return my_json(ERROR_POST_NOT_FOUND)
 
         like = db.session.query(Likes).filter(Likes.user_id == user_id, Likes.post_id == id_post).first()
         if not like:
-            return my_json(error_code=3, mess="not found like post")
+            return my_json(ERROR_LIKE_NOT_FOUND)
 
         try:
             post.count_like = post.count_like - 1
@@ -331,9 +335,9 @@ def user_unlike_post_service(id_post, current_user):
             return my_json("unlike success")
         except IndentationError:
             db.session.rollback()
-            return my_json(error_code=1, mess="error in DB")
+            return my_json(ERROR_SAVE_DB)
     else:
-        return my_json(error_code=2, mess="error data request")
+        return my_json(ERROR_DATA_NOT_MATCH)
 
 
 def user_comment_post_service(current_user):
@@ -341,7 +345,7 @@ def user_comment_post_service(current_user):
         user_id = current_user.id
     except Exception as e:
         print(e)
-        return my_json(error_code=5, mess="token not match user id")
+        return my_json(ERROR_CHECK_TOKEN)
 
     data = request.json
     check_data = data and ('id_post' in data) and ('content' in data)
@@ -352,33 +356,30 @@ def user_comment_post_service(current_user):
 
         post = db.session.query(Posts).filter(Posts.id == id_post).first()
         if not post:
-            return my_json(error_code=4, mess="not found post")
+            return my_json(ERROR_POST_NOT_FOUND)
 
-        if id_post and user_id:
-            try:
-                create_at = get_current_time()
-                new_comment = Comments(user_id, id_post, content, 0, create_at)
-                post.count_comment = post.count_comment + 1
-                db.session.add(new_comment)
-                db.session.commit()
+        try:
+            create_at = get_current_time()
+            new_comment = Comments(user_id, id_post, content, 0, create_at)
+            post.count_comment = post.count_comment + 1
+            db.session.add(new_comment)
+            db.session.commit()
 
-                data_comment = comment_schema.dump(new_comment)
-                data_notification = {
-                    "mess": f"{current_user.username} đã bình luận bài viết của bạn",
-                    "avatar": current_user.avatar,
-                    "user_name": current_user.username,
-                    "create_at": create_at
-                }
-                socketio.emit('receive_notification_post', data_notification, room=f'post_{data_comment['post_id']}')
+            data_comment = comment_schema.dump(new_comment)
+            data_notification = {
+                "mess": f"{current_user.username} đã bình luận bài viết của bạn",
+                "avatar": current_user.avatar,
+                "user_name": current_user.username,
+                "create_at": create_at
+            }
+            socketio.emit('receive_notification_post', data_notification, room=f'post_{data_comment['post_id']}')
 
-                return my_json(data_comment)
-            except IndentationError:
-                db.session.rollback()
-                return my_json(error_code=1, mess="error in DB")
-        else:
-            return my_json(error_code=2, mess="error data request")
+            return my_json(data_comment)
+        except IndentationError:
+            db.session.rollback()
+            return my_json(ERROR_SAVE_DB)
     else:
-        return my_json(error_code=3, mess="error data request")
+        return my_json(ERROR_DATA_NOT_MATCH)
 
 
 def user_delete_comment_post_service(current_user):
@@ -386,7 +387,7 @@ def user_delete_comment_post_service(current_user):
         user_id = current_user.id
     except Exception as e:
         print(e)
-        return my_json(error_code=7, mess="token not match user id")
+        return my_json(ERROR_CHECK_TOKEN)
 
     data = request.json
     check_data = data and ('id_post' in data) and ('id_comment' in data)
@@ -397,17 +398,17 @@ def user_delete_comment_post_service(current_user):
 
         post = db.session.query(Posts).filter(Posts.id == id_post).first()
         if not post:
-            return my_json(error_code=6, mess="not found post")
+            return my_json(ERROR_POST_NOT_FOUND)
 
         comment = db.session.query(Comments).filter(Comments.id == id_comment).first()
         if not comment:
-            return my_json(error_code=5, mess="not found comment post")
+            return my_json(ERROR_COMMENT_NOT_FOUND)
 
         if comment.isDeleted == 1:
-            return my_json(error_code=4, mess="comment was deleted")
+            return my_json(ERROR_COMMENT_NOT_FOUND)
 
         if post.user_id != user_id:
-            return my_json(error_code=3, mess="user can't delete comment")
+            return my_json(ERROR_USER_HAVE_NOT_ROLE)
 
         try:
             comment.isDeleted = 1
@@ -417,9 +418,9 @@ def user_delete_comment_post_service(current_user):
             return my_json("delete comment success")
         except IndentationError:
             db.session.rollback()
-            return my_json(error_code=1, mess="error in DB")
+            return my_json(ERROR_SAVE_DB)
     else:
-        return my_json(error_code=2, mess="error data request")
+        return my_json(ERROR_DATA_NOT_MATCH)
 
 
 def image_post_service(filename):

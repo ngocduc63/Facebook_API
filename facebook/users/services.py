@@ -1,5 +1,5 @@
 import math
-from sqlalchemy import func, text
+from sqlalchemy import func
 from facebook.extension import db
 from facebook.facebook_ma import UserSchema, PostSchema
 from facebook.model import Users, Posts, TokenBlocklist
@@ -13,6 +13,11 @@ from ..config import PER_PAGE_LIST_USER
 from werkzeug.utils import secure_filename
 from flask_jwt_extended import create_access_token, create_refresh_token
 import re
+from ..config_error_code import (ERROR_DATA_NOT_MATCH, ERROR_FORMAT_EMAIL, ERROR_FORMAT_PASSWORD,
+                                 ERROR_FORMAT_DATE, ERROR_NOT_FOUND_EMAIL, ERROR_PASSWORD_NOT_MATCH,
+                                 ERROR_USER_NOT_FOUND, ERROR_FILE_NULL, ERROR_UPLOAD_FILE,
+                                 ERROR_CHECK_TOKEN,  ERROR_SAVE_DB, ERROR_ACCOUNT_EXIST, ERROR_USER_HAVE_NOT_ROLE)
+
 
 regex_email = r'\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,7}\b'
 UPLOAD_AVATAR_FOLDER = "upload/avatar"
@@ -32,17 +37,17 @@ def add_user_service():
         email = data['email']
         password = data['password']
         if not re.fullmatch(regex_email, email):
-            return my_json(error_code=5, mess="error email format")
+            return my_json(ERROR_FORMAT_EMAIL)
 
         if len(password) < 6:
-            return my_json(error_code=6, mess="error password format")
+            return my_json(ERROR_FORMAT_PASSWORD)
 
         try:
             birth_date_str = data['birth_date']
             birth_date_timestamp = int(datetime.strptime(birth_date_str, '%m/%d/%Y').timestamp())
         except Exception as e:
             print(e)
-            return my_json(error_code=4, mess="error date not match")
+            return my_json(ERROR_FORMAT_DATE)
 
         username = data['username']
         description = ""
@@ -62,13 +67,13 @@ def add_user_service():
             return my_json(user_schema.dump(new_user))
         except IndentationError:
             db.session.rollback()
-            return my_json(error_code=1, mess="error in DB")
+            return my_json(ERROR_SAVE_DB)
         except Exception as e:
             print(e)
-            return my_json(error_code=2, mess="error email existed or error db")
+            return my_json(ERROR_ACCOUNT_EXIST)
 
     else:
-        return my_json(error_code=3, mess="error validate data")
+        return my_json(ERROR_DATA_NOT_MATCH)
 
 
 def get_user_by_id_service(user_id):
@@ -78,13 +83,13 @@ def get_user_by_id_service(user_id):
         user_data = user_schema.dump(user)
         return jsonify(obj_success(user_data))
     else:
-        return my_json(error_code=1, mess="Not found user")
+        return my_json(ERROR_CHECK_TOKEN)
 
 
 def get_all_user_service(page, claims):
 
     if not is_admin(claims):
-        return my_json(error_code=2, mess="User not admin")
+        return my_json(ERROR_USER_HAVE_NOT_ROLE)
 
     users = Users.query.paginate(page=page, per_page=PER_PAGE_LIST_USER, error_out=False)
 
@@ -95,7 +100,7 @@ def get_all_user_service(page, claims):
         users_data = users_schema.dump(users)
         return my_json(obj_success_paginate(users_data, cur_page, max_page))
     else:
-        return my_json(error_code=1, mess="Not found")
+        return my_json(ERROR_USER_NOT_FOUND)
 
 
 def update_profile_by_id_service(current_user):
@@ -103,13 +108,13 @@ def update_profile_by_id_service(current_user):
         user_id = current_user.id
     except Exception as e:
         print(e)
-        return my_json(error_code=5, mess="token not match user id")
+        return my_json(ERROR_CHECK_TOKEN)
 
     user = Users.query.get(user_id)
     data = request.json
 
     if not user:
-        return my_json(error_code=1, mess="Not found user")
+        return my_json(ERROR_USER_NOT_FOUND)
 
     if (data and ('username' in data) and ('description' in data) and ('nickname' in data)
             and ('birth_date' in data) and ('gender' in data)):
@@ -119,7 +124,7 @@ def update_profile_by_id_service(current_user):
             birth_date_timestamp = int(datetime.strptime(birth_date_str, '%m/%d/%Y').timestamp())
         except Exception as e:
             print(e)
-            return my_json(error_code=4, mess="error date not match")
+            return my_json(ERROR_FORMAT_DATE)
 
         try:
             user.username = data['username']
@@ -132,19 +137,19 @@ def update_profile_by_id_service(current_user):
             return jsonify(obj_success(users_data))
         except Exception as e:
             print(e)
-            return my_json(error_code=3, mess="error in DB")
+            return my_json(ERROR_SAVE_DB)
     else:
-        return my_json(error_code=2, mess="Data user not match")
+        return my_json(ERROR_DATA_NOT_MATCH)
 
 
 def block_user_by_id_service(user_id, claims):
     user = Users.query.get(user_id)
 
     if not is_admin(claims):
-        return my_json(error_code=3, mess="user not admin")
+        return my_json(ERROR_USER_HAVE_NOT_ROLE)
 
     if not user:
-        return my_json(error_code=1, mess="Not found user")
+        return my_json(ERROR_USER_NOT_FOUND)
 
     try:
         user.is_block = 1
@@ -157,7 +162,7 @@ def block_user_by_id_service(user_id, claims):
         return my_json(f"block user {user_id} success")
     except Exception as e:
         print(e)
-        return my_json(error_code=2, mess="error in DB")
+        return my_json(ERROR_SAVE_DB)
 
 
 def search_approximate(array, key, value):
@@ -169,7 +174,7 @@ def search_user_service():
 
     data = request.json
     if not data and ("page" in data) and ("username" in data):
-        return my_json(error_code=2, mess="data not match")
+        return my_json(ERROR_DATA_NOT_MATCH)
 
     page = data['page']
     username_input = data['username']
@@ -186,7 +191,7 @@ def search_user_service():
 
         return jsonify(obj_success_paginate(users_data, cur_page, max_page))
     else:
-        return my_json(error_code=1, mess="Not found user")
+        return my_json(ERROR_USER_NOT_FOUND)
 
 
 def refresh_service(identity):
@@ -197,21 +202,29 @@ def refresh_service(identity):
 def user_login_service():
     data = request.json
 
-    if not data and ('email' in data) and ('password' in data):
-        return my_json(error_code=1, mess="data not match")
+    if not (data and ('email' in data) and ('password' in data)):
+        return my_json(ERROR_DATA_NOT_MATCH)
 
     email_data = data['email']
-    user = Users.query.filter(text("(users.email) = (:email)")).params(email=email_data).first()
+    password_data = data["password"]
+
+    if not re.fullmatch(regex_email, email_data):
+        return my_json(ERROR_FORMAT_EMAIL)
+
+    if len(password_data) < 6:
+        return my_json(ERROR_FORMAT_PASSWORD)
+
+    user = db.session.query(Users).filter(Users.email == email_data).first()
     user_data = user_schema.dump(user)
 
     if not user_data:
-        return my_json(error_code=2, mess="email not found")
+        return my_json(ERROR_NOT_FOUND_EMAIL)
 
     if user.is_block == 1:
-        return my_json(error_code=4, mess="user was blocked")
+        return my_json(ERROR_USER_NOT_FOUND)
 
-    if not user.check_password(password=data["password"]):
-        return my_json(error_code=3, mess="password fail")
+    if not user.check_password(password=password_data):
+        return my_json(ERROR_PASSWORD_NOT_MATCH)
 
     access_token = create_access_token(user_data["email"])
     refresh_token = create_refresh_token(user_data["email"])
@@ -233,20 +246,20 @@ def upload_avatar_service(current_user):
         user_id = current_user.id
     except Exception as e:
         print(e)
-        return my_json(error_code=5, mess="token not match user id")
+        return my_json(ERROR_CHECK_TOKEN)
 
     data = request.files
     user = Users.query.get(user_id)
 
     if not user:
-        return my_json(error_code=3, mess="not found user")
+        return my_json(ERROR_USER_NOT_FOUND)
 
     if not data:
-        return my_json(error_code=1, mess="not found data request")
+        return my_json(ERROR_DATA_NOT_MATCH)
 
     file = data['file']
     if file.filename == '':
-        return my_json(error_code=2, mess="file null")
+        return my_json(ERROR_FILE_NULL)
 
     if file and allowed_file(file.filename):
         try:
@@ -269,7 +282,7 @@ def upload_avatar_service(current_user):
             return jsonify(obj_success({"user": users_data, "post": post_data}))
         except Exception as e:
             print(e)
-            return my_json(error_code=4, mess="error save data")
+            return my_json(ERROR_UPLOAD_FILE)
 
 
 def upload_cover_photo_service(current_user):
@@ -277,20 +290,20 @@ def upload_cover_photo_service(current_user):
         user_id = current_user.id
     except Exception as e:
         print(e)
-        return my_json(error_code=5, mess="token not match user id")
+        return my_json(ERROR_CHECK_TOKEN)
 
     data = request.files
     user = Users.query.get(user_id)
 
     if not user:
-        return my_json(error_code=3, mess="not found user")
+        return my_json(ERROR_USER_NOT_FOUND)
 
     if not data:
-        return my_json(error_code=1, mess="not found data request")
+        return my_json(ERROR_DATA_NOT_MATCH)
 
     file = data['file']
     if file.filename == '':
-        return my_json(error_code=2, mess="file null")
+        return my_json(ERROR_FILE_NULL)
 
     if file and allowed_file(file.filename):
         try:
@@ -313,7 +326,7 @@ def upload_cover_photo_service(current_user):
             return jsonify(obj_success({"user": users_data, "post": post_data}))
         except Exception as e:
             print(e)
-            return my_json(error_code=4, mess="error save data")
+            return my_json(ERROR_SAVE_DB)
 
 
 def get_avatar_from_filename_service(filename):
@@ -334,4 +347,4 @@ def logout_user(claims):
         token_b.save()
         return my_json("logout success")
     else:
-        return my_json(error_code=1, mess="login fail")
+        return my_json(ERROR_CHECK_TOKEN)
