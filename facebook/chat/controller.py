@@ -31,7 +31,7 @@ def create_room(room_name, user_id_create, user_id_added):
         add_room_member(room_id, room_name, user_id_added, user_id_create)
         return room_id
     else:
-        return ""
+        return None
 
 
 def view_messages_room(room_id, user_id):

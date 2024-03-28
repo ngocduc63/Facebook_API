@@ -3,13 +3,15 @@ from facebook.extension import db
 from facebook.facebook_ma import FriendSchema
 from facebook.model import Friends, Users
 from flask import request
-from ..extension import my_json, obj_success_paginate, get_current_time, obj_success
+from ..extension import my_json, obj_success_paginate, get_current_time
 from ..config import PER_PAGE_LIST_FRIEND
 from sqlalchemy import or_, and_
 from sqlalchemy.orm import aliased
 from ..chat.controller import create_room
 from ..config_error_code import (ERROR_SAVE_DB,  ERROR_FRIEND_NOT_FOUND, ERROR_CAN_NOT_ADD_FRIEND,
                                  ERROR_CAN_NOT_ADD_YOURSELF, ERROR_CAN_NOT_CREATE_ROOM, ERROR_PAGE_NUM_NULL)
+from ..socketio_instance import socketio
+from ..notification.services import create_notification_add_friend_service
 
 friend_schema = FriendSchema()
 friends_schema = FriendSchema(many=True)
@@ -49,7 +51,25 @@ def add_friend_service(friend_id, current_user):
         db.session.add(new_friend)
         db.session.commit()
 
-        return my_json("add friend success")
+        data_notification = {
+            'description': f'{current_user.username} đã gửi lời mời kết bạn cho bạn',
+            'created_by': {
+                'id': current_user.id,
+                'username': current_user.username,
+                'avatar': current_user.avatar
+            },
+            'for_user_id': friend_id,
+            'id_friend': new_friend.id,
+            'create_at': create_at
+        }
+
+        id_notification = create_notification_add_friend_service(data_notification)
+        socketio.emit('join_notification_add_friend', data_notification, room=f'user_id_{friend_id}')
+
+        # if id_notification != "" and id_notification is None:
+        #     print("error save db mongo")
+
+        return my_json(f"add friend id notification")
     except IndentationError:
         db.session.rollback()
         return my_json(ERROR_SAVE_DB)
@@ -75,7 +95,7 @@ def accept_service(user_id, current_user):
         check_exits.is_accept = 1
 
         room_id = create_room(current_user.username, user_id, friend_id)
-        if room_id == "":
+        if room_id is None:
             return my_json(ERROR_CAN_NOT_CREATE_ROOM)
         else:
             db.session.commit()

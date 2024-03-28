@@ -5,6 +5,7 @@ from flask_marshmallow import Marshmallow
 from flask import jsonify
 import time
 from flask_jwt_extended import JWTManager
+from bson import ObjectId
 
 db = SQLAlchemy()
 migrate = Migrate()

@@ -64,6 +64,7 @@ def save_message(room_id, text, sender):
 def get_messages(room_id, page=0):
     offset = page * MESSAGE_FETCH_LIMIT
     messages = list(
-        messages_collection.find({'room_id': room_id}).sort('_id', DESCENDING).limit(MESSAGE_FETCH_LIMIT).skip(offset))
+        messages_collection.find({'room_id': room_id}).sort('_id', DESCENDING)
+        .limit(MESSAGE_FETCH_LIMIT).skip(offset))
 
     return messages[::-1]
