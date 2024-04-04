@@ -20,6 +20,11 @@ like_schema = LikeSchema()
 comment_schema = CommentSchema()
 
 
+def check_user_like_post(user_id, post_id):
+    data = db.session.query(Likes).filter(Likes.user_id == user_id, Likes.post_id == post_id).first()
+    return 1 if data else 0
+
+
 def get_new_feed_service(page_num, current_user):
     try:
         user_id = current_user.id
@@ -52,7 +57,8 @@ def get_new_feed_service(page_num, current_user):
                 "image": result[0].image,
                 "create_at": result[0].create_at,
                 "num_like": result[0].count_like,
-                "num_comment": result[0].count_comment
+                "num_comment": result[0].count_comment,
+                'liked': check_user_like_post(user_id, result[0].id)
             }
             data_rs.append(data)
 

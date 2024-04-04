@@ -5,17 +5,20 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="23cb2c54-3c39-4df6-92f4-23e60e3d4d48" name="Changes" comment="Create config error code">
-      <change afterPath="$PROJECT_DIR$/facebook/notification/controller.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/facebook/notification/db_notification.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/facebook/notification/services.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/facebook/upload/post/Anh_chup_man_hinh_2021-11-19_193332_1_1712124656.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/facebook/upload/post/fist_001_1_1712064012.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/facebook/upload/post/fist_004_1_1712124139.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/facebook/upload/post/fist_016_1_1712124159.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/facebook/upload/post/fist_025_1_1712124206.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/facebook/upload/post/fist_030_1_1712124191.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/facebook/upload/post/fist_031_1_1712124174.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/facebook/upload/post/fist_036_1_1712124220.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/facebook/upload/post/fist_038_1_1712124212.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/facebook/upload/post/fist_114_1_1712124185.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/facebook/upload/post/fist_135_1_1712124622.jpg" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/facebook/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/facebook/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/facebook/chat/controller.py" beforeDir="false" afterPath="$PROJECT_DIR$/facebook/chat/controller.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/facebook/chat/db_chat.py" beforeDir="false" afterPath="$PROJECT_DIR$/facebook/chat/db_chat.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/facebook/config.py" beforeDir="false" afterPath="$PROJECT_DIR$/facebook/config.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/facebook/extension.py" beforeDir="false" afterPath="$PROJECT_DIR$/facebook/extension.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/facebook/friends/services.py" beforeDir="false" afterPath="$PROJECT_DIR$/facebook/friends/services.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/facebook/posts/controller.py" beforeDir="false" afterPath="$PROJECT_DIR$/facebook/posts/controller.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/facebook/posts/services.py" beforeDir="false" afterPath="$PROJECT_DIR$/facebook/posts/services.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/facebook/users/controller.py" beforeDir="false" afterPath="$PROJECT_DIR$/facebook/users/controller.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/instance/facebook.db" beforeDir="false" afterPath="$PROJECT_DIR$/instance/facebook.db" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -566,7 +569,15 @@
       <option name="project" value="LOCAL" />
       <updated>1711123339775</updated>
     </task>
-    <option name="localTasksCounter" value="46" />
+    <task id="LOCAL-00046" summary="Update feature: notification add friend">
+      <option name="closed" value="true" />
+      <created>1711606862785</created>
+      <option name="number" value="00046" />
+      <option name="presentableId" value="LOCAL-00046" />
+      <option name="project" value="LOCAL" />
+      <updated>1711606862785</updated>
+    </task>
+    <option name="localTasksCounter" value="47" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -582,7 +593,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="update post api: fix api create, create api update, delete" />
     <MESSAGE value="create file setup and tuturial" />
     <MESSAGE value="user api: update refresh token, expries token" />
     <MESSAGE value="post api: create api for comment, like post" />
@@ -606,6 +616,7 @@
     <MESSAGE value="Update socket notifi:" />
     <MESSAGE value="Fix migration: update table (friend -&gt; post)" />
     <MESSAGE value="Update socket notification for post: event user like, comment" />
+    <MESSAGE value="Update feature: notification add friend" />
     <MESSAGE value="Create config error code" />
     <option name="LAST_COMMIT_MESSAGE" value="Create config error code" />
   </component>

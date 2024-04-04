@@ -40,7 +40,7 @@ def user_refresh():
     return refresh_service(identity)
 
 
-@users.route("/user-management/user/<int:user_id>", methods=["POST"])
+@users.route("/user-management/user/<int:user_id>", methods=["GET"])
 @jwt_required()
 def get_user_by_id(user_id):
     return get_user_by_id_service(user_id)
