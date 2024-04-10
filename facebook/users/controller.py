@@ -2,7 +2,8 @@ from flask import Blueprint
 from .services import (add_user_service, get_user_by_id_service, get_all_user_service,
                        update_profile_by_id_service, block_user_by_id_service, search_user_service,
                        user_login_service, upload_avatar_service, get_avatar_from_filename_service,
-                       upload_cover_photo_service, get_cover_photo_from_filename_service, logout_user, refresh_service
+                       upload_cover_photo_service, get_cover_photo_from_filename_service, logout_user, refresh_service,
+                       find_user_service
                        )
 from flask_jwt_extended import jwt_required, get_jwt, current_user, get_jwt_identity
 
@@ -21,6 +22,12 @@ def get_all_user(page):
 @jwt_required()
 def search_user():
     return search_user_service()
+
+
+@users.route("/user-management/user/find/<string:name>", methods=["GET"])
+@jwt_required()
+def find_user(name):
+    return find_user_service(name, current_user)
 
 
 @users.route("/user-management/user/register", methods=["POST"])
@@ -43,7 +50,7 @@ def user_refresh():
 @users.route("/user-management/user/<int:user_id>", methods=["GET"])
 @jwt_required()
 def get_user_by_id(user_id):
-    return get_user_by_id_service(user_id)
+    return get_user_by_id_service(user_id, current_user)
 
 
 @users.route("/user-management/user/update", methods=["PUT"])
@@ -59,13 +66,13 @@ def block_user_by_id(user_id):
     return block_user_by_id_service(user_id, claims)
 
 
-@users.route("/user-management/user/avatar", methods=["POST"])
+@users.route("/user-management/user/update-avatar", methods=["POST"])
 @jwt_required()
 def upload_avatar():
     return upload_avatar_service(current_user)
 
 
-@users.route("/user-management/user/cover", methods=["POST"])
+@users.route("/user-management/user/update-cover", methods=["POST"])
 @jwt_required()
 def upload_cover_photo():
     return upload_cover_photo_service(current_user)

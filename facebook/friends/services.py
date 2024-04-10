@@ -9,7 +9,8 @@ from sqlalchemy import or_, and_
 from sqlalchemy.orm import aliased
 from ..chat.controller import create_room
 from ..config_error_code import (ERROR_SAVE_DB,  ERROR_FRIEND_NOT_FOUND, ERROR_CAN_NOT_ADD_FRIEND,
-                                 ERROR_CAN_NOT_ADD_YOURSELF, ERROR_CAN_NOT_CREATE_ROOM, ERROR_PAGE_NUM_NULL)
+                                 ERROR_CAN_NOT_ADD_YOURSELF, ERROR_CAN_NOT_CREATE_ROOM, ERROR_PAGE_NUM_NULL,
+                                 ERROR_CHECK_TOKEN)
 from ..socketio_instance import socketio
 from ..notification.services import create_notification_add_friend_service
 
@@ -75,15 +76,18 @@ def add_friend_service(friend_id, current_user):
         return my_json(ERROR_SAVE_DB)
 
 
-def accept_service(user_id, current_user):
-    friend_id = current_user.id
+def accept_service(friend_id, current_user):
+    user_id = current_user.id
 
     if user_id == friend_id:
         return my_json(ERROR_CAN_NOT_ADD_YOURSELF)
 
     check_exits = (db.session.query(Friends).
                    filter(
-                            Friends.user_id == user_id, Friends.friend_id == friend_id,
+                            or_(
+                                and_(Friends.user_id == user_id, Friends.friend_id == friend_id),
+                                and_(Friends.user_id == friend_id, Friends.friend_id == user_id)
+                                ),
                             Friends.is_accept == 0
                           ).
                    first())
@@ -139,6 +143,57 @@ def get_friend_by_id_service(user_id):
                filter(
                         or_(Friends.user_id == user_id, Friends.friend_id == user_id),
                         Friends.is_accept == 1
+                     ).
+               paginate(page=page_num, per_page=PER_PAGE_LIST_FRIEND, error_out=False))
+
+    cur_page = friends.page
+    max_page = math.ceil(friends.total / PER_PAGE_LIST_FRIEND)
+
+    if friends:
+        data_rs = []
+        for result in friends:
+            if result[0].user_id == user_id:
+                user_id_rs = result[0].user_id
+                friend_id_rs = result[0].friend_id
+                username_rs = result[2].username
+                avatar_rs = result[2].avatar
+            else:
+                user_id_rs = result[0].friend_id
+                friend_id_rs = result[0].user_id
+                username_rs = result[1].username
+                avatar_rs = result[1].avatar
+
+            data = {
+                "user_id": user_id_rs,
+                "friend_id": friend_id_rs,
+                "name": username_rs,
+                "avatar": avatar_rs
+            }
+            data_rs.append(data)
+
+        data_rs.sort(key=lambda x: x["name"])
+
+        return my_json(obj_success_paginate(data_rs, cur_page, max_page))
+    else:
+        return my_json(ERROR_FRIEND_NOT_FOUND)
+
+
+def get_invite_by_id_service(page_num, current_user):
+    try:
+        user_id = current_user.id
+    except Exception as e:
+        print(e)
+        return my_json(ERROR_CHECK_TOKEN)
+
+    if not page_num:
+        return my_json(ERROR_PAGE_NUM_NULL)
+
+    friends = (db.session.query(Friends, user_alias, friend_alias).
+               join(user_alias, Friends.user_id == user_alias.id).
+               join(friend_alias, Friends.friend_id == friend_alias.id).
+               filter(
+                        Friends.friend_id == user_id,
+                        Friends.is_accept == 0
                      ).
                paginate(page=page_num, per_page=PER_PAGE_LIST_FRIEND, error_out=False))
 

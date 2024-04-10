@@ -2,7 +2,7 @@ import math
 from sqlalchemy import func
 from facebook.extension import db
 from facebook.facebook_ma import UserSchema, PostSchema
-from facebook.model import Users, Posts, TokenBlocklist
+from facebook.model import Users, Posts, TokenBlocklist, Friends
 from flask import request, jsonify, send_from_directory
 from datetime import datetime
 from ..extension import (my_json, obj_success, obj_success_paginate, allowed_file,
@@ -17,6 +17,7 @@ from ..config_error_code import (ERROR_DATA_NOT_MATCH, ERROR_FORMAT_EMAIL, ERROR
                                  ERROR_FORMAT_DATE, ERROR_NOT_FOUND_EMAIL, ERROR_PASSWORD_NOT_MATCH,
                                  ERROR_USER_NOT_FOUND, ERROR_FILE_NULL, ERROR_UPLOAD_FILE,
                                  ERROR_CHECK_TOKEN,  ERROR_SAVE_DB, ERROR_ACCOUNT_EXIST, ERROR_USER_HAVE_NOT_ROLE)
+from sqlalchemy import or_, and_
 
 
 regex_email = r'\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,7}\b'
@@ -76,11 +77,18 @@ def add_user_service():
         return my_json(ERROR_DATA_NOT_MATCH)
 
 
-def get_user_by_id_service(user_id):
-    user = Users.query.get(user_id)
+def get_user_by_id_service(user_id_search, current_user):
+    try:
+        user_id = current_user.id
+    except Exception as e:
+        print(e)
+        return my_json(ERROR_CHECK_TOKEN)
+
+    user = Users.query.get(user_id_search)
 
     if user:
         user_data = user_schema.dump(user)
+        user_data["isFriend"] = check_is_friend(user_id, user_id_search)
         return jsonify(obj_success(user_data))
     else:
         return my_json(ERROR_CHECK_TOKEN)
@@ -170,6 +178,61 @@ def search_approximate(array, key, value):
     return result
 
 
+def check_is_friend(user_id, friend_id):
+    # 0 chưa kết bạn
+    # 1 là bạn bè
+    # 2 đã gửi lời mời
+    # 3 đang chờ chấp nhận
+    friend = (db.session.query(Friends).
+              filter(
+                        or_(
+                            and_(Friends.user_id == user_id, Friends.friend_id == friend_id),
+                            and_(Friends.user_id == friend_id, Friends.friend_id == user_id)
+                        ),
+                     ).
+              first())
+
+    if not friend:
+        return 0
+
+    if friend.is_accept == 1:
+        return 1
+
+    if friend.user_id == user_id:
+        return 2
+
+    return 3
+
+
+def find_user_service(name, current_user):
+    try:
+        user_id = current_user.id
+    except Exception as e:
+        print(e)
+        return my_json(ERROR_CHECK_TOKEN)
+
+    username = name.lower()
+    users = (db.session.query(Users)
+             .filter(func.lower(Users.username).ilike(f'%{username}%'), Users.id != user_id)
+             .limit(4).all())
+
+    if users:
+        data_rs = []
+
+        for result in users:
+            data = {
+                "id": result.id,
+                "username": result.username,
+                "avatar": result.avatar,
+                "isFriend": check_is_friend(user_id, result.id)
+            }
+            data_rs.append(data)
+
+        return my_json(data_rs)
+    else:
+        return my_json([])
+
+
 def search_user_service():
 
     data = request.json
@@ -189,7 +252,7 @@ def search_user_service():
         users_data = users_schema.dump(users)
         # search_approximate(users_data, "username", username_input)
 
-        return jsonify(obj_success_paginate(users_data, cur_page, max_page))
+        return my_json(obj_success_paginate(users_data, cur_page, max_page))
     else:
         return my_json(ERROR_USER_NOT_FOUND)
 

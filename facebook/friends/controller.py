@@ -1,5 +1,6 @@
 from flask import Blueprint
-from .services import add_friend_service, get_friend_by_id_service, unfriend_service, accept_service
+from .services import (add_friend_service, get_friend_by_id_service, unfriend_service, accept_service,
+                       get_invite_by_id_service)
 from flask_jwt_extended import jwt_required, get_jwt, current_user
 
 friends = Blueprint("friends", __name__)
@@ -11,10 +12,10 @@ def add_friend(friend_id):
     return add_friend_service(friend_id, current_user)
 
 
-@friends.route("/friend-management/accept/<int:user_id>", methods=["PUT"])
+@friends.route("/friend-management/accept/<int:friend_id>", methods=["PUT"])
 @jwt_required()
-def accept_friend(user_id):
-    return accept_service(user_id, current_user)
+def accept_friend(friend_id):
+    return accept_service(friend_id, current_user)
 
 
 @friends.route("/friend-management/unfriend/<int:friend_id>", methods=["DELETE"])
@@ -27,3 +28,9 @@ def unfriend(friend_id):
 @jwt_required()
 def get_friend_by_id(user_id):
     return get_friend_by_id_service(user_id)
+
+
+@friends.route("/friend-management/invite-friend/<int:page>", methods=["GET"])
+@jwt_required()
+def get_invite_by_id(page):
+    return get_invite_by_id_service(page, current_user)
