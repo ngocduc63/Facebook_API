@@ -3,7 +3,7 @@ from flask_jwt_extended import jwt_required, current_user
 from .services import (get_new_feed_service, create_post_service, update_post_service, delete_post_service,
                        user_like_post_service, user_unlike_post_service, user_comment_post_service,
                        user_delete_comment_post_service, image_post_service, get_users_like_post_service,
-                       get_users_comment_post_service)
+                       get_users_comment_post_service, get_posts_by_user_service)
 
 posts = Blueprint("posts", __name__)
 
@@ -13,6 +13,12 @@ posts = Blueprint("posts", __name__)
 @jwt_required()
 def get_new_feed(page):
     return get_new_feed_service(page, current_user)
+
+
+@posts.route("/post-management/post/get-user-posts", methods=["post"])
+@jwt_required()
+def get_user_posts():
+    return get_posts_by_user_service()
 
 
 @posts.route("/post-management/post/create", methods=["POST"])

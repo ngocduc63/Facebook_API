@@ -1,6 +1,6 @@
 from facebook.extension import db
 from facebook.facebook_ma import PostSchema, LikeSchema, CommentSchema
-from facebook.model import Posts, Likes, Comments, Users
+from facebook.model import Posts, Likes, Comments, Users, Friends
 from ..extension import (my_json, obj_success_paginate, get_current_time, change_name_file, get_path_upload,
                          allowed_file, get_path_local)
 from ..config import PER_PAGE_POST, PER_PAGE_LIKE_POST, PER_PAGE_COMMENT_POST
@@ -11,6 +11,7 @@ from ..socketio_instance import socketio
 from ..config_error_code import (ERROR_DATA_NOT_MATCH, ERROR_FILE_NULL, ERROR_UPLOAD_FILE, ERROR_CHECK_TOKEN,
                                  ERROR_SAVE_DB, ERROR_USER_HAVE_NOT_ROLE, ERROR_POST_NOT_FOUND, ERROR_LIKE_NOT_FOUND,
                                  ERROR_COMMENT_NOT_FOUND, ERROR_LIKE_IN_POST_EXIST)
+from sqlalchemy import and_, or_
 
 UPLOAD_POST_FOLDER = "upload/post"
 
@@ -25,6 +26,50 @@ def check_user_like_post(user_id, post_id):
     return 1 if data else 0
 
 
+def get_posts_by_user_service():
+    data = request.json
+
+    check_data = data and ('user_id' in data) and ('page' in data)
+
+    if not check_data:
+        return my_json(ERROR_DATA_NOT_MATCH)
+
+    user_id = data['user_id']
+    page_num = data['page']
+    posts = (db.session.query(Posts, Users).
+             outerjoin(Users, Users.id == Posts.user_id)
+             .filter(Posts.user_id == user_id)
+             .order_by(Posts.create_at.desc())
+             .paginate(page=page_num, per_page=PER_PAGE_POST, error_out=False)
+             )
+    cur_page = posts.page
+    max_page = math.ceil(posts.total / PER_PAGE_POST)
+
+    if posts:
+        data_rs = []
+        for result in posts:
+            data = {
+                "id": result[0].id,
+                "user": {
+                    "id": result[1].id,
+                    "username": result[1].username,
+                    "avatar": result[1].avatar
+                },
+                "title": result[0].title,
+                "image": result[0].image,
+                "category": result[0].category,
+                "create_at": result[0].create_at,
+                "num_like": result[0].count_like,
+                "num_comment": result[0].count_comment,
+                'liked': check_user_like_post(user_id, result[0].id)
+            }
+            data_rs.append(data)
+
+        return my_json(obj_success_paginate(data_rs, cur_page, max_page))
+    else:
+        return my_json(ERROR_POST_NOT_FOUND)
+
+
 def get_new_feed_service(page_num, current_user):
     try:
         user_id = current_user.id
@@ -32,10 +77,11 @@ def get_new_feed_service(page_num, current_user):
         print(e)
         return my_json(ERROR_CHECK_TOKEN)
 
-    posts = (db.session.
-             query(Posts, Users)
-             .outerjoin(Users, Users.id == Posts.user_id)
-             .filter(Posts.user_id == user_id)
+    friends = Friends.query.filter(or_(Friends.user_id == user_id, Friends.friend_id == user_id)).all()
+    friend_ids = [friend.user_id if friend.user_id != user_id else friend.friend_id for friend in friends]
+    posts = (db.session.query(Posts, Users).
+             outerjoin(Users, Users.id == Posts.user_id)
+             .filter(or_(Posts.user_id.in_(friend_ids), Posts.user_id == user_id))
              .order_by(Posts.create_at.desc())
              .paginate(page=page_num, per_page=PER_PAGE_POST, error_out=False)
              )
@@ -55,6 +101,7 @@ def get_new_feed_service(page_num, current_user):
                 },
                 "title": result[0].title,
                 "image": result[0].image,
+                "category": result[0].category,
                 "create_at": result[0].create_at,
                 "num_like": result[0].count_like,
                 "num_comment": result[0].count_comment,
@@ -187,7 +234,7 @@ def create_post_service(current_user):
                 return my_json(ERROR_FILE_NULL)
 
         try:
-            new_post = Posts(title, image_str, user_id, status, is_delete, create_at)
+            new_post = Posts(title, image_str, user_id, status, is_delete, 0, create_at)
 
             db.session.add(new_post)
             db.session.commit()
@@ -301,13 +348,16 @@ def user_like_post_service(current_user):
             data_like = like_schema.dump(new_like)
             data_notification = {
                 "mess": f"{current_user.username} đã thả cảm xúc bài viết của bạn",
+                "post_id": data_like['post_id'],
+                "user_id": current_user.id,
                 "user_name": current_user.username,
                 "avatar": current_user.avatar,
                 "category_react": category,
                 "num_like": post.count_like,
+                "create_post": post.user_id,
                 "create_at": create_at
             }
-            socketio.emit('receive_notification_post', data_notification, room=f'post_{data_like['post_id']}')
+            socketio.emit('notification_post', data_notification, room=f'post_{data_like['post_id']}')
 
             return my_json(data_like)
         except IndentationError:
@@ -338,6 +388,16 @@ def user_unlike_post_service(id_post, current_user):
             post.count_like = post.count_like - 1
             db.session.delete(like)
             db.session.commit()
+
+            data_notification = {
+                "mess": "un_like",
+                "post_id": post.id,
+                "user_id": current_user.id,
+                "num_like": post.count_like,
+                "create_post": post.user_id,
+            }
+            socketio.emit('notification_post', data_notification, room=f'post_{post.id}')
+
             return my_json("unlike success")
         except IndentationError:
             db.session.rollback()
@@ -374,11 +434,15 @@ def user_comment_post_service(current_user):
             data_comment = comment_schema.dump(new_comment)
             data_notification = {
                 "mess": f"{current_user.username} đã bình luận bài viết của bạn",
-                "avatar": current_user.avatar,
+                "post_id": data_comment['post_id'],
+                "user_id": current_user.id,
                 "user_name": current_user.username,
+                "avatar": current_user.avatar,
+                "num_comment": post.count_comment,
+                "create_post": post.user_id,
                 "create_at": create_at
             }
-            socketio.emit('receive_notification_post', data_notification, room=f'post_{data_comment['post_id']}')
+            socketio.emit('notification_post', data_notification, room=f'post_{data_comment['post_id']}')
 
             return my_json(data_comment)
         except IndentationError:

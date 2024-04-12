@@ -64,7 +64,7 @@ def add_friend_service(friend_id, current_user):
             'create_at': create_at
         }
 
-        id_notification = create_notification_add_friend_service(data_notification)
+        # id_notification = create_notification_add_friend_service(data_notification)
         socketio.emit('join_notification_add_friend', data_notification, room=f'user_id_{friend_id}')
 
         # if id_notification != "" and id_notification is None:
@@ -103,6 +103,21 @@ def accept_service(friend_id, current_user):
             return my_json(ERROR_CAN_NOT_CREATE_ROOM)
         else:
             db.session.commit()
+
+            data_notification = {
+                'description': f'{current_user.username} đã đồng ý kết bạn',
+                'created_by': {
+                    'id': current_user.id,
+                    'username': current_user.username,
+                    'avatar': current_user.avatar
+                },
+                'for_user_id': friend_id,
+                'id_friend': user_id,
+                'create_at': get_current_time()
+            }
+
+            socketio.emit('join_notification_add_friend', data_notification, room=f'user_id_{friend_id}')
+
             return my_json({"room_id": str(room_id)})
     except IndentationError:
         db.session.rollback()

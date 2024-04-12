@@ -53,6 +53,7 @@ class Friends(db.Model):
 
 
 class Posts(db.Model):
+    # category: 0:normal, 1: avatar, 2: cover
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String())
     image = db.Column(db.String())
@@ -61,9 +62,10 @@ class Posts(db.Model):
     isDeleted = db.Column(db.Integer)
     count_like = db.Column(db.Integer)
     count_comment = db.Column(db.Integer)
+    category = db.Column(db.Integer)
     create_at = db.Column(db.Integer, nullable=False)
 
-    def __init__(self, title, image, user_id, status, isDeleted, create_at):
+    def __init__(self, title, image, user_id, status, isDeleted, category, create_at):
         self.title = title
         self.image = image
         self.user_id = user_id
@@ -71,6 +73,7 @@ class Posts(db.Model):
         self.isDeleted = isDeleted
         self.count_like = 0
         self.count_comment = 0
+        self.category = category
         self.create_at = create_at
 
 

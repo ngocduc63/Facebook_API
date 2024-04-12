@@ -18,8 +18,8 @@ def get_notification_add_friend(page):
 # socket
 @socketio.on('join_notification_post')
 def handle_join_post_notification_event(data):
-    join_room(f'post_{data['id_post']}')
-    socketio.emit('join_notification_post', data, room=f'post_{data['id_post']}')
+    join_room(f'post_{data['post_id']}')
+    socketio.emit('notification_post', {}, room=f'post_{data['post_id']}')
 
 
 @socketio.on('join_notification_add_friend')
@@ -30,5 +30,5 @@ def handle_join_post_notification_event(data):
 
 @socketio.on('leave_notification_post')
 def handle_leave_post_notification_event(data):
-    leave_room(f'post_{data['id_post']}')
-    socketio.emit('join_notification_post', data, room=f'post_{data['id_post']}')
+    leave_room(f'post_{data['post_id']}')
+    socketio.emit('notification_post', {}, room=f'post_{data['post_id']}')
