@@ -64,7 +64,12 @@ def save_message(room_id, text, sender):
 def get_messages(room_id, page=0):
     offset = page * MESSAGE_FETCH_LIMIT
     messages = list(
-        messages_collection.find({'room_id': room_id}).sort('_id', DESCENDING)
+        messages_collection.find({'room_id': room_id}, {'_id': 0}).sort('_id', DESCENDING)
         .limit(MESSAGE_FETCH_LIMIT).skip(offset))
 
-    return messages[::-1]
+    total_messages = messages_collection.count_documents({'room_id': room_id})
+    total_page = total_messages // MESSAGE_FETCH_LIMIT
+    if total_messages % MESSAGE_FETCH_LIMIT != 0:
+        total_page += 1
+
+    return messages, total_page

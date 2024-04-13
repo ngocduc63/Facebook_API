@@ -29,3 +29,4 @@ ERROR_CAN_NOT_ADD_FRIEND = create_error_code(20, "can't add because friend exist
 ERROR_FRIEND_NOT_FOUND = create_error_code(21, "friend not found in DB")
 ERROR_CAN_NOT_CREATE_ROOM = create_error_code(22, "can't create room")
 ERROR_PAGE_NUM_NULL = create_error_code(23, "page null")
+ERROR_FOUND_ROOM_CHAT = create_error_code(24, "not found room chat")

@@ -7,7 +7,7 @@ from ..extension import my_json, obj_success_paginate, get_current_time
 from ..config import PER_PAGE_LIST_FRIEND
 from sqlalchemy import or_, and_
 from sqlalchemy.orm import aliased
-from ..chat.controller import create_room
+from ..chat.services import create_room
 from ..config_error_code import (ERROR_SAVE_DB,  ERROR_FRIEND_NOT_FOUND, ERROR_CAN_NOT_ADD_FRIEND,
                                  ERROR_CAN_NOT_ADD_YOURSELF, ERROR_CAN_NOT_CREATE_ROOM, ERROR_PAGE_NUM_NULL,
                                  ERROR_CHECK_TOKEN)
@@ -99,9 +99,11 @@ def accept_service(friend_id, current_user):
         check_exits.is_accept = 1
 
         room_id = create_room(current_user.username, user_id, friend_id)
+
         if room_id is None:
             return my_json(ERROR_CAN_NOT_CREATE_ROOM)
         else:
+            check_exits.id_room_chat = f"{room_id}"
             db.session.commit()
 
             data_notification = {

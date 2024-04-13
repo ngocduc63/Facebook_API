@@ -347,7 +347,7 @@ def user_like_post_service(current_user):
 
             data_like = like_schema.dump(new_like)
             data_notification = {
-                "mess": f"{current_user.username} đã thả cảm xúc bài viết của bạn",
+                "mess": "đã thả cảm xúc bài viết của bạn",
                 "post_id": data_like['post_id'],
                 "user_id": current_user.id,
                 "user_name": current_user.username,
@@ -433,7 +433,7 @@ def user_comment_post_service(current_user):
 
             data_comment = comment_schema.dump(new_comment)
             data_notification = {
-                "mess": f"{current_user.username} đã bình luận bài viết của bạn",
+                "mess": "đã bình luận bài viết của bạn",
                 "post_id": data_comment['post_id'],
                 "user_id": current_user.id,
                 "user_name": current_user.username,

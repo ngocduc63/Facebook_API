@@ -1,2 +1,4 @@
 git clone https://github.com/ngocduc63/Facebook_API
 pip install -r setup.txt
+flask db migrate -m "mess"
+flask db upgrade

@@ -1,11 +1,23 @@
-from ..extension import get_current_time
 from .db_chat import (save_room, add_room_members, get_rooms_for_user, get_room, is_room_member, add_room_member,
                       get_room_members, update_room, remove_room_members, save_message, get_messages)
 from flask_socketio import join_room, leave_room
 from datetime import datetime
 from facebook.socketio_instance import socketio
+from flask import Blueprint
+from .services import get_messages_room_service
+from flask_jwt_extended import jwt_required, current_user
+
+chats = Blueprint("chat", __name__)
 
 
+# api
+@chats.route("/chat-management/room", methods=["POST"])
+@jwt_required()
+def add_friend():
+    return get_messages_room_service(current_user)
+
+
+# socket
 @socketio.on('send_message')
 def handle_send_message_event(data):
     data['created_at'] = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
@@ -25,19 +37,7 @@ def handle_leave_room_event(data):
     socketio.emit('leave_room_announcement', data, room=data['room'])
 
 
-def create_room(room_name, user_id_create, user_id_added):
-    if len(room_name) and user_id_added and user_id_create:
-        room_id = save_room(room_name, user_id_create)
-        add_room_member(room_id, room_name, user_id_added, user_id_create)
-        return room_id
-    else:
-        return None
 
 
-def view_messages_room(room_id, user_id):
-    room = get_room(room_id)
-    if room and is_room_member(room_id, user_id):
-        messages = get_messages(room_id)
-        return messages
-    else:
-        return None
+
+
