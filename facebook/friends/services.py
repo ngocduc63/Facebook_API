@@ -65,7 +65,7 @@ def add_friend_service(friend_id, current_user):
         }
 
         # id_notification = create_notification_add_friend_service(data_notification)
-        socketio.emit('join_notification_add_friend', data_notification, room=f'user_id_{friend_id}')
+        socketio.emit('join_notification', data_notification, room=f'user_id_{friend_id}')
 
         # if id_notification != "" and id_notification is None:
         #     print("error save db mongo")
@@ -118,7 +118,7 @@ def accept_service(friend_id, current_user):
                 'create_at': get_current_time()
             }
 
-            socketio.emit('join_notification_add_friend', data_notification, room=f'user_id_{friend_id}')
+            socketio.emit('join_notification', data_notification, room=f'user_id_{friend_id}')
 
             return my_json({"room_id": str(room_id)})
     except IndentationError:
@@ -244,3 +244,28 @@ def get_invite_by_id_service(page_num, current_user):
         return my_json(obj_success_paginate(data_rs, cur_page, max_page))
     else:
         return my_json(ERROR_FRIEND_NOT_FOUND)
+
+
+def get_room_chat_service(current_user, friend_id):
+    try:
+        user_id = current_user.id
+    except Exception as e:
+        print(e)
+        return my_json(ERROR_CHECK_TOKEN)
+
+    if user_id == friend_id:
+        return my_json(ERROR_CAN_NOT_ADD_YOURSELF)
+
+    check_exits = (db.session.query(Friends).
+                   filter(
+                            or_(
+                                and_(Friends.user_id == user_id, Friends.friend_id == friend_id),
+                                and_(Friends.user_id == friend_id, Friends.friend_id == user_id)
+                            ),
+                            Friends.is_accept == 1
+                        ).first())
+
+    if not check_exits:
+        return my_json(ERROR_FRIEND_NOT_FOUND)
+
+    return my_json({'room_id': check_exits.id_room_chat})

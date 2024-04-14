@@ -44,6 +44,15 @@ def obj_success_paginate(data, cur_page, max_page):
             }
 
 
+def obj_message_paginate(data, friend, cur_page, max_page):
+    return {
+                "datas": data,
+                "friend": friend,
+                "currentPage": cur_page,
+                "maxPage": max_page
+            }
+
+
 def change_name_file(filename, name_id):
     name = f"{filename.split('.')[0]}_{name_id}_{str(get_current_time())}"
     return f"{name}.{filename.split('.')[1]}"

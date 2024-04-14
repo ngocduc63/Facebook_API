@@ -56,9 +56,17 @@ def is_room_member(room_id, username):
     return room_members_collection.count_documents({'_id': {'room_id': ObjectId(room_id), 'username': username}})
 
 
-def save_message(room_id, text, sender):
+def save_message(data):
     (messages_collection.
-        insert_one({'room_id': room_id, 'text': text, 'sender': sender, 'created_at': get_current_time()}))
+        insert_one(
+                    {
+                        'room_id': data['room_id'],
+                        'text': data['text'],
+                        'sender': data['sender'],
+                        'created_at': data['created_at']
+                     }
+                   )
+     )
 
 
 def get_messages(room_id, page=0):

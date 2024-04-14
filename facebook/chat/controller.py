@@ -4,8 +4,9 @@ from flask_socketio import join_room, leave_room
 from datetime import datetime
 from facebook.socketio_instance import socketio
 from flask import Blueprint
-from .services import get_messages_room_service
+from .services import get_messages_room_service, data_notification_mess
 from flask_jwt_extended import jwt_required, current_user
+from ..extension import get_current_time
 
 chats = Blueprint("chat", __name__)
 
@@ -13,16 +14,18 @@ chats = Blueprint("chat", __name__)
 # api
 @chats.route("/chat-management/room", methods=["POST"])
 @jwt_required()
-def add_friend():
+def get_message():
     return get_messages_room_service(current_user)
 
 
 # socket
 @socketio.on('send_message')
 def handle_send_message_event(data):
-    data['created_at'] = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-    save_message(data['room'], data['message'], data['username'])
-    socketio.emit('receive_message', data, room=data['room'])
+    data['created_at'] = get_current_time()
+    save_message(data)
+    socketio.emit('receive_message', data, room=data['room_id'])
+    data_notification, id_friend = data_notification_mess(data['room_id'], int(data['sender']))
+    socketio.emit('join_notification', data_notification, room=f'user_id_{id_friend}')
 
 
 @socketio.on('join_room')

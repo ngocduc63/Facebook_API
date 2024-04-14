@@ -22,10 +22,10 @@ def handle_join_post_notification_event(data):
     socketio.emit('notification_post', {}, room=f'post_{data['post_id']}')
 
 
-@socketio.on('join_notification_add_friend')
+@socketio.on('join_notification')
 def handle_join_post_notification_event(data):
     join_room(f'user_id_{data['user_id']}')
-    socketio.emit('join_notification_add_friend', "listen event add friend success", room=f'user_id_{data['user_id']}')
+    socketio.emit('join_notification', "listen event add friend success", room=f'user_id_{data['user_id']}')
 
 
 @socketio.on('leave_notification_post')
