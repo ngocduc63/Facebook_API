@@ -55,6 +55,8 @@ class Friends(db.Model):
 
 class Posts(db.Model):
     # category: 0:normal, 1: avatar, 2: cover
+    # status: 0:private, 1:public, 2: friend
+
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String())
     image = db.Column(db.String())

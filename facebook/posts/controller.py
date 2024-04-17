@@ -18,7 +18,7 @@ def get_new_feed(page):
 @posts.route("/post-management/post/get-user-posts", methods=["post"])
 @jwt_required()
 def get_user_posts():
-    return get_posts_by_user_service()
+    return get_posts_by_user_service(current_user)
 
 
 @posts.route("/post-management/post/create", methods=["POST"])

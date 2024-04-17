@@ -26,7 +26,7 @@ def check_user_like_post(user_id, post_id):
     return 1 if data else 0
 
 
-def get_posts_by_user_service():
+def get_posts_by_user_service(current_user):
     data = request.json
 
     check_data = data and ('user_id' in data) and ('page' in data)
@@ -38,7 +38,7 @@ def get_posts_by_user_service():
     page_num = data['page']
     posts = (db.session.query(Posts, Users).
              outerjoin(Users, Users.id == Posts.user_id)
-             .filter(Posts.user_id == user_id)
+             .filter(Posts.user_id == user_id, Posts.isDeleted == 0)
              .order_by(Posts.create_at.desc())
              .paginate(page=page_num, per_page=PER_PAGE_POST, error_out=False)
              )
@@ -61,7 +61,7 @@ def get_posts_by_user_service():
                 "create_at": result[0].create_at,
                 "num_like": result[0].count_like,
                 "num_comment": result[0].count_comment,
-                'liked': check_user_like_post(user_id, result[0].id)
+                'liked': check_user_like_post(current_user.id, result[0].id)
             }
             data_rs.append(data)
 
@@ -81,7 +81,7 @@ def get_new_feed_service(page_num, current_user):
     friend_ids = [friend.user_id if friend.user_id != user_id else friend.friend_id for friend in friends]
     posts = (db.session.query(Posts, Users).
              outerjoin(Users, Users.id == Posts.user_id)
-             .filter(or_(Posts.user_id.in_(friend_ids), Posts.user_id == user_id))
+             .filter(or_(Posts.user_id.in_(friend_ids), Posts.user_id == user_id), Posts.isDeleted == 0)
              .order_by(Posts.create_at.desc())
              .paginate(page=page_num, per_page=PER_PAGE_POST, error_out=False)
              )
@@ -262,7 +262,10 @@ def update_post_service(current_user):
         title_new = data["title"]
         status_new = data['status']
 
+        post = db.session.query(Posts).filter(Posts.id == id_post).first()
+
         data_image = request.files
+
         if data_image:
             file = data_image['image']
             if file and allowed_file(file.filename):
@@ -272,7 +275,6 @@ def update_post_service(current_user):
                     file.save(get_path_upload(UPLOAD_POST_FOLDER, filename))
                     image_str_new = filename
 
-                    post = db.session.query(Posts).filter(Posts.id == id_post).first()
                     post.title = title_new
                     post.status = status_new
                     post.image = image_str_new
@@ -289,7 +291,12 @@ def update_post_service(current_user):
             else:
                 return my_json(ERROR_FILE_NULL)
         else:
-            return my_json(ERROR_FILE_NULL)
+            post.title = title_new
+            post.status = status_new
+
+            post_data = post_schema.dump(post)
+            db.session.commit()
+            return my_json(post_data)
     else:
         return my_json(ERROR_DATA_NOT_MATCH)
 
@@ -304,7 +311,7 @@ def delete_post_service(id_post, current_user):
     if id_post and user_id:
         try:
             post = db.session.query(Posts).filter(Posts.id == id_post).first()
-            post.isDelete = 1
+            post.isDeleted = 1
 
             post_data = post_schema.dump(post)
             db.session.commit()
