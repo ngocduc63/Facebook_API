@@ -3,7 +3,7 @@ from flask_jwt_extended import jwt_required, current_user
 from .services import (get_new_feed_service, create_post_service, update_post_service, delete_post_service,
                        user_like_post_service, user_unlike_post_service, user_comment_post_service,
                        user_delete_comment_post_service, image_post_service, get_users_like_post_service,
-                       get_users_comment_post_service, get_posts_by_user_service)
+                       get_users_comment_post_service, get_posts_by_user_service, update_comment_service)
 
 posts = Blueprint("posts", __name__)
 
@@ -74,7 +74,13 @@ def comment_post():
     return user_comment_post_service(current_user)
 
 
-@posts.route("/post-management/post/delete-comment", methods=["DELETE"])
+@posts.route("/post-management/post/delete-comment/<int:id_comment>", methods=["DELETE"])
 @jwt_required()
-def delete_comment_post():
-    return user_delete_comment_post_service(current_user)
+def delete_comment_post(id_comment):
+    return user_delete_comment_post_service(current_user, id_comment)
+
+
+@posts.route("/post-management/post/update-comment", methods=["PUT"])
+@jwt_required()
+def update_comment_post():
+    return update_comment_service()

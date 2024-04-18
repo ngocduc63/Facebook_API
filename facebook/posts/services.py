@@ -167,7 +167,7 @@ def get_users_comment_post_service():
 
         comments = (db.session.query(Comments, Users)
                     .outerjoin(Users, Users.id == Comments.user_id)
-                    .filter(Comments.post_id == post_id)
+                    .filter(Comments.post_id == post_id, Comments.isDeleted != 1)
                     .group_by(Comments.id)
                     .order_by(Comments.create_at.desc())
                     .paginate(page=page_num, per_page=PER_PAGE_COMMENT_POST, error_out=False)
@@ -459,45 +459,70 @@ def user_comment_post_service(current_user):
         return my_json(ERROR_DATA_NOT_MATCH)
 
 
-def user_delete_comment_post_service(current_user):
+def user_delete_comment_post_service(current_user, id_comment):
     try:
         user_id = current_user.id
     except Exception as e:
         print(e)
         return my_json(ERROR_CHECK_TOKEN)
 
+    comment = db.session.query(Comments).filter(Comments.id == id_comment).first()
+    if not comment:
+        return my_json(ERROR_COMMENT_NOT_FOUND)
+
+    comment_data = comment_schema.dump(comment)
+    post = db.session.query(Posts).filter(Posts.id == comment_data['post_id']).first()
+    if not post:
+        return my_json(ERROR_POST_NOT_FOUND)
+
+    post_data = post_schema.dump(post)
+
+    if comment.isDeleted == 1:
+        return my_json(ERROR_COMMENT_NOT_FOUND)
+
+    if comment.user_id != user_id and user_id != post_data['user_id']:
+        return my_json(ERROR_USER_HAVE_NOT_ROLE)
+
+    try:
+        comment.isDeleted = 1
+        post.count_comment = post.count_comment - 1
+        db.session.commit()
+
+        data_notification = {
+            "num_comment": post.count_comment,
+        }
+        socketio.emit('notification_post', data_notification, room=f'post_{post.id}')
+
+        return my_json("delete comment success")
+    except IndentationError:
+        db.session.rollback()
+        return my_json(ERROR_SAVE_DB)
+
+
+def update_comment_service():
     data = request.json
-    check_data = data and ('id_post' in data) and ('id_comment' in data)
 
-    if check_data:
-        id_post = data['id_post']
-        id_comment = data['id_comment']
-
-        post = db.session.query(Posts).filter(Posts.id == id_post).first()
-        if not post:
-            return my_json(ERROR_POST_NOT_FOUND)
-
-        comment = db.session.query(Comments).filter(Comments.id == id_comment).first()
-        if not comment:
-            return my_json(ERROR_COMMENT_NOT_FOUND)
-
-        if comment.isDeleted == 1:
-            return my_json(ERROR_COMMENT_NOT_FOUND)
-
-        if post.user_id != user_id:
-            return my_json(ERROR_USER_HAVE_NOT_ROLE)
-
-        try:
-            comment.isDeleted = 1
-            post.count_comment = post.count_comment - 1
-
-            db.session.commit()
-            return my_json("delete comment success")
-        except IndentationError:
-            db.session.rollback()
-            return my_json(ERROR_SAVE_DB)
-    else:
+    check_data = data and ('id_comment' in data) and ('content' in data)
+    if not check_data:
         return my_json(ERROR_DATA_NOT_MATCH)
+
+    id_comment = data['id_comment']
+    content = data['content']
+
+    comment = db.session.query(Comments).filter(Comments.id == id_comment, Comments.isDeleted != 1).first()
+
+    if not comment:
+        return my_json(ERROR_COMMENT_NOT_FOUND)
+
+    try:
+        comment.content = content
+        db.session.commit()
+        
+        comment_data = comment_schema.dump(comment)
+        return my_json(comment_data)
+    except IndentationError:
+        db.session.rollback()
+        return my_json(ERROR_SAVE_DB)
 
 
 def image_post_service(filename):
