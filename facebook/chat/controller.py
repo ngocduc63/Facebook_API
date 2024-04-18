@@ -4,7 +4,7 @@ from flask_socketio import join_room, leave_room
 from datetime import datetime
 from facebook.socketio_instance import socketio
 from flask import Blueprint
-from .services import get_messages_room_service, data_notification_mess
+from .services import get_messages_room_service, data_notification_mess, get_messages_chat_list_service
 from flask_jwt_extended import jwt_required, current_user
 from ..extension import get_current_time
 
@@ -16,6 +16,12 @@ chats = Blueprint("chat", __name__)
 @jwt_required()
 def get_message():
     return get_messages_room_service(current_user)
+
+
+@chats.route("/chat-management/chat-list", methods=["GET"])
+@jwt_required()
+def get_chat_list():
+    return get_messages_chat_list_service(current_user)
 
 
 # socket

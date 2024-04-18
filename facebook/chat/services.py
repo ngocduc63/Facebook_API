@@ -6,15 +6,16 @@ from flask import request
 from facebook.model import Friends, Users
 from facebook.extension import db
 from facebook.facebook_ma import FriendSchema, UserSchema
+from bson import json_util
 
 friend_schema = FriendSchema()
 user_schema = UserSchema()
 
 
-def create_room(room_name, user_id_create, user_id_added):
-    if len(room_name) and user_id_added and user_id_create:
-        room_id = save_room(room_name, user_id_create)
-        add_room_member(room_id, room_name, user_id_added, user_id_create)
+def create_room(room_name, current_user, user_create_room):
+    if len(room_name) and user_create_room and current_user:
+        room_id = save_room(room_name, current_user.id)
+        add_room_member(room_id, room_name, user_create_room, current_user)
         return room_id
     else:
         return None
@@ -50,6 +51,18 @@ def get_messages_room_service(current_user):
         return my_json(ERROR_FOUND_ROOM_CHAT)
 
 
+def get_messages_chat_list_service(current_user):
+    try:
+        user_id = current_user.id
+    except Exception as e:
+        print(e)
+        return my_json(ERROR_CHECK_TOKEN)
+
+    chat_list = get_rooms_for_user(user_id)
+
+    return my_json(json_util.dumps(chat_list))
+
+
 def data_notification_mess(room_id, user_id):
     friend = db.session.query(Friends).filter(Friends.id_room_chat == room_id).first()
     friend = friend_schema.dump(friend)
@@ -60,4 +73,3 @@ def data_notification_mess(room_id, user_id):
         'room': room_id,
         'friend': user_data
     }, friend_id
-

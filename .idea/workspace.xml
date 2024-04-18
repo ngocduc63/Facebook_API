@@ -5,7 +5,13 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="23cb2c54-3c39-4df6-92f4-23e60e3d4d48" name="Changes" comment="Create config error code">
+      <change afterPath="$PROJECT_DIR$/facebook/upload/avatar/Anh_chup_man_hinh_2021-11-19_193332_1_1712592894.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/facebook/upload/avatar/Anh_chup_man_hinh_2021-11-19_193445_1_1712593036.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/facebook/upload/avatar/run2_3_1712841958.png" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/facebook/upload/post/Anh_chup_man_hinh_2021-11-19_193332_1_1712124656.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/facebook/upload/post/background_meet_1_1712588004.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/facebook/upload/post/chim2_1_1712850490.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/facebook/upload/post/chim6_1_1713325819.png" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/facebook/upload/post/fist_001_1_1712064012.jpg" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/facebook/upload/post/fist_004_1_1712124139.jpg" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/facebook/upload/post/fist_016_1_1712124159.jpg" afterDir="false" />
@@ -17,8 +23,10 @@
       <change afterPath="$PROJECT_DIR$/facebook/upload/post/fist_114_1_1712124185.jpg" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/facebook/upload/post/fist_135_1_1712124622.jpg" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/facebook/posts/services.py" beforeDir="false" afterPath="$PROJECT_DIR$/facebook/posts/services.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/facebook/users/controller.py" beforeDir="false" afterPath="$PROJECT_DIR$/facebook/users/controller.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/facebook/chat/controller.py" beforeDir="false" afterPath="$PROJECT_DIR$/facebook/chat/controller.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/facebook/chat/db_chat.py" beforeDir="false" afterPath="$PROJECT_DIR$/facebook/chat/db_chat.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/facebook/chat/services.py" beforeDir="false" afterPath="$PROJECT_DIR$/facebook/chat/services.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/facebook/friends/services.py" beforeDir="false" afterPath="$PROJECT_DIR$/facebook/friends/services.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/instance/facebook.db" beforeDir="false" afterPath="$PROJECT_DIR$/instance/facebook.db" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -208,38 +216,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1705236449798</updated>
-    </task>
-    <task id="LOCAL-00001" summary="update git ignore">
-      <option name="closed" value="true" />
-      <created>1705237516944</created>
-      <option name="number" value="00001" />
-      <option name="presentableId" value="LOCAL-00001" />
-      <option name="project" value="LOCAL" />
-      <updated>1705237516944</updated>
-    </task>
-    <task id="LOCAL-00002" summary="update git ignore">
-      <option name="closed" value="true" />
-      <created>1705237602118</created>
-      <option name="number" value="00002" />
-      <option name="presentableId" value="LOCAL-00002" />
-      <option name="project" value="LOCAL" />
-      <updated>1705237602118</updated>
-    </task>
-    <task id="LOCAL-00003" summary="create db">
-      <option name="closed" value="true" />
-      <created>1705249092668</created>
-      <option name="number" value="00003" />
-      <option name="presentableId" value="LOCAL-00003" />
-      <option name="project" value="LOCAL" />
-      <updated>1705249092668</updated>
-    </task>
-    <task id="LOCAL-00004" summary="fix create db">
-      <option name="closed" value="true" />
-      <created>1705327673767</created>
-      <option name="number" value="00004" />
-      <option name="presentableId" value="LOCAL-00004" />
-      <option name="project" value="LOCAL" />
-      <updated>1705327673767</updated>
     </task>
     <task id="LOCAL-00005" summary="create api add user">
       <option name="closed" value="true" />
@@ -577,7 +553,63 @@
       <option name="project" value="LOCAL" />
       <updated>1711606862785</updated>
     </task>
-    <option name="localTasksCounter" value="47" />
+    <task id="LOCAL-00047" summary="Update api get new feed: fix user liked">
+      <option name="closed" value="true" />
+      <created>1712215957526</created>
+      <option name="number" value="00047" />
+      <option name="presentableId" value="LOCAL-00047" />
+      <option name="project" value="LOCAL" />
+      <updated>1712215957526</updated>
+    </task>
+    <task id="LOCAL-00048" summary="update api: find user, logic friend">
+      <option name="closed" value="true" />
+      <created>1712760859869</created>
+      <option name="number" value="00048" />
+      <option name="presentableId" value="LOCAL-00048" />
+      <option name="project" value="LOCAL" />
+      <updated>1712760859869</updated>
+    </task>
+    <task id="LOCAL-00049" summary="update db post with category, fix bug socket cors, add api get post by user">
+      <option name="closed" value="true" />
+      <created>1712936262773</created>
+      <option name="number" value="00049" />
+      <option name="presentableId" value="LOCAL-00049" />
+      <option name="project" value="LOCAL" />
+      <updated>1712936262773</updated>
+    </task>
+    <task id="LOCAL-00050" summary="upodate api message, save room chat id in friend table">
+      <option name="closed" value="true" />
+      <created>1713026286648</created>
+      <option name="number" value="00050" />
+      <option name="presentableId" value="LOCAL-00050" />
+      <option name="project" value="LOCAL" />
+      <updated>1713026286648</updated>
+    </task>
+    <task id="LOCAL-00051" summary="change notification add friend to notification common for user, update api get room chat">
+      <option name="closed" value="true" />
+      <created>1713112264977</created>
+      <option name="number" value="00051" />
+      <option name="presentableId" value="LOCAL-00051" />
+      <option name="project" value="LOCAL" />
+      <updated>1713112264977</updated>
+    </task>
+    <task id="LOCAL-00052" summary="Update api get post: config delete post">
+      <option name="closed" value="true" />
+      <created>1713359898101</created>
+      <option name="number" value="00052" />
+      <option name="presentableId" value="LOCAL-00052" />
+      <option name="project" value="LOCAL" />
+      <updated>1713359898102</updated>
+    </task>
+    <task id="LOCAL-00053" summary="Update api: update comment">
+      <option name="closed" value="true" />
+      <created>1713423172649</created>
+      <option name="number" value="00053" />
+      <option name="presentableId" value="LOCAL-00053" />
+      <option name="project" value="LOCAL" />
+      <updated>1713423172651</updated>
+    </task>
+    <option name="localTasksCounter" value="54" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -593,13 +625,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="create file setup and tuturial" />
-    <MESSAGE value="user api: update refresh token, expries token" />
-    <MESSAGE value="post api: create api for comment, like post" />
-    <MESSAGE value="post api: fix api comment" />
-    <MESSAGE value="fix all api: get current user id" />
-    <MESSAGE value="Feature chat: import pymongo" />
-    <MESSAGE value="Feature chat: update logic chat" />
     <MESSAGE value="Feature chat: add socketio, update logic add friend: create chat room" />
     <MESSAGE value="Feature chat: fix socket chat" />
     <MESSAGE value="Api friends: update api acp friend" />
@@ -617,7 +642,14 @@
     <MESSAGE value="Fix migration: update table (friend -&gt; post)" />
     <MESSAGE value="Update socket notification for post: event user like, comment" />
     <MESSAGE value="Update feature: notification add friend" />
+    <MESSAGE value="Update api get new feed: fix user liked" />
+    <MESSAGE value="update api: find user, logic friend" />
+    <MESSAGE value="update db post with category, fix bug socket cors, add api get post by user" />
+    <MESSAGE value="upodate api message, save room chat id in friend table" />
+    <MESSAGE value="change notification add friend to notification common for user, update api get room chat" />
+    <MESSAGE value="Update api get post: config delete post" />
     <MESSAGE value="Create config error code" />
-    <option name="LAST_COMMIT_MESSAGE" value="Create config error code" />
+    <MESSAGE value="Update api: update comment" />
+    <option name="LAST_COMMIT_MESSAGE" value="Update api: update comment" />
   </component>
 </project>

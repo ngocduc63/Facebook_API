@@ -1,6 +1,6 @@
 import math
 from facebook.extension import db
-from facebook.facebook_ma import FriendSchema
+from facebook.facebook_ma import FriendSchema, UserSchema
 from facebook.model import Friends, Users
 from flask import request
 from ..extension import my_json, obj_success_paginate, get_current_time
@@ -15,6 +15,7 @@ from ..socketio_instance import socketio
 from ..notification.services import create_notification_add_friend_service
 
 friend_schema = FriendSchema()
+user_schema = UserSchema()
 friends_schema = FriendSchema(many=True)
 user_alias = aliased(Users)
 friend_alias = aliased(Users)
@@ -98,7 +99,10 @@ def accept_service(friend_id, current_user):
     try:
         check_exits.is_accept = 1
 
-        room_id = create_room(current_user.username, user_id, friend_id)
+        user_create = db.session.query(Users).filter(Users.id == friend_id).first()
+        user_create = user_schema.dump(user_create)
+
+        room_id = create_room(current_user.username, current_user, user_create)
 
         if room_id is None:
             return my_json(ERROR_CAN_NOT_CREATE_ROOM)

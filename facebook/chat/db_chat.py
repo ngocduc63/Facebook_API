@@ -14,14 +14,35 @@ messages_collection = chat_db.get_collection("messages")
 def save_room(room_name, created_by):
     room_id = rooms_collection.insert_one(
         {'name': room_name, 'created_by': created_by, 'created_at': get_current_time()}).inserted_id
-    add_room_member(room_id, room_name, created_by, created_by)
+    # add_room_member(room_id, room_name, created_by, created_by)
     return room_id
 
 
-def add_room_member(room_id, room_name, username, added_by):
+def add_room_member(room_id, room_name, user_added, current_user):
     room_members_collection.insert_one(
-        {'_id': {'room_id': ObjectId(room_id), 'username': username}, 'room_name': room_name, 'added_by': added_by,
-         'added_at': get_current_time()})
+        {
+            '_id': {
+                    'room_id': ObjectId(room_id),
+                    'username_key': {
+                        'user_id': user_added['id'],
+                        'username': user_added['username'],
+                        'avatar': user_added['avatar'],
+                    },
+                    'username_friend': {
+                        'user_id': current_user.id,
+                        'username': current_user.username,
+                        'avatar': current_user.avatar,
+                    },
+
+                },
+            'room_name': room_name,
+            'added_by': user_added['id'],
+            'last_mess': {
+                'sender': 0,
+                'text': ''
+            },
+            'added_at': get_current_time()
+        })
 
 
 def update_room(room_id, room_name):
@@ -49,11 +70,24 @@ def get_room_members(room_id):
 
 
 def get_rooms_for_user(username):
-    return list(room_members_collection.find({'_id.username': username}))
+    query = {
+        '$or': [
+            {'_id.username_key.user_id': username},
+            {'_id.username_friend.user_id': username}
+        ]
+    }
+    return list(room_members_collection.find(query))
 
 
 def is_room_member(room_id, username):
-    return room_members_collection.count_documents({'_id': {'room_id': ObjectId(room_id), 'username': username}})
+    query = {
+        '$or': [
+            {'_id.username_key.user_id': username},
+            {'_id.username_friend.user_id': username}
+        ],
+        '_id.room_id': ObjectId(room_id)
+    }
+    return room_members_collection.count_documents(query)
 
 
 def save_message(data):
@@ -67,6 +101,12 @@ def save_message(data):
                      }
                    )
      )
+    room_members_collection.update_one({'_id.room_id': ObjectId(data['room_id'])},
+                                       {'$set': {
+                                           'last_mess': {
+                                               'text': data['text'],
+                                               'sender': data['sender']
+                                           }}})
 
 
 def get_messages(room_id, page=0):
