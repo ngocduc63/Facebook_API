@@ -1,12 +1,14 @@
 from .db_chat import (save_room, add_room_members, get_rooms_for_user, get_room, is_room_member, add_room_member,
-                      get_room_members, update_room, remove_room_members, save_message, get_messages)
+                      get_room_members, update_room, remove_room_members, save_message, get_messages,
+                      get_room_collection)
 from flask_socketio import join_room, leave_room
 from datetime import datetime
 from facebook.socketio_instance import socketio
 from flask import Blueprint
-from .services import get_messages_room_service, data_notification_mess, get_messages_chat_list_service
+from .services import get_messages_room_service, get_messages_chat_list_service
 from flask_jwt_extended import jwt_required, current_user
 from ..extension import get_current_time
+from bson import json_util
 
 chats = Blueprint("chat", __name__)
 
@@ -30,8 +32,13 @@ def handle_send_message_event(data):
     data['created_at'] = get_current_time()
     save_message(data)
     socketio.emit('receive_message', data, room=data['room_id'])
-    data_notification, id_friend = data_notification_mess(data['room_id'], int(data['sender']))
-    socketio.emit('join_notification', data_notification, room=f'user_id_{id_friend}')
+
+    data_room_collection = get_room_collection(data['room_id'])
+    data_notification = json_util.dumps(data_room_collection)
+    socketio.emit('join_notification', data_notification,
+                  room=f'user_id_{data_room_collection['_id']['username_key']['user_id']}')
+    socketio.emit('join_notification', data_notification,
+                  room=f'user_id_{data_room_collection['_id']['username_friend']['user_id']}')
 
 
 @socketio.on('join_room')

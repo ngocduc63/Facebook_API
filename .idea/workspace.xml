@@ -4,7 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="23cb2c54-3c39-4df6-92f4-23e60e3d4d48" name="Changes" comment="Create config error code">
+    <list default="true" id="23cb2c54-3c39-4df6-92f4-23e60e3d4d48" name="Changes" comment="Config message fetch limit 10 to 20, fix notification when save mess">
       <change afterPath="$PROJECT_DIR$/facebook/upload/avatar/Anh_chup_man_hinh_2021-11-19_193332_1_1712592894.png" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/facebook/upload/avatar/Anh_chup_man_hinh_2021-11-19_193445_1_1712593036.png" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/facebook/upload/avatar/run2_3_1712841958.png" afterDir="false" />
@@ -26,8 +26,7 @@
       <change beforePath="$PROJECT_DIR$/facebook/chat/controller.py" beforeDir="false" afterPath="$PROJECT_DIR$/facebook/chat/controller.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/facebook/chat/db_chat.py" beforeDir="false" afterPath="$PROJECT_DIR$/facebook/chat/db_chat.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/facebook/chat/services.py" beforeDir="false" afterPath="$PROJECT_DIR$/facebook/chat/services.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/facebook/friends/services.py" beforeDir="false" afterPath="$PROJECT_DIR$/facebook/friends/services.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/instance/facebook.db" beforeDir="false" afterPath="$PROJECT_DIR$/instance/facebook.db" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/facebook/config.py" beforeDir="false" afterPath="$PROJECT_DIR$/facebook/config.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -216,14 +215,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1705236449798</updated>
-    </task>
-    <task id="LOCAL-00005" summary="create api add user">
-      <option name="closed" value="true" />
-      <created>1705336688762</created>
-      <option name="number" value="00005" />
-      <option name="presentableId" value="LOCAL-00005" />
-      <option name="project" value="LOCAL" />
-      <updated>1705336688762</updated>
     </task>
     <task id="LOCAL-00006" summary="add api add, get, get all : user, friend,">
       <option name="closed" value="true" />
@@ -609,7 +600,15 @@
       <option name="project" value="LOCAL" />
       <updated>1713423172651</updated>
     </task>
-    <option name="localTasksCounter" value="54" />
+    <task id="LOCAL-00054" summary="Config rooms member colection, update api get list chat">
+      <option name="closed" value="true" />
+      <created>1713457210742</created>
+      <option name="number" value="00054" />
+      <option name="presentableId" value="LOCAL-00054" />
+      <option name="project" value="LOCAL" />
+      <updated>1713457210742</updated>
+    </task>
+    <option name="localTasksCounter" value="55" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -625,7 +624,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="Feature chat: add socketio, update logic add friend: create chat room" />
     <MESSAGE value="Feature chat: fix socket chat" />
     <MESSAGE value="Api friends: update api acp friend" />
     <MESSAGE value="Api posts: update api new feed, list likes, list comments" />
@@ -648,8 +646,9 @@
     <MESSAGE value="upodate api message, save room chat id in friend table" />
     <MESSAGE value="change notification add friend to notification common for user, update api get room chat" />
     <MESSAGE value="Update api get post: config delete post" />
-    <MESSAGE value="Create config error code" />
     <MESSAGE value="Update api: update comment" />
-    <option name="LAST_COMMIT_MESSAGE" value="Update api: update comment" />
+    <MESSAGE value="Config rooms member colection, update api get list chat" />
+    <MESSAGE value="Create config error code" />
+    <option name="LAST_COMMIT_MESSAGE" value="Create config error code" />
   </component>
 </project>

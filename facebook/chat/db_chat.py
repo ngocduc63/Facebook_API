@@ -54,6 +54,10 @@ def get_room(room_id):
     return rooms_collection.find_one({'_id': ObjectId(room_id)})
 
 
+def get_room_collection(room_id):
+    return room_members_collection.find_one({'_id.room_id': ObjectId(room_id)})
+
+
 def add_room_members(room_id, room_name, usernames, added_by):
     room_members_collection.insert_many(
         [{'_id': {'room_id': ObjectId(room_id), 'username': username}, 'room_name': room_name, 'added_by': added_by,

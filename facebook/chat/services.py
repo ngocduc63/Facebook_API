@@ -61,15 +61,3 @@ def get_messages_chat_list_service(current_user):
     chat_list = get_rooms_for_user(user_id)
 
     return my_json(json_util.dumps(chat_list))
-
-
-def data_notification_mess(room_id, user_id):
-    friend = db.session.query(Friends).filter(Friends.id_room_chat == room_id).first()
-    friend = friend_schema.dump(friend)
-    friend_id = friend['friend_id'] if friend['user_id'] == user_id else friend['user_id']
-    user_data = db.session.query(Users).filter(Users.id == user_id).first()
-    user_data = user_schema.dump(user_data)
-    return {
-        'room': room_id,
-        'friend': user_data
-    }, friend_id
