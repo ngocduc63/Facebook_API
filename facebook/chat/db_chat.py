@@ -1,7 +1,7 @@
 from pymongo import MongoClient, DESCENDING
 from ..extension import get_current_time
 from bson import ObjectId
-from ..config import MESSAGE_FETCH_LIMIT
+from ..config import MESSAGE_FETCH_LIMIT, LIST_ROOM_CHAT_FETCH_LIMIT
 
 client = MongoClient("mongodb+srv://test:123@facebook.7yqdc0f.mongodb.net/?retryWrites=true&w=majority&appName=facebook")
 
@@ -69,18 +69,41 @@ def remove_room_members(room_id, usernames):
         {'_id': {'$in': [{'room_id': ObjectId(room_id), 'username': username} for username in usernames]}})
 
 
-def get_room_members(room_id):
-    return list(room_members_collection.find({'_id.room_id': ObjectId(room_id)}))
+def get_room_members(room_id, page=0):
+    offset = page * LIST_ROOM_CHAT_FETCH_LIMIT
+
+    list_room = list(room_members_collection.find({'_id.room_id': ObjectId(room_id)})
+                     .sort('last_mess.created_at', DESCENDING)
+                     .limit(LIST_ROOM_CHAT_FETCH_LIMIT).skip(offset)
+                     )
+    total_messages = room_members_collection.count_documents({'_id.room_id': ObjectId(room_id)})
+    total_page = total_messages // LIST_ROOM_CHAT_FETCH_LIMIT
+    if total_messages % LIST_ROOM_CHAT_FETCH_LIMIT != 0:
+        total_page += 1
+
+    return list_room, total_page
 
 
-def get_rooms_for_user(username):
+def get_rooms_for_user(username, page):
+    offset = page * LIST_ROOM_CHAT_FETCH_LIMIT
+
     query = {
         '$or': [
             {'_id.username_key.user_id': username},
             {'_id.username_friend.user_id': username}
         ]
     }
-    return list(room_members_collection.find(query))
+    list_room = list(room_members_collection.find(query)
+                     .sort('last_mess.created_at', DESCENDING)
+                     .limit(LIST_ROOM_CHAT_FETCH_LIMIT).skip(offset)
+                     )
+
+    total_messages = room_members_collection.count_documents(query)
+    total_page = total_messages // LIST_ROOM_CHAT_FETCH_LIMIT
+    if total_messages % LIST_ROOM_CHAT_FETCH_LIMIT != 0:
+        total_page += 1
+
+    return list_room, total_page
 
 
 def is_room_member(room_id, username):
@@ -109,7 +132,8 @@ def save_message(data):
                                        {'$set': {
                                            'last_mess': {
                                                'text': data['text'],
-                                               'sender': data['sender']
+                                               'sender': data['sender'],
+                                               'created_at': data['created_at']
                                            }}})
 
 

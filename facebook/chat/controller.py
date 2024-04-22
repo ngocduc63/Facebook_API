@@ -20,10 +20,10 @@ def get_message():
     return get_messages_room_service(current_user)
 
 
-@chats.route("/chat-management/chat-list", methods=["GET"])
+@chats.route("/chat-management/chat-list/<int:page>", methods=["GET"])
 @jwt_required()
-def get_chat_list():
-    return get_messages_chat_list_service(current_user)
+def get_chat_list(page):
+    return get_messages_chat_list_service(current_user, page)
 
 
 # socket

@@ -27,6 +27,7 @@
       <change beforePath="$PROJECT_DIR$/facebook/chat/db_chat.py" beforeDir="false" afterPath="$PROJECT_DIR$/facebook/chat/db_chat.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/facebook/chat/services.py" beforeDir="false" afterPath="$PROJECT_DIR$/facebook/chat/services.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/facebook/config.py" beforeDir="false" afterPath="$PROJECT_DIR$/facebook/config.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/instance/facebook.db" beforeDir="false" afterPath="$PROJECT_DIR$/instance/facebook.db" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -215,14 +216,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1705236449798</updated>
-    </task>
-    <task id="LOCAL-00006" summary="add api add, get, get all : user, friend,">
-      <option name="closed" value="true" />
-      <created>1705399944850</created>
-      <option name="number" value="00006" />
-      <option name="presentableId" value="LOCAL-00006" />
-      <option name="project" value="LOCAL" />
-      <updated>1705399944850</updated>
     </task>
     <task id="LOCAL-00007" summary="update">
       <option name="closed" value="true" />
@@ -608,7 +601,15 @@
       <option name="project" value="LOCAL" />
       <updated>1713457210742</updated>
     </task>
-    <option name="localTasksCounter" value="55" />
+    <task id="LOCAL-00055" summary="Config message fetch limit 10 to 20, fix notification when save mess">
+      <option name="closed" value="true" />
+      <created>1713718532040</created>
+      <option name="number" value="00055" />
+      <option name="presentableId" value="LOCAL-00055" />
+      <option name="project" value="LOCAL" />
+      <updated>1713718532041</updated>
+    </task>
+    <option name="localTasksCounter" value="56" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -624,7 +625,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="Feature chat: fix socket chat" />
     <MESSAGE value="Api friends: update api acp friend" />
     <MESSAGE value="Api posts: update api new feed, list likes, list comments" />
     <MESSAGE value="change method some get api to post" />
@@ -649,6 +649,7 @@
     <MESSAGE value="Update api: update comment" />
     <MESSAGE value="Config rooms member colection, update api get list chat" />
     <MESSAGE value="Create config error code" />
-    <option name="LAST_COMMIT_MESSAGE" value="Create config error code" />
+    <MESSAGE value="Config message fetch limit 10 to 20, fix notification when save mess" />
+    <option name="LAST_COMMIT_MESSAGE" value="Config message fetch limit 10 to 20, fix notification when save mess" />
   </component>
 </project>

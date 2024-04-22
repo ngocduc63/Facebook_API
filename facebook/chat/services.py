@@ -1,7 +1,7 @@
 from .db_chat import (save_room, add_room_members, get_rooms_for_user, get_room, is_room_member, add_room_member,
                       get_room_members, update_room, remove_room_members, save_message, get_messages)
 from ..config_error_code import ERROR_CHECK_TOKEN, ERROR_DATA_NOT_MATCH, ERROR_FOUND_ROOM_CHAT
-from ..extension import my_json, obj_message_paginate
+from ..extension import my_json, obj_message_paginate, obj_success_paginate
 from flask import request
 from facebook.model import Friends, Users
 from facebook.extension import db
@@ -51,13 +51,13 @@ def get_messages_room_service(current_user):
         return my_json(ERROR_FOUND_ROOM_CHAT)
 
 
-def get_messages_chat_list_service(current_user):
+def get_messages_chat_list_service(current_user, page):
     try:
         user_id = current_user.id
     except Exception as e:
         print(e)
         return my_json(ERROR_CHECK_TOKEN)
 
-    chat_list = get_rooms_for_user(user_id)
+    chat_list, total_page = get_rooms_for_user(user_id, page - 1)
 
-    return my_json(json_util.dumps(chat_list))
+    return my_json(obj_success_paginate(json_util.dumps(chat_list), page, total_page))
