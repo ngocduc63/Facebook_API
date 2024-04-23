@@ -128,16 +128,23 @@ def save_message(data):
                      }
                    )
      )
+
+    data_room = get_room_collection(data['room_id'])
+    watched = 0
+    if data_room['last_mess']['sender'] != data['sender']:
+        watched = 1
+
     room_members_collection.update_one({'_id.room_id': ObjectId(data['room_id'])},
                                        {'$set': {
                                            'last_mess': {
                                                'text': data['text'],
                                                'sender': data['sender'],
-                                               'created_at': data['created_at']
+                                               'created_at': data['created_at'],
+                                               'watched': watched,
                                            }}})
 
 
-def get_messages(room_id, page=0):
+def get_messages(room_id, user_id, page=0):
     offset = page * MESSAGE_FETCH_LIMIT
     messages = list(
         messages_collection.find({'room_id': room_id}, {'_id': 0}).sort('_id', DESCENDING)
@@ -147,5 +154,11 @@ def get_messages(room_id, page=0):
     total_page = total_messages // MESSAGE_FETCH_LIMIT
     if total_messages % MESSAGE_FETCH_LIMIT != 0:
         total_page += 1
+
+    # update user watched
+    data_room = get_room_collection(room_id)
+    if user_id != int(data_room['last_mess']['sender']):
+        room_members_collection.update_one({'_id.room_id': ObjectId(room_id)},
+                                       {'$set': {'last_mess.watched': 1}})
 
     return messages, total_page

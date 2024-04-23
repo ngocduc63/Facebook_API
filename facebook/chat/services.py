@@ -45,7 +45,7 @@ def get_messages_room_service(current_user):
 
     room = get_room(room_id)
     if room and is_room_member(room_id, user_id):
-        messages, total_page = get_messages(room_id, page - 1)
+        messages, total_page = get_messages(room_id, user_id, page - 1)
         return my_json(obj_message_paginate(messages, friend_data, page, total_page))
     else:
         return my_json(ERROR_FOUND_ROOM_CHAT)
