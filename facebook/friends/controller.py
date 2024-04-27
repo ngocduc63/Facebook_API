@@ -24,10 +24,10 @@ def unfriend(friend_id):
     return unfriend_service(friend_id, current_user)
 
 
-@friends.route("/friend-management/friend/<int:user_id>", methods=["GET"])
+@friends.route("/friend-management/friend/<int:page>", methods=["GET"])
 @jwt_required()
-def get_friend_by_id(user_id):
-    return get_friend_by_id_service(user_id)
+def get_friend_by_id(page):
+    return get_friend_by_id_service(page, current_user)
 
 
 @friends.route("/friend-management/invite-friend/<int:page>", methods=["GET"])

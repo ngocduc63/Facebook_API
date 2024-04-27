@@ -23,8 +23,8 @@
       <change afterPath="$PROJECT_DIR$/facebook/upload/post/fist_114_1_1712124185.jpg" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/facebook/upload/post/fist_135_1_1712124622.jpg" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/facebook/chat/db_chat.py" beforeDir="false" afterPath="$PROJECT_DIR$/facebook/chat/db_chat.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/facebook/chat/services.py" beforeDir="false" afterPath="$PROJECT_DIR$/facebook/chat/services.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/facebook/friends/controller.py" beforeDir="false" afterPath="$PROJECT_DIR$/facebook/friends/controller.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/facebook/friends/services.py" beforeDir="false" afterPath="$PROJECT_DIR$/facebook/friends/services.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/instance/facebook.db" beforeDir="false" afterPath="$PROJECT_DIR$/instance/facebook.db" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -214,14 +214,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1705236449798</updated>
-    </task>
-    <task id="LOCAL-00008" summary="update format json user api">
-      <option name="closed" value="true" />
-      <created>1705418311898</created>
-      <option name="number" value="00008" />
-      <option name="presentableId" value="LOCAL-00008" />
-      <option name="project" value="LOCAL" />
-      <updated>1705418311898</updated>
     </task>
     <task id="LOCAL-00009" summary="paginate, update api update, delete, search user">
       <option name="closed" value="true" />
@@ -607,7 +599,15 @@
       <option name="project" value="LOCAL" />
       <updated>1713793878852</updated>
     </task>
-    <option name="localTasksCounter" value="57" />
+    <task id="LOCAL-00057" summary="update logic watched with message">
+      <option name="closed" value="true" />
+      <created>1713884859262</created>
+      <option name="number" value="00057" />
+      <option name="presentableId" value="LOCAL-00057" />
+      <option name="project" value="LOCAL" />
+      <updated>1713884859264</updated>
+    </task>
+    <option name="localTasksCounter" value="58" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -623,7 +623,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="Api posts: update api new feed, list likes, list comments" />
     <MESSAGE value="change method some get api to post" />
     <MESSAGE value="Fix bug: api register" />
     <MESSAGE value="Update api register: format email, password" />
@@ -646,8 +645,9 @@
     <MESSAGE value="Update api: update comment" />
     <MESSAGE value="Config rooms member colection, update api get list chat" />
     <MESSAGE value="Create config error code" />
-    <MESSAGE value="Config message fetch limit 10 to 20, fix notification when save mess" />
     <MESSAGE value="update paginate for api get list room chat" />
-    <option name="LAST_COMMIT_MESSAGE" value="update paginate for api get list room chat" />
+    <MESSAGE value="update logic watched with message" />
+    <MESSAGE value="Config message fetch limit 10 to 20, fix notification when save mess" />
+    <option name="LAST_COMMIT_MESSAGE" value="Config message fetch limit 10 to 20, fix notification when save mess" />
   </component>
 </project>

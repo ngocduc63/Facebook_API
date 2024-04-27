@@ -61,7 +61,7 @@ def add_friend_service(friend_id, current_user):
                 'avatar': current_user.avatar
             },
             'for_user_id': friend_id,
-            'id_friend': new_friend.id,
+            'id': new_friend.id,
             'create_at': create_at
         }
 
@@ -152,8 +152,12 @@ def unfriend_service(friend_id, current_user):
         return my_json(ERROR_SAVE_DB)
 
 
-def get_friend_by_id_service(user_id):
-    page_num = request.json["page"]
+def get_friend_by_id_service(page_num, current_user):
+    try:
+        user_id = current_user.id
+    except Exception as e:
+        print(e)
+        return my_json(ERROR_CHECK_TOKEN)
 
     if not page_num:
         return my_json(ERROR_PAGE_NUM_NULL)
@@ -165,6 +169,7 @@ def get_friend_by_id_service(user_id):
                         or_(Friends.user_id == user_id, Friends.friend_id == user_id),
                         Friends.is_accept == 1
                      ).
+               order_by(Friends.create_at.desc()).
                paginate(page=page_num, per_page=PER_PAGE_LIST_FRIEND, error_out=False))
 
     cur_page = friends.page
@@ -191,8 +196,6 @@ def get_friend_by_id_service(user_id):
                 "avatar": avatar_rs
             }
             data_rs.append(data)
-
-        data_rs.sort(key=lambda x: x["name"])
 
         return my_json(obj_success_paginate(data_rs, cur_page, max_page))
     else:
@@ -216,6 +219,7 @@ def get_invite_by_id_service(page_num, current_user):
                         Friends.friend_id == user_id,
                         Friends.is_accept == 0
                      ).
+               order_by(Friends.create_at.desc()).
                paginate(page=page_num, per_page=PER_PAGE_LIST_FRIEND, error_out=False))
 
     cur_page = friends.page
@@ -242,8 +246,6 @@ def get_invite_by_id_service(page_num, current_user):
                 "avatar": avatar_rs
             }
             data_rs.append(data)
-
-        data_rs.sort(key=lambda x: x["name"])
 
         return my_json(obj_success_paginate(data_rs, cur_page, max_page))
     else:
