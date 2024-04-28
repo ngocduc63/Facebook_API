@@ -1,6 +1,6 @@
 from flask import Blueprint
 from .services import (add_friend_service, get_friend_by_id_service, unfriend_service, accept_service,
-                       get_invite_by_id_service, get_room_chat_service)
+                       get_invite_by_id_service, get_room_chat_service, search_invite_service, search_friend_service)
 from flask_jwt_extended import jwt_required, get_jwt, current_user
 
 friends = Blueprint("friends", __name__)
@@ -40,3 +40,15 @@ def get_invite_by_id(page):
 @jwt_required()
 def get_room_chat(friend_id):
     return get_room_chat_service(current_user, friend_id)
+
+
+@friends.route("/friend-management/search-invite", methods=["POST"])
+@jwt_required()
+def search_invite_friend():
+    return search_invite_service(current_user)
+
+
+@friends.route("/friend-management/search-friend", methods=["POST"])
+@jwt_required()
+def search_friend():
+    return search_friend_service(current_user)
