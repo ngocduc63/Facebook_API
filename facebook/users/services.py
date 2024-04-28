@@ -214,6 +214,27 @@ def count_friend_service(user_id):
     return num_friend
 
 
+def return_search_user(users, user_id, cur_page=-1, max_page=-1):
+    if users:
+        data_rs = []
+
+        for result in users:
+            data = {
+                "id": result.id,
+                "username": result.username,
+                "avatar": result.avatar,
+                "isFriend": check_is_friend(user_id, result.id)
+            }
+            data_rs.append(data)
+
+        if cur_page < 0 and max_page < 0:
+            return my_json(data_rs)
+        else:
+            return my_json(obj_success_paginate(data_rs, cur_page, max_page))
+    else:
+        return my_json([])
+
+
 def find_user_service(name, current_user):
     try:
         user_id = current_user.id
@@ -227,24 +248,15 @@ def find_user_service(name, current_user):
              .order_by(Users.create_at.desc())
              .limit(4).all())
 
-    if users:
-        data_rs = []
-
-        for result in users:
-            data = {
-                "id": result.id,
-                "username": result.username,
-                "avatar": result.avatar,
-                "isFriend": check_is_friend(user_id, result.id)
-            }
-            data_rs.append(data)
-
-        return my_json(data_rs)
-    else:
-        return my_json([])
+    return return_search_user(users, user_id)
 
 
-def search_user_service():
+def search_user_service(current_user):
+    try:
+        user_id = current_user.id
+    except Exception as e:
+        print(e)
+        return my_json(ERROR_CHECK_TOKEN)
 
     data = request.json
     if not data and ("page" in data) and ("username" in data):
@@ -253,19 +265,14 @@ def search_user_service():
     page = data['page']
     username_input = data['username']
 
-    users = (Users.query.filter(func.lower(Users.username).ilike(f'%{username_input.lower()}%'))
+    users = (Users.query.filter(func.lower(Users.username).ilike(f'%{username_input.lower()}%'), Users.id != user_id)
+             .order_by(Users.create_at.desc())
              .paginate(page=page, per_page=PER_PAGE_LIST_USER, error_out=False))
 
     cur_page = users.page
     max_page = math.ceil(users.total / PER_PAGE_LIST_USER)
 
-    if users:
-        users_data = users_schema.dump(users)
-        # search_approximate(users_data, "username", username_input)
-
-        return my_json(obj_success_paginate(users_data, cur_page, max_page))
-    else:
-        return my_json(ERROR_USER_NOT_FOUND)
+    return return_search_user(users, user_id, cur_page, max_page)
 
 
 def refresh_service(identity):

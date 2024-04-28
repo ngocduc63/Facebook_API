@@ -18,10 +18,10 @@ def get_all_user(page):
     return get_all_user_service(page, claims)
 
 
-@users.route("/user-management/user/search", methods=["GET"])
+@users.route("/user-management/user/search", methods=["POST"])
 @jwt_required()
 def search_user():
-    return search_user_service()
+    return search_user_service(current_user)
 
 
 @users.route("/user-management/user/find/<string:name>", methods=["GET"])
