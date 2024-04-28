@@ -89,6 +89,8 @@ def get_user_by_id_service(user_id_search, current_user):
     if user:
         user_data = user_schema.dump(user)
         user_data["isFriend"] = check_is_friend(user_id, user_id_search)
+        user_data["num_friend"] = count_friend_service(user_id_search)
+
         return jsonify(obj_success(user_data))
     else:
         return my_json(ERROR_CHECK_TOKEN)
@@ -204,6 +206,14 @@ def check_is_friend(user_id, friend_id):
     return 3
 
 
+def count_friend_service(user_id):
+    num_friend = (db.session.query(Friends).
+                  filter(or_(Friends.user_id == user_id, Friends.friend_id == user_id)).
+                  count())
+
+    return num_friend
+
+
 def find_user_service(name, current_user):
     try:
         user_id = current_user.id
@@ -214,6 +224,7 @@ def find_user_service(name, current_user):
     username = name.lower()
     users = (db.session.query(Users)
              .filter(func.lower(Users.username).ilike(f'%{username}%'), Users.id != user_id)
+             .order_by(Users.create_at.desc())
              .limit(4).all())
 
     if users:
