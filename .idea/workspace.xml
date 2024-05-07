@@ -4,7 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="23cb2c54-3c39-4df6-92f4-23e60e3d4d48" name="Changes" comment="" />
+    <list default="true" id="23cb2c54-3c39-4df6-92f4-23e60e3d4d48" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app.py" beforeDir="false" afterPath="$PROJECT_DIR$/app.py" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -192,14 +195,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1705236449798</updated>
-    </task>
-    <task id="LOCAL-00015" summary="update jwt handel: load current user from token">
-      <option name="closed" value="true" />
-      <created>1708963398712</created>
-      <option name="number" value="00015" />
-      <option name="presentableId" value="LOCAL-00015" />
-      <option name="project" value="LOCAL" />
-      <updated>1708963398712</updated>
     </task>
     <task id="LOCAL-00016" summary="update call api update for only 1 user">
       <option name="closed" value="true" />
@@ -585,7 +580,15 @@
       <option name="project" value="LOCAL" />
       <updated>1715086920103</updated>
     </task>
-    <option name="localTasksCounter" value="64" />
+    <task id="LOCAL-00064" summary="change file setup to requirements">
+      <option name="closed" value="true" />
+      <created>1715087278098</created>
+      <option name="number" value="00064" />
+      <option name="presentableId" value="LOCAL-00064" />
+      <option name="project" value="LOCAL" />
+      <updated>1715087278098</updated>
+    </task>
+    <option name="localTasksCounter" value="65" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -601,7 +604,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="update responsive error code with token" />
     <MESSAGE value="update responsive with paginate" />
     <MESSAGE value="Update db: count comment, like; fix api post, fix obj paginate" />
     <MESSAGE value="Update socket notifi:" />
@@ -626,6 +628,7 @@
     <MESSAGE value="Update socket video call" />
     <MESSAGE value="Config message fetch limit 10 to 20, fix notification when save mess" />
     <MESSAGE value="Update db image" />
-    <option name="LAST_COMMIT_MESSAGE" value="Update db image" />
+    <MESSAGE value="change file setup to requirements" />
+    <option name="LAST_COMMIT_MESSAGE" value="change file setup to requirements" />
   </component>
 </project>
