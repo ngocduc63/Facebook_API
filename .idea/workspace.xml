@@ -4,30 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="23cb2c54-3c39-4df6-92f4-23e60e3d4d48" name="Changes" comment="Config message fetch limit 10 to 20, fix notification when save mess">
-      <change afterPath="$PROJECT_DIR$/facebook/call/controller.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/facebook/upload/avatar/Anh_chup_man_hinh_2021-11-19_193332_1_1712592894.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/facebook/upload/avatar/Anh_chup_man_hinh_2021-11-19_193445_1_1712593036.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/facebook/upload/avatar/run2_3_1712841958.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/facebook/upload/post/Anh_chup_man_hinh_2021-11-19_193332_1_1712124656.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/facebook/upload/post/background_meet_1_1712588004.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/facebook/upload/post/chim2_1_1712850490.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/facebook/upload/post/chim6_1_1713325819.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/facebook/upload/post/fist_001_1_1712064012.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/facebook/upload/post/fist_004_1_1712124139.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/facebook/upload/post/fist_016_1_1712124159.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/facebook/upload/post/fist_025_1_1712124206.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/facebook/upload/post/fist_030_1_1712124191.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/facebook/upload/post/fist_031_1_1712124174.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/facebook/upload/post/fist_036_1_1712124220.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/facebook/upload/post/fist_038_1_1712124212.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/facebook/upload/post/fist_114_1_1712124185.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/facebook/upload/post/fist_135_1_1712124622.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/facebook/config.py" beforeDir="false" afterPath="$PROJECT_DIR$/facebook/config.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/facebook/socketio_instance.py" beforeDir="false" afterPath="$PROJECT_DIR$/facebook/socketio_instance.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/instance/facebook.db" beforeDir="false" afterPath="$PROJECT_DIR$/instance/facebook.db" afterDir="false" />
-    </list>
+    <list default="true" id="23cb2c54-3c39-4df6-92f4-23e60e3d4d48" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -215,22 +192,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1705236449798</updated>
-    </task>
-    <task id="LOCAL-00013" summary="The first commit in 2024: create access token when user login">
-      <option name="closed" value="true" />
-      <created>1707528374605</created>
-      <option name="number" value="00013" />
-      <option name="presentableId" value="LOCAL-00013" />
-      <option name="project" value="LOCAL" />
-      <updated>1707528374605</updated>
-    </task>
-    <task id="LOCAL-00014" summary="update db, update jwt required">
-      <option name="closed" value="true" />
-      <created>1708869363128</created>
-      <option name="number" value="00014" />
-      <option name="presentableId" value="LOCAL-00014" />
-      <option name="project" value="LOCAL" />
-      <updated>1708869363128</updated>
     </task>
     <task id="LOCAL-00015" summary="update jwt handel: load current user from token">
       <option name="closed" value="true" />
@@ -608,7 +569,23 @@
       <option name="project" value="LOCAL" />
       <updated>1714314549967</updated>
     </task>
-    <option name="localTasksCounter" value="62" />
+    <task id="LOCAL-00062" summary="Update socket video call">
+      <option name="closed" value="true" />
+      <created>1715086886586</created>
+      <option name="number" value="00062" />
+      <option name="presentableId" value="LOCAL-00062" />
+      <option name="project" value="LOCAL" />
+      <updated>1715086886586</updated>
+    </task>
+    <task id="LOCAL-00063" summary="Update db image">
+      <option name="closed" value="true" />
+      <created>1715086920103</created>
+      <option name="number" value="00063" />
+      <option name="presentableId" value="LOCAL-00063" />
+      <option name="project" value="LOCAL" />
+      <updated>1715086920103</updated>
+    </task>
+    <option name="localTasksCounter" value="64" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -624,8 +601,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="Add flask-migrate" />
-    <MESSAGE value="Update api login, register" />
     <MESSAGE value="update responsive error code with token" />
     <MESSAGE value="update responsive with paginate" />
     <MESSAGE value="Update db: count comment, like; fix api post, fix obj paginate" />
@@ -648,7 +623,9 @@
     <MESSAGE value="update count friend in api get user by id" />
     <MESSAGE value="Update api search friend, invite" />
     <MESSAGE value="Update api search user" />
+    <MESSAGE value="Update socket video call" />
     <MESSAGE value="Config message fetch limit 10 to 20, fix notification when save mess" />
-    <option name="LAST_COMMIT_MESSAGE" value="Config message fetch limit 10 to 20, fix notification when save mess" />
+    <MESSAGE value="Update db image" />
+    <option name="LAST_COMMIT_MESSAGE" value="Update db image" />
   </component>
 </project>
