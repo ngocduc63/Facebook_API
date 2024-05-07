@@ -5,8 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="23cb2c54-3c39-4df6-92f4-23e60e3d4d48" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app.py" beforeDir="false" afterPath="$PROJECT_DIR$/app.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vercel.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -195,14 +194,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1705236449798</updated>
-    </task>
-    <task id="LOCAL-00017" summary="update user api: logout api block token">
-      <option name="closed" value="true" />
-      <created>1709124568527</created>
-      <option name="number" value="00017" />
-      <option name="presentableId" value="LOCAL-00017" />
-      <option name="project" value="LOCAL" />
-      <updated>1709124568527</updated>
     </task>
     <task id="LOCAL-00018" summary="create api post, change folder library to facebook">
       <option name="closed" value="true" />
@@ -588,7 +579,15 @@
       <option name="project" value="LOCAL" />
       <updated>1715087461299</updated>
     </task>
-    <option name="localTasksCounter" value="66" />
+    <task id="LOCAL-00066" summary="config cors">
+      <option name="closed" value="true" />
+      <created>1715090108831</created>
+      <option name="number" value="00066" />
+      <option name="presentableId" value="LOCAL-00066" />
+      <option name="project" value="LOCAL" />
+      <updated>1715090108831</updated>
+    </task>
+    <option name="localTasksCounter" value="67" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -604,7 +603,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="Update db: count comment, like; fix api post, fix obj paginate" />
     <MESSAGE value="Update socket notifi:" />
     <MESSAGE value="Fix migration: update table (friend -&gt; post)" />
     <MESSAGE value="Update socket notification for post: event user like, comment" />
@@ -629,6 +627,7 @@
     <MESSAGE value="Update db image" />
     <MESSAGE value="change file setup to requirements" />
     <MESSAGE value="config host, cors" />
-    <option name="LAST_COMMIT_MESSAGE" value="config host, cors" />
+    <MESSAGE value="config cors" />
+    <option name="LAST_COMMIT_MESSAGE" value="config cors" />
   </component>
 </project>
