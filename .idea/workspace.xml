@@ -5,6 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="23cb2c54-3c39-4df6-92f4-23e60e3d4d48" name="Changes" comment="Config message fetch limit 10 to 20, fix notification when save mess">
+      <change afterPath="$PROJECT_DIR$/facebook/call/controller.py" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/facebook/upload/avatar/Anh_chup_man_hinh_2021-11-19_193332_1_1712592894.png" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/facebook/upload/avatar/Anh_chup_man_hinh_2021-11-19_193445_1_1712593036.png" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/facebook/upload/avatar/run2_3_1712841958.png" afterDir="false" />
@@ -23,8 +24,9 @@
       <change afterPath="$PROJECT_DIR$/facebook/upload/post/fist_114_1_1712124185.jpg" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/facebook/upload/post/fist_135_1_1712124622.jpg" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/facebook/users/controller.py" beforeDir="false" afterPath="$PROJECT_DIR$/facebook/users/controller.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/facebook/users/services.py" beforeDir="false" afterPath="$PROJECT_DIR$/facebook/users/services.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/facebook/config.py" beforeDir="false" afterPath="$PROJECT_DIR$/facebook/config.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/facebook/socketio_instance.py" beforeDir="false" afterPath="$PROJECT_DIR$/facebook/socketio_instance.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/instance/facebook.db" beforeDir="false" afterPath="$PROJECT_DIR$/instance/facebook.db" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -213,14 +215,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1705236449798</updated>
-    </task>
-    <task id="LOCAL-00012" summary="update: upload cover photo for user&#10;auto add post when user update image">
-      <option name="closed" value="true" />
-      <created>1705850570080</created>
-      <option name="number" value="00012" />
-      <option name="presentableId" value="LOCAL-00012" />
-      <option name="project" value="LOCAL" />
-      <updated>1705850570080</updated>
     </task>
     <task id="LOCAL-00013" summary="The first commit in 2024: create access token when user login">
       <option name="closed" value="true" />
@@ -606,7 +600,15 @@
       <option name="project" value="LOCAL" />
       <updated>1714296399232</updated>
     </task>
-    <option name="localTasksCounter" value="61" />
+    <task id="LOCAL-00061" summary="Update api search user">
+      <option name="closed" value="true" />
+      <created>1714314549967</created>
+      <option name="number" value="00061" />
+      <option name="presentableId" value="LOCAL-00061" />
+      <option name="project" value="LOCAL" />
+      <updated>1714314549967</updated>
+    </task>
+    <option name="localTasksCounter" value="62" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -622,7 +624,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="Fix responsive error is http 400, update api post to get" />
     <MESSAGE value="Add flask-migrate" />
     <MESSAGE value="Update api login, register" />
     <MESSAGE value="update responsive error code with token" />
@@ -645,8 +646,9 @@
     <MESSAGE value="update logic watched with message" />
     <MESSAGE value="Fix (url, sort): api get list friend, invite" />
     <MESSAGE value="update count friend in api get user by id" />
-    <MESSAGE value="Config message fetch limit 10 to 20, fix notification when save mess" />
     <MESSAGE value="Update api search friend, invite" />
-    <option name="LAST_COMMIT_MESSAGE" value="Update api search friend, invite" />
+    <MESSAGE value="Update api search user" />
+    <MESSAGE value="Config message fetch limit 10 to 20, fix notification when save mess" />
+    <option name="LAST_COMMIT_MESSAGE" value="Config message fetch limit 10 to 20, fix notification when save mess" />
   </component>
 </project>
