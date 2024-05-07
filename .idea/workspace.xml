@@ -5,7 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="23cb2c54-3c39-4df6-92f4-23e60e3d4d48" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/vercel.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/templates/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app.py" beforeDir="false" afterPath="$PROJECT_DIR$/app.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -16,6 +18,7 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="Python Script" />
+        <option value="HTML File" />
       </list>
     </option>
   </component>
@@ -58,6 +61,7 @@
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
     "ASKED_ADD_EXTERNAL_FILES": "true",
+    "DefaultHtmlFileTemplate": "HTML File",
     "Python.__init__.executor": "Run",
     "Python.app.executor": "Run",
     "Python.db_chat.executor": "Run",
@@ -194,14 +198,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1705236449798</updated>
-    </task>
-    <task id="LOCAL-00018" summary="create api post, change folder library to facebook">
-      <option name="closed" value="true" />
-      <created>1709125364500</created>
-      <option name="number" value="00018" />
-      <option name="presentableId" value="LOCAL-00018" />
-      <option name="project" value="LOCAL" />
-      <updated>1709125364500</updated>
     </task>
     <task id="LOCAL-00019" summary="api user: update delete user to block user, move function change name file.&#10;Model: tb_user(update properties is_block).&#10;Friend: update api(get list friend, add friend), add api unfriend">
       <option name="closed" value="true" />
@@ -587,7 +583,15 @@
       <option name="project" value="LOCAL" />
       <updated>1715090108831</updated>
     </task>
-    <option name="localTasksCounter" value="67" />
+    <task id="LOCAL-00067" summary="update vercel config">
+      <option name="closed" value="true" />
+      <created>1715090512545</created>
+      <option name="number" value="00067" />
+      <option name="presentableId" value="LOCAL-00067" />
+      <option name="project" value="LOCAL" />
+      <updated>1715090512545</updated>
+    </task>
+    <option name="localTasksCounter" value="68" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -603,7 +607,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="Update socket notifi:" />
     <MESSAGE value="Fix migration: update table (friend -&gt; post)" />
     <MESSAGE value="Update socket notification for post: event user like, comment" />
     <MESSAGE value="Update feature: notification add friend" />
@@ -628,6 +631,7 @@
     <MESSAGE value="change file setup to requirements" />
     <MESSAGE value="config host, cors" />
     <MESSAGE value="config cors" />
-    <option name="LAST_COMMIT_MESSAGE" value="config cors" />
+    <MESSAGE value="update vercel config" />
+    <option name="LAST_COMMIT_MESSAGE" value="update vercel config" />
   </component>
 </project>
