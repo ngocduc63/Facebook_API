@@ -71,7 +71,7 @@ def add_friend_service(friend_id, current_user):
         # if id_notification != "" and id_notification is None:
         #     print("error save db mongo")
 
-        return my_json(f"add friend id notification")
+        return my_json("add friend id notification")
     except IndentationError:
         db.session.rollback()
         return my_json(ERROR_SAVE_DB)

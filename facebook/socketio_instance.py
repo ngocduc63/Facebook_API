@@ -19,10 +19,10 @@ socketio = SocketIO(cors_allowed_origins="*")
 
 @socketio.on('create_room_call')
 def handel_create_room_call(data):
-    join_room(f'call_{data['room']}')
+    join_room(f'call_{data["room"]}')
     data_room = get_room_collection(data['room'])
     if not data_room:
-        socketio.emit('room_call_notification', 'join_room_fail', room=f'call_{data['room']}')
+        socketio.emit('room_call_notification', 'join_room_fail', room=f'call_{data["room"]}')
         return
 
     user_key = data_room['_id']['username_key']
@@ -37,13 +37,13 @@ def handel_create_room_call(data):
     send_by['type'] = 'call'
     send_by['room'] = data['room']
     send_by['signalData'] = data['signalData']
-    socketio.emit('join_notification', send_by, room=f'user_id_{send_for['user_id']}')
+    socketio.emit('join_notification', send_by, room=f'user_id_{send_for["user_id"]}')
 
 
 @socketio.on('join_room_call')
 def handel_join_room_call(data):
-    join_room(f'call_{data['room']}')
-    socketio.emit('room_call_notification', data, room=f'call_{data['room']}')
+    join_room(f'call_{data["room"]}')
+    socketio.emit('room_call_notification', data, room=f'call_{data["room"]}')
 
 
 @socketio.on('room_call_data')
@@ -53,6 +53,6 @@ def handel_send_data_call():
 
 @socketio.on('leave_room_call')
 def handel_leave_room_call(data):
-    leave_room(f'call_{data['room']}')
+    leave_room(f'call_{data["room"]}')
     data['type'] = 'end_call'
-    socketio.emit('room_call_notification', data, room=f'call_{data['room']}')
+    socketio.emit('room_call_notification', data, room=f'call_{data["room"]}')

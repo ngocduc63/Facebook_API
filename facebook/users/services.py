@@ -352,7 +352,7 @@ def upload_avatar_service(current_user):
             user.avatar = filename
 
             # add post
-            title = f"{user.username} đã cập nhật ảnh đại diện của {"anh ấy" if user.gender == 1 else "cô ấy"}"
+            title = f"{user.username} đã cập nhật ảnh đại diện của {'anh ấy' if user.gender == 1 else 'cô ấy'}"
             post_new = Posts(title, filename, user.id, 1, 0, 1, get_current_time())
             db.session.add(post_new)
 
@@ -396,7 +396,7 @@ def upload_cover_photo_service(current_user):
             user.cover_photo = filename
 
             # add post
-            title = f"{user.username} đã cập nhật ảnh bìa của {"anh ấy" if user.gender == 1 else "cô ấy"}"
+            title = f"{user.username} đã cập nhật ảnh bìa của {'anh ấy' if user.gender == 1 else 'cô ấy'}"
             post_new = Posts(title, filename, user.id, 1, 0, 2, get_current_time())
             db.session.add(post_new)
 

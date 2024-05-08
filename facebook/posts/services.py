@@ -364,7 +364,7 @@ def user_like_post_service(current_user):
                 "create_post": post.user_id,
                 "create_at": create_at
             }
-            socketio.emit('notification_post', data_notification, room=f'post_{data_like['post_id']}')
+            socketio.emit('notification_post', data_notification, room=f'post_{data_like["post_id"]}')
 
             return my_json(data_like)
         except IndentationError:
@@ -449,7 +449,7 @@ def user_comment_post_service(current_user):
                 "create_post": post.user_id,
                 "create_at": create_at
             }
-            socketio.emit('notification_post', data_notification, room=f'post_{data_comment['post_id']}')
+            socketio.emit('notification_post', data_notification, room=f'post_{data_comment["post_id"]}')
 
             return my_json(data_comment)
         except IndentationError:

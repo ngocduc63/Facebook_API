@@ -36,9 +36,9 @@ def handle_send_message_event(data):
     data_room_collection = get_room_collection(data['room_id'])
     data_notification = json_util.dumps(data_room_collection)
     socketio.emit('join_notification', data_notification,
-                  room=f'user_id_{data_room_collection['_id']['username_key']['user_id']}')
+                  room=f'user_id_{data_room_collection["_id"]["username_key"]["user_id"]}')
     socketio.emit('join_notification', data_notification,
-                  room=f'user_id_{data_room_collection['_id']['username_friend']['user_id']}')
+                  room=f'user_id_{data_room_collection["_id"]["username_key"]["user_id"]}')
 
 
 @socketio.on('join_room')
