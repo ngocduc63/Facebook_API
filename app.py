@@ -6,7 +6,7 @@ from flask import render_template
 
 if __name__ == "__main__":
     app = create_app()
-    CORS(app, origins=['http://localhost:3000', 'https://example.com'], supports_credentials=True)
+    CORS(app, origins=['http://localhost:3000', 'https://facebook-demo.netlify.app/'], supports_credentials=True)
     socketio.init_app(app)
 
     @app.route('/')
