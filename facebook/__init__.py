@@ -8,6 +8,7 @@ from .extension import db, ma, jwt, migrate
 from .model import Users, Friends, Posts, Comments, Likes, TokenBlocklist
 import os
 from datetime import timedelta
+from flask_cors import CORS
 
 TIME_EXPIRES_ACCESS_TOKEN = 5
 TIME_EXPIRES_REFRESH_TOKEN = 30
@@ -72,6 +73,7 @@ def jwt_handel():
 
 def create_app(config_file="config.py"):
     app = Flask(__name__)
+    CORS(app)
     app.config.from_pyfile(config_file)
     db.init_app(app)
     migrate.init_app(app, db)
