@@ -39,6 +39,10 @@ class Users(db.Model):
 
 
 class Friends(db.Model):
+    # is_accept = -1 : da kb xong roi huy
+    # is_accept = 0 : dang cho chap nhan
+    # is_accept = 1 : da la ban be
+
     id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey("users.id"))
     friend_id = db.Column(db.Integer, db.ForeignKey("users.id"))

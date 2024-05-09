@@ -181,6 +181,7 @@ def search_approximate(array, key, value):
 
 
 def check_is_friend(user_id, friend_id):
+    # -1 ket ban roi nhung huy di ket ban lai
     # 0 chưa kết bạn
     # 1 là bạn bè
     # 2 đã gửi lời mời
@@ -197,6 +198,9 @@ def check_is_friend(user_id, friend_id):
     if not friend:
         return 0
 
+    if friend.is_accept == -1:
+        return 0
+
     if friend.is_accept == 1:
         return 1
 
@@ -208,7 +212,7 @@ def check_is_friend(user_id, friend_id):
 
 def count_friend_service(user_id):
     num_friend = (db.session.query(Friends).
-                  filter(or_(Friends.user_id == user_id, Friends.friend_id == user_id)).
+                  filter(or_(Friends.user_id == user_id, Friends.friend_id == user_id), Friends.is_accept == 1).
                   count())
 
     return num_friend
