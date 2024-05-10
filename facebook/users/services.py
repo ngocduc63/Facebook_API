@@ -18,6 +18,7 @@ from ..config_error_code import (ERROR_DATA_NOT_MATCH, ERROR_FORMAT_EMAIL, ERROR
                                  ERROR_USER_NOT_FOUND, ERROR_FILE_NULL, ERROR_UPLOAD_FILE,
                                  ERROR_CHECK_TOKEN,  ERROR_SAVE_DB, ERROR_ACCOUNT_EXIST, ERROR_USER_HAVE_NOT_ROLE)
 from sqlalchemy import or_, and_
+from ..chat.db_chat import update_username_in_room, update_avatar_in_room
 
 
 regex_email = r'\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,7}\b'
@@ -137,6 +138,7 @@ def update_profile_by_id_service(current_user):
             return my_json(ERROR_FORMAT_DATE)
 
         try:
+            username_last = user.username
             user.username = data['username']
             user.description = data['description']
             user.nickname = data['nickname']
@@ -144,6 +146,10 @@ def update_profile_by_id_service(current_user):
             user.gender = data['gender']
             db.session.commit()
             users_data = user_schema.dump(user)
+
+            if username_last != users_data['username']:
+                update_username_in_room(users_data['id'], users_data['username'])
+
             return jsonify(obj_success(users_data))
         except Exception as e:
             print(e)
@@ -363,6 +369,9 @@ def upload_avatar_service(current_user):
             # save db
             db.session.commit()
             users_data = user_schema.dump(user)
+
+            update_avatar_in_room(users_data['id'], users_data['avatar'])
+
             post_data = post_schema.dump(post_new)
             return jsonify(obj_success({"user": users_data, "post": post_data}))
         except Exception as e:
@@ -423,7 +432,6 @@ def get_cover_photo_from_filename_service(filename):
 
 
 def logout_user(claims):
-    print(claims)
     type_token = claims['type']
     jti = claims['jti']
 

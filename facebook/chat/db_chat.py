@@ -23,6 +23,8 @@ def add_room_member(room_id, room_name, user_added, current_user):
         {
             '_id': {
                     'room_id': ObjectId(room_id),
+            },
+            'users': {
                     'username_key': {
                         'user_id': user_added['id'],
                         'username': user_added['username'],
@@ -33,8 +35,7 @@ def add_room_member(room_id, room_name, user_added, current_user):
                         'username': current_user.username,
                         'avatar': current_user.avatar,
                     },
-
-                },
+            },
             'room_name': room_name,
             'added_by': user_added['id'],
             'last_mess': {
@@ -84,13 +85,57 @@ def get_room_members(room_id, page=0):
     return list_room, total_page
 
 
+def update_avatar_in_room(username, avatar):
+    query = {
+        '$or': [
+            {'users.username_key.user_id': username},
+            {'users.username_friend.user_id': username}
+        ]
+    }
+    list_room = list(room_members_collection.find(query))
+
+    for room in list_room:
+        if room['users']['username_key']['user_id'] == username:
+            room_members_collection.update_one(
+                {'_id': room['_id']},
+                {'$set': {'users.username_key.avatar': avatar}}
+            )
+        else:
+            room_members_collection.update_one(
+                {'_id': room['_id']},
+                {'$set': {'users.username_friend.avatar': avatar}}
+            )
+
+
+def update_username_in_room(username, name):
+    query = {
+        '$or': [
+            {'users.username_key.user_id': username},
+            {'users.username_friend.user_id': username}
+        ]
+    }
+    list_room = list(room_members_collection.find(query))
+
+    for room in list_room:
+        if room['users']['username_key']['user_id'] == username:
+            room_members_collection.update_one(
+                {'_id': room['_id']},
+                {'$set': {'users.username_key.username': name}}
+            )
+        else:
+            room_members_collection.update_one(
+                {'_id': room['_id']},
+                {'$set': {'users.username_friend.username': name}}
+            )
+
+
 def get_rooms_for_user(username, page):
     offset = page * LIST_ROOM_CHAT_FETCH_LIMIT
 
     query = {
         '$or': [
-            {'_id.username_key.user_id': username},
-            {'_id.username_friend.user_id': username}
+            {'users.username_key.user_id': username},
+            {'users.username_friend.user_id': username}
         ]
     }
     list_room = list(room_members_collection.find(query)
@@ -109,8 +154,8 @@ def get_rooms_for_user(username, page):
 def is_room_member(room_id, username):
     query = {
         '$or': [
-            {'_id.username_key.user_id': username},
-            {'_id.username_friend.user_id': username}
+            {'users.username_key.user_id': username},
+            {'users.username_friend.user_id': username}
         ],
         '_id.room_id': ObjectId(room_id)
     }
@@ -159,6 +204,6 @@ def get_messages(room_id, user_id, page=0):
     data_room = get_room_collection(room_id)
     if user_id != int(data_room['last_mess']['sender']):
         room_members_collection.update_one({'_id.room_id': ObjectId(room_id)},
-                                       {'$set': {'last_mess.watched': 1}})
+                                           {'$set': {'last_mess.watched': 1}})
 
     return messages, total_page

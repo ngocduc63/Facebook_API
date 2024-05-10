@@ -25,8 +25,8 @@ def handel_create_room_call(data):
         socketio.emit('room_call_notification', 'join_room_fail', room=f'call_{data["room"]}')
         return
 
-    user_key = data_room['_id']['username_key']
-    friend_data = data_room['_id']['username_friend']
+    user_key = data_room['users']['username_key']
+    friend_data = data_room['users']['username_friend']
     if user_key['user_id'] == data['user_id']:
         send_for = friend_data
         send_by = user_key
