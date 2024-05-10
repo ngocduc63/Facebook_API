@@ -2238,6 +2238,46 @@
       <change afterPath="$PROJECT_DIR$/venv/pyvenv.cfg" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/facebook/posts/services.py" beforeDir="false" afterPath="$PROJECT_DIR$/facebook/posts/services.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/facebook/upload/avatar/Anh_chup_man_hinh_2021-11-19_193332_1_1712592894.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/facebook/upload/avatar/Anh_chup_man_hinh_2021-11-19_193332_1_1712820998.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/facebook/upload/avatar/Anh_chup_man_hinh_2021-11-19_193445_1_1712593036.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/facebook/upload/avatar/Anh_chup_man_hinh_2021-11-19_193445_1_1712675058.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/facebook/upload/avatar/Anh_chup_man_hinh_2021-11-19_193445_2_1712821061.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/facebook/upload/avatar/avt_default_female.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/facebook/upload/avatar/avt_default_male.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/facebook/upload/avatar/avt_defualt_male_1_1712633936.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/facebook/upload/avatar/chim_hoi_7_1713186493.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/facebook/upload/avatar/gojo3_2_1715323157.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/facebook/upload/avatar/gojo3_2_1715323165.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/facebook/upload/avatar/gojo3_2_1715323236.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/facebook/upload/avatar/gojo_1_2_1715267517.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/facebook/upload/avatar/gojo_1_2_1715267526.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/facebook/upload/avatar/run2_3_1712841958.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/facebook/upload/cover_photo/GaCuonBK_1_1712633857.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/facebook/upload/cover_photo/back_gr_1_1715324076.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/facebook/upload/cover_photo/back_gr_2_1715324038.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/facebook/upload/cover_photo/background_meet_2_1712821086.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/facebook/upload/cover_photo/slice_1_1_1712044698.jpeg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/facebook/upload/cover_photo/slice_2_2_1715263772.jpeg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/facebook/upload/post/Anh_chup_man_hinh_2021-11-19_193332_1_1712124656.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/facebook/upload/post/Anh_chup_man_hinh_2021-11-19_193445_1_1712126065.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/facebook/upload/post/background_meet_1_1712588004.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/facebook/upload/post/background_meet_2_1712556079.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/facebook/upload/post/chim14_7_1713187462.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/facebook/upload/post/chim2_1_1712850490.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/facebook/upload/post/chim6_1_1713325819.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/facebook/upload/post/fist_001_1_1712064012.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/facebook/upload/post/fist_004_1_1712124139.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/facebook/upload/post/fist_016_1_1712124159.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/facebook/upload/post/fist_025_1_1712124206.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/facebook/upload/post/fist_030_1_1712124191.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/facebook/upload/post/fist_031_1_1712124174.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/facebook/upload/post/fist_036_1_1712124220.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/facebook/upload/post/fist_038_1_1712124212.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/facebook/upload/post/fist_114_1_1712124185.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/facebook/upload/post/fist_135_1_1712124622.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/facebook/upload/post/rgb_1_1712125434.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/facebook/upload/post/run2_1_1712125245.png" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/instance/facebook.db" beforeDir="false" afterPath="$PROJECT_DIR$/instance/facebook.db" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -2301,7 +2341,7 @@
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;git-widget-placeholder&quot;: &quot;dev__deploy&quot;,
     &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;D:/game/HandGestRecog_CNN&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Python_Code/dev/Facebook_API&quot;,
     &quot;settings.editor.selected.configurable&quot;: &quot;com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable&quot;
   }
 }</component>
@@ -2429,14 +2469,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1705236449798</updated>
-    </task>
-    <task id="LOCAL-00022" summary="update post api: create new post api">
-      <option name="closed" value="true" />
-      <created>1709563622514</created>
-      <option name="number" value="00022" />
-      <option name="presentableId" value="LOCAL-00022" />
-      <option name="project" value="LOCAL" />
-      <updated>1709563622514</updated>
     </task>
     <task id="LOCAL-00023" summary="update user api: change logic check user_id from token">
       <option name="closed" value="true" />
@@ -2822,7 +2854,15 @@
       <option name="project" value="LOCAL" />
       <updated>1715327642730</updated>
     </task>
-    <option name="localTasksCounter" value="71" />
+    <task id="LOCAL-00071" summary="Update logic get new feed">
+      <option name="closed" value="true" />
+      <created>1715352998391</created>
+      <option name="number" value="00071" />
+      <option name="presentableId" value="LOCAL-00071" />
+      <option name="project" value="LOCAL" />
+      <updated>1715352998391</updated>
+    </task>
+    <option name="localTasksCounter" value="72" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -2838,7 +2878,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="update api: find user, logic friend" />
     <MESSAGE value="update db post with category, fix bug socket cors, add api get post by user" />
     <MESSAGE value="upodate api message, save room chat id in friend table" />
     <MESSAGE value="change notification add friend to notification common for user, update api get room chat" />
@@ -2861,8 +2900,9 @@
     <MESSAGE value="update vercel config" />
     <MESSAGE value="update file index" />
     <MESSAGE value="fix bug" />
-    <MESSAGE value="Update logic unfriend" />
     <MESSAGE value="update cors" />
-    <option name="LAST_COMMIT_MESSAGE" value="update cors" />
+    <MESSAGE value="Update logic get new feed" />
+    <MESSAGE value="Update logic unfriend" />
+    <option name="LAST_COMMIT_MESSAGE" value="Update logic unfriend" />
   </component>
 </project>
