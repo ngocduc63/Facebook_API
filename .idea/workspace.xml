@@ -2237,6 +2237,7 @@
       <change afterPath="$PROJECT_DIR$/venv/Scripts/unidecode.exe" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/venv/pyvenv.cfg" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app.py" beforeDir="false" afterPath="$PROJECT_DIR$/app.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/instance/facebook.db" beforeDir="false" afterPath="$PROJECT_DIR$/instance/facebook.db" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -2428,14 +2429,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1705236449798</updated>
-    </task>
-    <task id="LOCAL-00025" summary="create file setup and tuturial">
-      <option name="closed" value="true" />
-      <created>1709734440733</created>
-      <option name="number" value="00025" />
-      <option name="presentableId" value="LOCAL-00025" />
-      <option name="project" value="LOCAL" />
-      <updated>1709734440733</updated>
     </task>
     <task id="LOCAL-00026" summary="user api: update refresh token, expries token">
       <option name="closed" value="true" />
@@ -2821,7 +2814,15 @@
       <option name="project" value="LOCAL" />
       <updated>1715356172102</updated>
     </task>
-    <option name="localTasksCounter" value="74" />
+    <task id="LOCAL-00074" summary="Update avatar, cover default">
+      <option name="closed" value="true" />
+      <created>1715357248432</created>
+      <option name="number" value="00074" />
+      <option name="presentableId" value="LOCAL-00074" />
+      <option name="project" value="LOCAL" />
+      <updated>1715357248432</updated>
+    </task>
+    <option name="localTasksCounter" value="75" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -2837,7 +2838,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="change notification add friend to notification common for user, update api get room chat" />
     <MESSAGE value="Update api get post: config delete post" />
     <MESSAGE value="Update api: update comment" />
     <MESSAGE value="Config rooms member colection, update api get list chat" />
@@ -2860,8 +2860,9 @@
     <MESSAGE value="update cors" />
     <MESSAGE value="Update logic get new feed" />
     <MESSAGE value="Reset db" />
-    <MESSAGE value="Update logic unfriend" />
     <MESSAGE value="reset db" />
-    <option name="LAST_COMMIT_MESSAGE" value="reset db" />
+    <MESSAGE value="Update logic unfriend" />
+    <MESSAGE value="Update avatar, cover default" />
+    <option name="LAST_COMMIT_MESSAGE" value="Update avatar, cover default" />
   </component>
 </project>

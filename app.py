@@ -9,6 +9,7 @@ if __name__ == "__main__":
     CORS(app,
          origins=['http://localhost:3000',
                   'https://my-fb-demo.netlify.app/',
+                  'https://facebook-ngocduc-2003.netlify.app/',
                   'https://my-fb-demo.000webhostapp.com/'],
          supports_credentials=True)
     socketio.init_app(app)
