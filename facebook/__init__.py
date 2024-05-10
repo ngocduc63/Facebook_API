@@ -71,18 +71,9 @@ def jwt_handel():
             return token is not None
 
 
-class InterceptRequestMiddleware:
-    def __init__(self, wsgi_app):
-        self.wsgi_app = wsgi_app
-
-    def __call__(self, environ, start_response):
-        environ['Access-Control-Allow-Credentials'] = 'true'
-        return self.wsgi_app(environ, start_response)
-
-
 def create_app(config_file="config.py"):
     app = Flask(__name__)
-    app.wsgi_app = InterceptRequestMiddleware(app.wsgi_app)
+    CORS(app)
     app.config.from_pyfile(config_file)
     db.init_app(app)
     migrate.init_app(app, db)
