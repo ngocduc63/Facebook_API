@@ -77,7 +77,9 @@ def get_new_feed_service(page_num, current_user):
         print(e)
         return my_json(ERROR_CHECK_TOKEN)
 
-    friends = Friends.query.filter(or_(Friends.user_id == user_id, Friends.friend_id == user_id)).all()
+    friends = (Friends.query
+               .filter(or_(Friends.user_id == user_id, Friends.friend_id == user_id), Friends.is_accept == 1)
+               .all())
     friend_ids = [friend.user_id if friend.user_id != user_id else friend.friend_id for friend in friends]
     posts = (db.session.query(Posts, Users).
              outerjoin(Users, Users.id == Posts.user_id)
