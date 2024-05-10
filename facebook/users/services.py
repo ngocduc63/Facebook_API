@@ -56,7 +56,7 @@ def add_user_service():
         nickname = ""
         birth_date = birth_date_timestamp
         avatar = "avt_default_male.png" if int(data['gender']) == 1 else "avt_default_female.png"
-        cover_photo = ""
+        cover_photo = "cover_default.jpeg"
         gender = data['gender']
         create_at = get_current_time()
         try:
