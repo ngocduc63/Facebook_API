@@ -1,26 +1,37 @@
-from .db_notification import save_notification_add_friend, get_notification_add_friend
 from ..extension import my_json, obj_success_paginate
-from ..config_error_code import ERROR_CHECK_TOKEN
+from ..config_error_code import ERROR_CHECK_TOKEN, ERROR_USER_NOT_FOUND
+from .db_notification import get_notifications_collection
+from facebook.facebook_ma import UserSchema
+from facebook.model import Users
+
+user_schema = UserSchema()
 
 
-def create_notification_add_friend_service(data):
-    if (data and ('description' in data) and ('created_by' in data)
-            and ('for_user_id' in data) and ('create_at' in data) and ('id_friend' in data)):
-
-        add_friend_id = save_notification_add_friend(data)
-        return add_friend_id
-
-    else:
-        return None
-
-
-def get_notification_add_friend_service(current_user, page):
+def get_notifications_for_user_service(current_user, page):
     try:
         user_id = current_user.id
     except Exception as e:
         print(e)
         return my_json(ERROR_CHECK_TOKEN)
 
-    data_rs = get_notification_add_friend(user_id, page)
+    datas, total_page = get_notifications_collection(user_id, page - 1)
 
-    return my_json(obj_success_paginate(data_rs, page, -1))
+    data_rs = []
+    for data in datas:
+        user = Users.query.get(data['data']['user_id'])
+        if not user:
+            return my_json(ERROR_USER_NOT_FOUND)
+
+        user_data = user_schema.dump(user)
+        user_rs = {
+            'id': user_data['id'],
+            'avatar': user_data['avatar'],
+            'username': user_data['username'],
+        }
+        data.update({'user': user_rs})
+        data_rs.append(data)
+
+    return my_json(obj_success_paginate(data_rs, page, total_page))
+
+
+

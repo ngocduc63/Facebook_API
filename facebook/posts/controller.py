@@ -4,6 +4,8 @@ from .services import (get_new_feed_service, create_post_service, update_post_se
                        user_like_post_service, user_unlike_post_service, user_comment_post_service,
                        user_delete_comment_post_service, image_post_service, get_users_like_post_service,
                        get_users_comment_post_service, get_posts_by_user_service, update_comment_service)
+from flask_socketio import join_room, leave_room
+from facebook.socketio_instance import socketio
 
 posts = Blueprint("posts", __name__)
 
@@ -84,3 +86,16 @@ def delete_comment_post(id_comment):
 @jwt_required()
 def update_comment_post():
     return update_comment_service()
+
+
+# socket
+@socketio.on('join_notification_post')
+def handle_join_post_notification_event(data):
+    join_room(f'post_{data["post_id"]}')
+    socketio.emit('join_notification_post', data, room=f'post_{data["post_id"]}')
+
+
+@socketio.on('leave_notification_post')
+def handle_leave_post_notification_event(data):
+    leave_room(f'post_{data["post_id"]}')
+    socketio.emit('join_notification_post', data, room=f'post_{data["post_id"]}')

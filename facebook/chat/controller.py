@@ -41,7 +41,6 @@ def handle_send_message_event(data):
                   room=f'user_id_{data_room_collection["users"]["username_friend"]["user_id"]}')
 
 
-
 @socketio.on('join_room')
 def handle_join_room_event(data):
     join_room(data['room'])

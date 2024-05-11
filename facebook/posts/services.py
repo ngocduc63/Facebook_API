@@ -11,7 +11,8 @@ from ..socketio_instance import socketio
 from ..config_error_code import (ERROR_DATA_NOT_MATCH, ERROR_FILE_NULL, ERROR_UPLOAD_FILE, ERROR_CHECK_TOKEN,
                                  ERROR_SAVE_DB, ERROR_USER_HAVE_NOT_ROLE, ERROR_POST_NOT_FOUND, ERROR_LIKE_NOT_FOUND,
                                  ERROR_COMMENT_NOT_FOUND, ERROR_LIKE_IN_POST_EXIST)
-from sqlalchemy import and_, or_
+from sqlalchemy import or_
+from ..notification.db_notification import add_notification_collection
 
 UPLOAD_POST_FOLDER = "upload/post"
 
@@ -325,6 +326,24 @@ def delete_post_service(id_post, current_user):
         return my_json(ERROR_DATA_NOT_MATCH)
 
 
+def notification_like(data_like, current_user, post):
+    data_notification = {
+        "mess": "đã thả cảm xúc bài viết của bạn",
+        "post_id": data_like['post_id'],
+        "user_id": current_user.id,
+        "user_name": current_user.username,
+        "avatar": current_user.avatar,
+        "category_react": data_like['category'],
+        "num_like": post.count_like,
+        "create_post": post.user_id,
+        "create_at": data_like['create_at']
+    }
+    if current_user.id != post.user_id:
+        add_notification_collection(post.user_id, data_notification, type_notification=3)
+
+    socketio.emit('notification_post', data_notification, room=f'post_{data_like["post_id"]}')
+
+
 def user_like_post_service(current_user):
     try:
         user_id = current_user.id
@@ -355,18 +374,8 @@ def user_like_post_service(current_user):
             db.session.commit()
 
             data_like = like_schema.dump(new_like)
-            data_notification = {
-                "mess": "đã thả cảm xúc bài viết của bạn",
-                "post_id": data_like['post_id'],
-                "user_id": current_user.id,
-                "user_name": current_user.username,
-                "avatar": current_user.avatar,
-                "category_react": category,
-                "num_like": post.count_like,
-                "create_post": post.user_id,
-                "create_at": create_at
-            }
-            socketio.emit('notification_post', data_notification, room=f'post_{data_like["post_id"]}')
+
+            notification_like(data_like, current_user, post)
 
             return my_json(data_like)
         except IndentationError:
@@ -415,6 +424,23 @@ def user_unlike_post_service(id_post, current_user):
         return my_json(ERROR_DATA_NOT_MATCH)
 
 
+def notification_comment(data_comment, current_user, post):
+    data_notification = {
+        "mess": "đã bình luận bài viết của bạn",
+        "post_id": data_comment['post_id'],
+        "user_id": current_user.id,
+        "user_name": current_user.username,
+        "avatar": current_user.avatar,
+        "num_comment": post.count_comment,
+        "create_post": post.user_id,
+        "create_at": data_comment['create_at']
+    }
+    if current_user.id != post.user_id:
+        add_notification_collection(post.user_id, data_notification, type_notification=4)
+
+    socketio.emit('notification_post', data_notification, room=f'post_{data_comment["post_id"]}')
+
+
 def user_comment_post_service(current_user):
     try:
         user_id = current_user.id
@@ -441,17 +467,7 @@ def user_comment_post_service(current_user):
             db.session.commit()
 
             data_comment = comment_schema.dump(new_comment)
-            data_notification = {
-                "mess": "đã bình luận bài viết của bạn",
-                "post_id": data_comment['post_id'],
-                "user_id": current_user.id,
-                "user_name": current_user.username,
-                "avatar": current_user.avatar,
-                "num_comment": post.count_comment,
-                "create_post": post.user_id,
-                "create_at": create_at
-            }
-            socketio.emit('notification_post', data_notification, room=f'post_{data_comment["post_id"]}')
+            notification_comment(data_comment, current_user, post)
 
             return my_json(data_comment)
         except IndentationError:

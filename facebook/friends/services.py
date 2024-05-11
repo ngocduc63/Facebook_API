@@ -12,7 +12,7 @@ from ..config_error_code import (ERROR_SAVE_DB,  ERROR_FRIEND_NOT_FOUND, ERROR_C
                                  ERROR_CAN_NOT_ADD_YOURSELF, ERROR_CAN_NOT_CREATE_ROOM, ERROR_PAGE_NUM_NULL,
                                  ERROR_CHECK_TOKEN, ERROR_DATA_NOT_MATCH, ERROR_USER_NOT_FOUND)
 from ..socketio_instance import socketio
-from ..notification.services import create_notification_add_friend_service
+from ..notification.db_notification import add_notification_collection
 
 friend_schema = FriendSchema()
 user_schema = UserSchema()
@@ -34,8 +34,27 @@ def notification_for_add_friend(current_user, friend_id, new_friend, create_at):
         'create_at': create_at
     }
 
-    # id_notification = create_notification_add_friend_service(data_notification)
-    socketio.emit('join_notification', data_notification, room=f'user_id_{friend_id}')
+    id_notification = add_notification_collection(friend_id, data_notification, 1)
+    if id_notification:
+        socketio.emit('join_notification', data_notification, room=f'user_id_{friend_id}')
+
+
+def notification_for_accept_friend(current_user, friend_id):
+    data_notification = {
+        'description': f'{current_user.username} đã đồng ý kết bạn',
+        'created_by': {
+            'id': current_user.id,
+            'username': current_user.username,
+            'avatar': current_user.avatar
+        },
+        'for_user_id': friend_id,
+        'id_friend': current_user.id,
+        'create_at': get_current_time()
+    }
+
+    id_notification = add_notification_collection(friend_id, data_notification, 2)
+    if id_notification:
+        socketio.emit('join_notification', data_notification, room=f'user_id_{friend_id}')
 
 
 def add_friend_service(friend_id, current_user):
@@ -84,8 +103,6 @@ def add_friend_service(friend_id, current_user):
         db.session.commit()
 
         notification_for_add_friend(current_user, friend_id, new_friend, create_at)
-        # if id_notification != "" and id_notification is None:
-        #     print("error save db mongo")
 
         return my_json("add friend id notification")
     except IndentationError:
@@ -126,19 +143,7 @@ def accept_service(friend_id, current_user):
             check_exits.id_room_chat = f"{room_id}"
             db.session.commit()
 
-            data_notification = {
-                'description': f'{current_user.username} đã đồng ý kết bạn',
-                'created_by': {
-                    'id': current_user.id,
-                    'username': current_user.username,
-                    'avatar': current_user.avatar
-                },
-                'for_user_id': friend_id,
-                'id_friend': user_id,
-                'create_at': get_current_time()
-            }
-
-            socketio.emit('join_notification', data_notification, room=f'user_id_{friend_id}')
+            notification_for_accept_friend(current_user, friend_id)
 
             return my_json({"room_id": str(room_id)})
     except IndentationError:
