@@ -3,6 +3,7 @@ from ..config_error_code import ERROR_CHECK_TOKEN, ERROR_USER_NOT_FOUND
 from .db_notification import get_notifications_collection
 from facebook.facebook_ma import UserSchema
 from facebook.model import Users
+from facebook.extension import db
 
 user_schema = UserSchema()
 
@@ -10,6 +11,10 @@ user_schema = UserSchema()
 def get_notifications_for_user_service(current_user, page):
     try:
         user_id = current_user.id
+
+        user = db.session.query(Users).filter(Users.id == user_id).first()
+        user.count_notification = 0
+        db.session.commit()
     except Exception as e:
         print(e)
         return my_json(ERROR_CHECK_TOKEN)

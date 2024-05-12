@@ -15,6 +15,7 @@ class Users(db.Model):
     gender = db.Column(db.Integer, nullable=False)
     role = db.Column(db.Integer)
     is_block = db.Column(db.Integer)
+    count_notification = db.Column(db.Integer)
     create_at = db.Column(db.Integer, nullable=False)
 
     def __init__(self, username, email, description, nickname,
@@ -30,6 +31,7 @@ class Users(db.Model):
         self.role = 0
         self.create_at = create_at
         self.is_block = 0
+        self.count_notification = 0
 
     def set_password(self, password):
         self.password_hash = generate_password_hash(password)

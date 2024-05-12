@@ -354,7 +354,7 @@ def delete_post_service(id_post, current_user):
         return my_json(ERROR_DATA_NOT_MATCH)
 
 
-def notification_like(data_like, current_user, post):
+def notification_like(data_like, current_user, post, total_notification):
     data_notification = {
         "mess": "đã thả cảm xúc bài viết của bạn",
         "post_id": data_like['post_id'],
@@ -364,12 +364,15 @@ def notification_like(data_like, current_user, post):
         "category_react": data_like['category'],
         "num_like": post.count_like,
         "create_post": post.user_id,
-        "create_at": data_like['create_at']
+        "create_at": data_like['create_at'],
+        "total_notification": total_notification
     }
+
     if current_user.id != post.user_id:
         add_notification_collection(post.user_id, data_notification, type_notification=3)
 
     socketio.emit('notification_post', data_notification, room=f'post_{data_like["post_id"]}')
+    socketio.emit('join_notification', data_notification, room=f'user_id_{post.user_id}')
 
 
 def user_like_post_service(current_user):
@@ -398,12 +401,16 @@ def user_like_post_service(current_user):
             create_at = get_current_time()
             new_like = Likes(user_id, id_post, category, create_at)
             post.count_like = post.count_like + 1
+
+            # update count notification
+            user = db.session.query(Users).filter(Users.id == post.user_id).first()
+            user.count_notification = user.count_notification + 1
+
             db.session.add(new_like)
             db.session.commit()
-
             data_like = like_schema.dump(new_like)
 
-            notification_like(data_like, current_user, post)
+            notification_like(data_like, current_user, post, user.count_notification)
 
             return my_json(data_like)
         except IndentationError:
@@ -452,7 +459,7 @@ def user_unlike_post_service(id_post, current_user):
         return my_json(ERROR_DATA_NOT_MATCH)
 
 
-def notification_comment(data_comment, current_user, post):
+def notification_comment(data_comment, current_user, post, total_notification):
     data_notification = {
         "mess": "đã bình luận bài viết của bạn",
         "post_id": data_comment['post_id'],
@@ -461,12 +468,14 @@ def notification_comment(data_comment, current_user, post):
         "avatar": current_user.avatar,
         "num_comment": post.count_comment,
         "create_post": post.user_id,
-        "create_at": data_comment['create_at']
+        "create_at": data_comment['create_at'],
+        "total_notification": total_notification
     }
     if current_user.id != post.user_id:
         add_notification_collection(post.user_id, data_notification, type_notification=4)
 
     socketio.emit('notification_post', data_notification, room=f'post_{data_comment["post_id"]}')
+    socketio.emit('join_notification', data_notification, room=f'user_id_{post.user_id}')
 
 
 def user_comment_post_service(current_user):
@@ -491,11 +500,16 @@ def user_comment_post_service(current_user):
             create_at = get_current_time()
             new_comment = Comments(user_id, id_post, content, 0, create_at)
             post.count_comment = post.count_comment + 1
+
+            # update count notification
+            user = db.session.query(Users).filter(Users.id == post.user_id).first()
+            user.count_notification = user.count_notification + 1
+
             db.session.add(new_comment)
             db.session.commit()
-
             data_comment = comment_schema.dump(new_comment)
-            notification_comment(data_comment, current_user, post)
+
+            notification_comment(data_comment, current_user, post, user.count_notification)
 
             return my_json(data_comment)
         except IndentationError:

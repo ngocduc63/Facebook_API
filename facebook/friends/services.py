@@ -22,6 +22,11 @@ friend_alias = aliased(Users)
 
 
 def notification_for_add_friend(current_user, friend_id, new_friend, create_at):
+    # update notification
+    user = db.session.query(Users).filter(Users.id == friend_id).first()
+    user.count_notification = user.count_notification + 1
+    db.session.commit()
+
     data_notification = {
         'description': f'{current_user.username} đã gửi lời mời kết bạn cho bạn',
         'created_by': {
@@ -31,7 +36,8 @@ def notification_for_add_friend(current_user, friend_id, new_friend, create_at):
         },
         'for_user_id': friend_id,
         'id': new_friend.id,
-        'create_at': create_at
+        'create_at': create_at,
+        'total_notification': user.count_notification
     }
 
     add_notification_collection(friend_id, data_notification, 1)
@@ -39,6 +45,11 @@ def notification_for_add_friend(current_user, friend_id, new_friend, create_at):
 
 
 def notification_for_accept_friend(current_user, friend_id):
+    # update notification
+    user = db.session.query(Users).filter(Users.id == friend_id).first()
+    user.count_notification = user.count_notification + 1
+    db.session.commit()
+
     data_notification = {
         'description': f'{current_user.username} đã đồng ý kết bạn',
         'created_by': {
@@ -48,7 +59,8 @@ def notification_for_accept_friend(current_user, friend_id):
         },
         'for_user_id': friend_id,
         'id_friend': current_user.id,
-        'create_at': get_current_time()
+        'create_at': get_current_time(),
+        'total_notification': user.count_notification
     }
 
     add_notification_collection(friend_id, data_notification, 2)
@@ -91,7 +103,7 @@ def add_friend_service(friend_id, current_user):
         db.session.commit()
         notification_for_add_friend(current_user, friend_id, check_exits, create_at)
 
-        return my_json("add friend id notification")
+        return my_json("add friend success")
 
     try:
         is_accept = 0
@@ -102,7 +114,7 @@ def add_friend_service(friend_id, current_user):
 
         notification_for_add_friend(current_user, friend_id, new_friend, create_at)
 
-        return my_json("add friend id notification")
+        return my_json("add friend success")
     except IndentationError:
         db.session.rollback()
         return my_json(ERROR_SAVE_DB)

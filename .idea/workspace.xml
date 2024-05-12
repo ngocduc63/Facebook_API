@@ -7,6 +7,7 @@
     <list default="true" id="23cb2c54-3c39-4df6-92f4-23e60e3d4d48" name="Changes" comment="fix notification for user">
       <change afterPath="$PROJECT_DIR$/facebook/upload/avatar/gojo_1_1_1715442346.jpg" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/facebook/upload/post/avt_tet_2_1715440656.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/migrations/versions/64a3174e64bf_update_count_notification.py" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/venv/Include/site/python3.12/greenlet/greenlet.h" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/venv/Lib/site-packages/Flask_Cors-4.0.0.dist-info/INSTALLER" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/venv/Lib/site-packages/Flask_Cors-4.0.0.dist-info/LICENSE" afterDir="false" />
@@ -2239,8 +2240,11 @@
       <change afterPath="$PROJECT_DIR$/venv/Scripts/unidecode.exe" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/venv/pyvenv.cfg" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/facebook/facebook_ma.py" beforeDir="false" afterPath="$PROJECT_DIR$/facebook/facebook_ma.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/facebook/friends/services.py" beforeDir="false" afterPath="$PROJECT_DIR$/facebook/friends/services.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/facebook/notification/controller.py" beforeDir="false" afterPath="$PROJECT_DIR$/facebook/notification/controller.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/facebook/model.py" beforeDir="false" afterPath="$PROJECT_DIR$/facebook/model.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/facebook/notification/services.py" beforeDir="false" afterPath="$PROJECT_DIR$/facebook/notification/services.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/facebook/posts/services.py" beforeDir="false" afterPath="$PROJECT_DIR$/facebook/posts/services.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/instance/facebook.db" beforeDir="false" afterPath="$PROJECT_DIR$/instance/facebook.db" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -2432,14 +2436,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1705236449798</updated>
-    </task>
-    <task id="LOCAL-00029" summary="fix all api: get current user id">
-      <option name="closed" value="true" />
-      <created>1710080888178</created>
-      <option name="number" value="00029" />
-      <option name="presentableId" value="LOCAL-00029" />
-      <option name="project" value="LOCAL" />
-      <updated>1710080888178</updated>
     </task>
     <task id="LOCAL-00030" summary="Feature chat: import pymongo">
       <option name="closed" value="true" />
@@ -2825,7 +2821,15 @@
       <option name="project" value="LOCAL" />
       <updated>1715499222378</updated>
     </task>
-    <option name="localTasksCounter" value="78" />
+    <task id="LOCAL-00078" summary="fix notification for friend">
+      <option name="closed" value="true" />
+      <created>1715502052716</created>
+      <option name="number" value="00078" />
+      <option name="presentableId" value="LOCAL-00078" />
+      <option name="project" value="LOCAL" />
+      <updated>1715502052716</updated>
+    </task>
+    <option name="localTasksCounter" value="79" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -2841,8 +2845,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="Create config error code" />
-    <MESSAGE value="update paginate for api get list room chat" />
     <MESSAGE value="update logic watched with message" />
     <MESSAGE value="Fix (url, sort): api get list friend, invite" />
     <MESSAGE value="update count friend in api get user by id" />
@@ -2866,7 +2868,9 @@
     <MESSAGE value="Update db notification(mongo), fix but socket with post (like, comment)" />
     <MESSAGE value="Update api get post by id" />
     <MESSAGE value="Update logic unfriend" />
-    <option name="LAST_COMMIT_MESSAGE" value="Update logic unfriend" />
+    <MESSAGE value="fix notification for user" />
+    <MESSAGE value="fix notification for friend" />
+    <option name="LAST_COMMIT_MESSAGE" value="fix notification for friend" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
