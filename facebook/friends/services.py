@@ -34,9 +34,8 @@ def notification_for_add_friend(current_user, friend_id, new_friend, create_at):
         'create_at': create_at
     }
 
-    id_notification = add_notification_collection(friend_id, data_notification, 1)
-    if id_notification:
-        socketio.emit('join_notification', data_notification, room=f'user_id_{friend_id}')
+    add_notification_collection(friend_id, data_notification, 1)
+    socketio.emit('join_notification', data_notification, room=f'user_id_{friend_id}')
 
 
 def notification_for_accept_friend(current_user, friend_id):
@@ -52,9 +51,8 @@ def notification_for_accept_friend(current_user, friend_id):
         'create_at': get_current_time()
     }
 
-    id_notification = add_notification_collection(friend_id, data_notification, 2)
-    if id_notification:
-        socketio.emit('join_notification', data_notification, room=f'user_id_{friend_id}')
+    add_notification_collection(friend_id, data_notification, 2)
+    socketio.emit('join_notification', data_notification, room=f'user_id_{friend_id}')
 
 
 def add_friend_service(friend_id, current_user):

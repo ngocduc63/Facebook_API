@@ -4,7 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="23cb2c54-3c39-4df6-92f4-23e60e3d4d48" name="Changes" comment="Update logic unfriend">
+    <list default="true" id="23cb2c54-3c39-4df6-92f4-23e60e3d4d48" name="Changes" comment="fix notification for user">
       <change afterPath="$PROJECT_DIR$/facebook/upload/avatar/gojo_1_1_1715442346.jpg" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/facebook/upload/post/avt_tet_2_1715440656.jpg" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/venv/Include/site/python3.12/greenlet/greenlet.h" afterDir="false" />
@@ -2239,8 +2239,8 @@
       <change afterPath="$PROJECT_DIR$/venv/Scripts/unidecode.exe" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/venv/pyvenv.cfg" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/facebook/posts/controller.py" beforeDir="false" afterPath="$PROJECT_DIR$/facebook/posts/controller.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/facebook/posts/services.py" beforeDir="false" afterPath="$PROJECT_DIR$/facebook/posts/services.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/facebook/friends/services.py" beforeDir="false" afterPath="$PROJECT_DIR$/facebook/friends/services.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/facebook/notification/controller.py" beforeDir="false" afterPath="$PROJECT_DIR$/facebook/notification/controller.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/instance/facebook.db" beforeDir="false" afterPath="$PROJECT_DIR$/instance/facebook.db" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -2432,14 +2432,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1705236449798</updated>
-    </task>
-    <task id="LOCAL-00028" summary="post api: fix api comment">
-      <option name="closed" value="true" />
-      <created>1709965175001</created>
-      <option name="number" value="00028" />
-      <option name="presentableId" value="LOCAL-00028" />
-      <option name="project" value="LOCAL" />
-      <updated>1709965175001</updated>
     </task>
     <task id="LOCAL-00029" summary="fix all api: get current user id">
       <option name="closed" value="true" />
@@ -2825,7 +2817,15 @@
       <option name="project" value="LOCAL" />
       <updated>1715442714091</updated>
     </task>
-    <option name="localTasksCounter" value="77" />
+    <task id="LOCAL-00077" summary="Update api get post by id">
+      <option name="closed" value="true" />
+      <created>1715499222378</created>
+      <option name="number" value="00077" />
+      <option name="presentableId" value="LOCAL-00077" />
+      <option name="project" value="LOCAL" />
+      <updated>1715499222378</updated>
+    </task>
+    <option name="localTasksCounter" value="78" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -2841,7 +2841,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="Config rooms member colection, update api get list chat" />
     <MESSAGE value="Create config error code" />
     <MESSAGE value="update paginate for api get list room chat" />
     <MESSAGE value="update logic watched with message" />
@@ -2864,9 +2863,10 @@
     <MESSAGE value="reset db" />
     <MESSAGE value="Update avatar, cover default" />
     <MESSAGE value="Update cors fe, uodate post image default" />
-    <MESSAGE value="Update logic unfriend" />
     <MESSAGE value="Update db notification(mongo), fix but socket with post (like, comment)" />
-    <option name="LAST_COMMIT_MESSAGE" value="Update db notification(mongo), fix but socket with post (like, comment)" />
+    <MESSAGE value="Update api get post by id" />
+    <MESSAGE value="Update logic unfriend" />
+    <option name="LAST_COMMIT_MESSAGE" value="Update logic unfriend" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
