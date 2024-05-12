@@ -3,7 +3,8 @@ from flask_jwt_extended import jwt_required, current_user
 from .services import (get_new_feed_service, create_post_service, update_post_service, delete_post_service,
                        user_like_post_service, user_unlike_post_service, user_comment_post_service,
                        user_delete_comment_post_service, image_post_service, get_users_like_post_service,
-                       get_users_comment_post_service, get_posts_by_user_service, update_comment_service)
+                       get_users_comment_post_service, get_posts_by_user_service, update_comment_service,
+                       get_post_by_id_service)
 from flask_socketio import join_room, leave_room
 from facebook.socketio_instance import socketio
 
@@ -21,6 +22,12 @@ def get_new_feed(page):
 @jwt_required()
 def get_user_posts():
     return get_posts_by_user_service(current_user)
+
+
+@posts.route("/post-management/post/<int:post_id>", methods=["get"])
+@jwt_required()
+def get_posts(post_id):
+    return get_post_by_id_service(post_id, current_user)
 
 
 @posts.route("/post-management/post/create", methods=["POST"])

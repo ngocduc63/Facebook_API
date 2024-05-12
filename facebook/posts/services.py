@@ -71,6 +71,34 @@ def get_posts_by_user_service(current_user):
         return my_json(ERROR_POST_NOT_FOUND)
 
 
+def get_post_by_id_service(post_id, current_user):
+
+    post = (db.session.query(Posts, Users)
+              .outerjoin(Users, Users.id == Posts.user_id)
+              .filter(Posts.id == post_id, Posts.isDeleted == 0).first())
+
+    if not post:
+        return my_json(ERROR_POST_NOT_FOUND)
+
+    result = {
+        "id": post[0].id,
+        "user": {
+            "id": post[1].id,
+            "username": post[1].username,
+            "avatar": post[1].avatar
+        },
+        "title": post[0].title,
+        "image": post[0].image,
+        "category": post[0].category,
+        "create_at": post[0].create_at,
+        "num_like": post[0].count_like,
+        "num_comment": post[0].count_comment,
+        'liked': check_user_like_post(current_user.id, post[0].id)
+    }
+
+    return my_json(result)
+
+
 def get_new_feed_service(page_num, current_user):
     try:
         user_id = current_user.id

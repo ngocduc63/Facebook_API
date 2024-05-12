@@ -2239,13 +2239,6 @@
       <change afterPath="$PROJECT_DIR$/venv/Scripts/unidecode.exe" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/venv/pyvenv.cfg" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/facebook/call/controller.py" beforeDir="false" afterPath="$PROJECT_DIR$/facebook/call/controller.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/facebook/chat/controller.py" beforeDir="false" afterPath="$PROJECT_DIR$/facebook/chat/controller.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/facebook/config.py" beforeDir="false" afterPath="$PROJECT_DIR$/facebook/config.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/facebook/friends/services.py" beforeDir="false" afterPath="$PROJECT_DIR$/facebook/friends/services.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/facebook/notification/controller.py" beforeDir="false" afterPath="$PROJECT_DIR$/facebook/notification/controller.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/facebook/notification/db_notification.py" beforeDir="false" afterPath="$PROJECT_DIR$/facebook/notification/db_notification.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/facebook/notification/services.py" beforeDir="false" afterPath="$PROJECT_DIR$/facebook/notification/services.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/facebook/posts/controller.py" beforeDir="false" afterPath="$PROJECT_DIR$/facebook/posts/controller.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/facebook/posts/services.py" beforeDir="false" afterPath="$PROJECT_DIR$/facebook/posts/services.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/instance/facebook.db" beforeDir="false" afterPath="$PROJECT_DIR$/instance/facebook.db" afterDir="false" />
@@ -2439,14 +2432,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1705236449798</updated>
-    </task>
-    <task id="LOCAL-00027" summary="post api: create api for comment, like post">
-      <option name="closed" value="true" />
-      <created>1709910120953</created>
-      <option name="number" value="00027" />
-      <option name="presentableId" value="LOCAL-00027" />
-      <option name="project" value="LOCAL" />
-      <updated>1709910120953</updated>
     </task>
     <task id="LOCAL-00028" summary="post api: fix api comment">
       <option name="closed" value="true" />
@@ -2832,7 +2817,15 @@
       <option name="project" value="LOCAL" />
       <updated>1715358205380</updated>
     </task>
-    <option name="localTasksCounter" value="76" />
+    <task id="LOCAL-00076" summary="Update db notification(mongo), fix but socket with post (like, comment)">
+      <option name="closed" value="true" />
+      <created>1715442714091</created>
+      <option name="number" value="00076" />
+      <option name="presentableId" value="LOCAL-00076" />
+      <option name="project" value="LOCAL" />
+      <updated>1715442714091</updated>
+    </task>
+    <option name="localTasksCounter" value="77" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -2848,7 +2841,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="Update api: update comment" />
     <MESSAGE value="Config rooms member colection, update api get list chat" />
     <MESSAGE value="Create config error code" />
     <MESSAGE value="update paginate for api get list room chat" />
@@ -2873,7 +2865,8 @@
     <MESSAGE value="Update avatar, cover default" />
     <MESSAGE value="Update cors fe, uodate post image default" />
     <MESSAGE value="Update logic unfriend" />
-    <option name="LAST_COMMIT_MESSAGE" value="Update logic unfriend" />
+    <MESSAGE value="Update db notification(mongo), fix but socket with post (like, comment)" />
+    <option name="LAST_COMMIT_MESSAGE" value="Update db notification(mongo), fix but socket with post (like, comment)" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
