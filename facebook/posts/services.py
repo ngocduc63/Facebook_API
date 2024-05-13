@@ -368,11 +368,11 @@ def notification_like(data_like, current_user, post, total_notification):
         "total_notification": total_notification
     }
 
+    socketio.emit('notification_post', data_notification, room=f'post_{data_like["post_id"]}')
+
     if current_user.id != post.user_id:
         add_notification_collection(post.user_id, data_notification, type_notification=3)
-
-    socketio.emit('notification_post', data_notification, room=f'post_{data_like["post_id"]}')
-    socketio.emit('join_notification', data_notification, room=f'user_id_{post.user_id}')
+        socketio.emit('join_notification', data_notification, room=f'user_id_{post.user_id}')
 
 
 def user_like_post_service(current_user):
@@ -471,11 +471,12 @@ def notification_comment(data_comment, current_user, post, total_notification):
         "create_at": data_comment['create_at'],
         "total_notification": total_notification
     }
-    if current_user.id != post.user_id:
-        add_notification_collection(post.user_id, data_notification, type_notification=4)
 
     socketio.emit('notification_post', data_notification, room=f'post_{data_comment["post_id"]}')
-    socketio.emit('join_notification', data_notification, room=f'user_id_{post.user_id}')
+
+    if current_user.id != post.user_id:
+        add_notification_collection(post.user_id, data_notification, type_notification=4)
+        socketio.emit('join_notification', data_notification, room=f'user_id_{post.user_id}')
 
 
 def user_comment_post_service(current_user):
