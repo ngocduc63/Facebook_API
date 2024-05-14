@@ -404,7 +404,8 @@ def user_like_post_service(current_user):
 
             # update count notification
             user = db.session.query(Users).filter(Users.id == post.user_id).first()
-            user.count_notification = user.count_notification + 1
+            if user_id != post.user_id:
+                user.count_notification = user.count_notification + 1
 
             db.session.add(new_like)
             db.session.commit()
@@ -504,7 +505,8 @@ def user_comment_post_service(current_user):
 
             # update count notification
             user = db.session.query(Users).filter(Users.id == post.user_id).first()
-            user.count_notification = user.count_notification + 1
+            if user_id != post.user_id:
+                user.count_notification = user.count_notification + 1
 
             db.session.add(new_comment)
             db.session.commit()
