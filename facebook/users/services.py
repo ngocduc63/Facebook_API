@@ -2,13 +2,12 @@ import math
 from sqlalchemy import func
 from facebook.extension import db
 from facebook.facebook_ma import UserSchema, PostSchema
-from facebook.model import Users, Posts, TokenBlocklist, Friends
+from facebook.model import Users, Posts, Friends
 from flask import request, jsonify, send_from_directory
 from datetime import datetime
 from ..extension import (my_json, obj_success, obj_success_paginate, allowed_file,
                          get_current_time, get_path_upload, get_path_local,
-                         is_admin, change_name_file)
-from unidecode import unidecode
+                         change_name_file)
 from ..config import PER_PAGE_LIST_USER
 from werkzeug.utils import secure_filename
 from flask_jwt_extended import create_access_token, create_refresh_token
@@ -16,7 +15,7 @@ import re
 from ..config_error_code import (ERROR_DATA_NOT_MATCH, ERROR_FORMAT_EMAIL, ERROR_FORMAT_PASSWORD,
                                  ERROR_FORMAT_DATE, ERROR_NOT_FOUND_EMAIL, ERROR_PASSWORD_NOT_MATCH,
                                  ERROR_USER_NOT_FOUND, ERROR_FILE_NULL, ERROR_UPLOAD_FILE,
-                                 ERROR_CHECK_TOKEN,  ERROR_SAVE_DB, ERROR_ACCOUNT_EXIST, ERROR_USER_HAVE_NOT_ROLE)
+                                 ERROR_CHECK_TOKEN,  ERROR_SAVE_DB, ERROR_ACCOUNT_EXIST)
 from sqlalchemy import or_, and_
 from ..chat.db_chat import update_username_in_room, update_avatar_in_room
 
@@ -97,23 +96,6 @@ def get_user_by_id_service(user_id_search, current_user):
         return my_json(ERROR_CHECK_TOKEN)
 
 
-def get_all_user_service(page, claims):
-
-    if not is_admin(claims):
-        return my_json(ERROR_USER_HAVE_NOT_ROLE)
-
-    users = Users.query.paginate(page=page, per_page=PER_PAGE_LIST_USER, error_out=False)
-
-    cur_page = users.page
-    max_page = math.ceil(users.total / PER_PAGE_LIST_USER)
-
-    if users:
-        users_data = users_schema.dump(users)
-        return my_json(obj_success_paginate(users_data, cur_page, max_page))
-    else:
-        return my_json(ERROR_USER_NOT_FOUND)
-
-
 def update_profile_by_id_service(current_user):
     try:
         user_id = current_user.id
@@ -156,34 +138,6 @@ def update_profile_by_id_service(current_user):
             return my_json(ERROR_SAVE_DB)
     else:
         return my_json(ERROR_DATA_NOT_MATCH)
-
-
-def block_user_by_id_service(user_id, claims):
-    user = Users.query.get(user_id)
-
-    if not is_admin(claims):
-        return my_json(ERROR_USER_HAVE_NOT_ROLE)
-
-    if not user:
-        return my_json(ERROR_USER_NOT_FOUND)
-
-    try:
-        user.is_block = 1
-
-        jti = claims['jti']
-        token_b = TokenBlocklist(jti=jti)
-        token_b.save()
-
-        db.session.commit()
-        return my_json(f"block user {user_id} success")
-    except Exception as e:
-        print(e)
-        return my_json(ERROR_SAVE_DB)
-
-
-def search_approximate(array, key, value):
-    result = [obj for obj in array if unidecode(value.lower()) in unidecode(obj[key].lower())]
-    return result
 
 
 def check_is_friend(user_id, friend_id):

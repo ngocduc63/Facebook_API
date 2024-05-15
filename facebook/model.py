@@ -12,6 +12,7 @@ class Users(db.Model):
     birth_date = db.Column(db.Integer)
     avatar = db.Column(db.String())
     cover_photo = db.Column(db.String())
+    # 1 la male, 2 la female
     gender = db.Column(db.Integer, nullable=False)
     role = db.Column(db.Integer)
     is_block = db.Column(db.Integer)

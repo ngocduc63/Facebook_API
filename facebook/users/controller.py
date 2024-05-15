@@ -1,6 +1,6 @@
 from flask import Blueprint
-from .services import (add_user_service, get_user_by_id_service, get_all_user_service,
-                       update_profile_by_id_service, block_user_by_id_service, search_user_service,
+from .services import (add_user_service, get_user_by_id_service,
+                       update_profile_by_id_service, search_user_service,
                        user_login_service, upload_avatar_service, get_avatar_from_filename_service,
                        upload_cover_photo_service, get_cover_photo_from_filename_service, logout_user, refresh_service,
                        find_user_service
@@ -8,14 +8,6 @@ from .services import (add_user_service, get_user_by_id_service, get_all_user_se
 from flask_jwt_extended import jwt_required, get_jwt, current_user, get_jwt_identity
 
 users = Blueprint("users", __name__)
-
-
-@users.route("/user-management/user/get-all-user/<int:page>", methods=["GET"])
-@jwt_required()
-def get_all_user(page):
-    claims = get_jwt()
-
-    return get_all_user_service(page, claims)
 
 
 @users.route("/user-management/user/search", methods=["POST"])
@@ -57,13 +49,6 @@ def get_user_by_id(user_id):
 @jwt_required()
 def update_profile_by_id():
     return update_profile_by_id_service(current_user)
-
-
-@users.route("/user-management/user/block/<int:user_id>", methods=["PUT"])
-@jwt_required()
-def block_user_by_id(user_id):
-    claims = get_jwt()
-    return block_user_by_id_service(user_id, claims)
 
 
 @users.route("/user-management/user/update-avatar", methods=["POST"])

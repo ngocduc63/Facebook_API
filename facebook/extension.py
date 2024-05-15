@@ -72,10 +72,3 @@ def get_path_upload(path_name, filename):
 
 def get_path_local(path_name):
     return os.path.join(os.path.abspath(os.path.dirname(__file__)), path_name)
-
-
-def is_admin(claims):
-    if claims["is_staff"]:
-        return False
-    else:
-        return True
