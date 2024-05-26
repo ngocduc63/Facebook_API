@@ -1,4 +1,4 @@
-from facebook import create_app
+from facebook import create_app, create_admin_account
 from flask_cors import CORS
 from facebook.socketio_instance import socketio
 from flask import render_template
@@ -6,11 +6,11 @@ from flask import render_template
 
 if __name__ == "__main__":
     app = create_app()
+
     CORS(app,
          origins=['http://localhost:3000',
                   'https://my-fb-demo.netlify.app/',
-                  'https://facebook-ngocduc-2003.netlify.app/',
-                  'https://my-fb-demo.000webhostapp.com/'],
+                  'https://project-social-nu.vercel.app/'],
          supports_credentials=True)
     socketio.init_app(app)
 

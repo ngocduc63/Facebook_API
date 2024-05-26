@@ -5,7 +5,7 @@ from flask_marshmallow import fields
 class UserSchema(ma.Schema):
     class Meta:
         fields = ('_sa_instance_state', 'id', 'email', 'username', 'description', 'nickname',
-                  'birth_date', 'avatar', 'cover_photo', 'gender', 'role', 'create_at', 'count_notification')
+                  'birth_date', 'avatar', 'cover_photo', 'gender', 'role', 'is_block', 'create_at', 'count_notification')
         exclude = ('_sa_instance_state',)
 
 

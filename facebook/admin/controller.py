@@ -1,6 +1,7 @@
 from flask import Blueprint
 from flask_jwt_extended import jwt_required, get_jwt, current_user, get_jwt_identity
-from .services import get_all_user_service, block_user_by_id_service, admin_login_service, statistical_service
+from .services import (get_all_user_service, block_user_by_id_service, admin_login_service, statistical_service,
+                       block_list_user_by_id_service, unblock_user_by_id_service)
 
 admin = Blueprint("admin", __name__)
 
@@ -22,7 +23,19 @@ def block_user_by_id(user_id):
     return block_user_by_id_service(user_id, current_user)
 
 
+@admin.route("/admin/unblock-user/<int:user_id>", methods=["PUT"])
+@jwt_required()
+def unblock_user_by_id(user_id):
+    return unblock_user_by_id_service(user_id, current_user)
+
+
+@admin.route("/admin/block-users", methods=["PUT"])
+@jwt_required()
+def block_users_by_id():
+    return block_list_user_by_id_service(current_user)
+
+
 @admin.route("/admin/statistical", methods=["GET"])
 @jwt_required()
 def statistical():
-    return statistical_service()
+    return statistical_service(current_user)

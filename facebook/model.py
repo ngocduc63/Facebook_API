@@ -20,7 +20,7 @@ class Users(db.Model):
     create_at = db.Column(db.Integer, nullable=False)
 
     def __init__(self, username, email, description, nickname,
-                 birth_date, avatar, cover_photo, gender, create_at):
+                 birth_date, avatar, cover_photo, gender, create_at, role=0):
         self.username = username
         self.email = email
         self.description = description
@@ -29,7 +29,7 @@ class Users(db.Model):
         self.avatar = avatar
         self.cover_photo = cover_photo
         self.gender = gender
-        self.role = 0
+        self.role = role
         self.create_at = create_at
         self.is_block = 0
         self.count_notification = 0

@@ -18,8 +18,8 @@ users_schema = UserSchema(many=True)
 def check_role_admin(current_user):
     user = db.session.query(Users).filter(Users.id == current_user.id).first()
 
-    # tam thoi de 0 de user nao cung vao duoc
-    if user and user.role == 0:
+    # role 1 la admin
+    if user and user.role == 1:
         return True
     else:
         return False
@@ -77,8 +77,11 @@ def get_all_user_service(page, current_user):
         return my_json(ERROR_USER_NOT_FOUND)
 
 
-def block_user_by_id_service(user_id, claims):
-    user = Users.query.get(user_id)
+def block_user_by_id_service(user_id, current_user):
+    if not check_role_admin(current_user):
+        return my_json(ERROR_USER_HAVE_NOT_ROLE)
+
+    user = db.session.query(Users).filter(Users.id == user_id, Users.is_block == 0).first()
 
     if not user:
         return my_json(ERROR_USER_NOT_FOUND)
@@ -86,15 +89,57 @@ def block_user_by_id_service(user_id, claims):
     try:
         user.is_block = 1
 
-        jti = claims['jti']
-        token_b = TokenBlocklist(jti=jti)
-        token_b.save()
-
         db.session.commit()
         return my_json(f"block user {user_id} success")
     except Exception as e:
         print(e)
         return my_json(ERROR_SAVE_DB)
+
+
+def unblock_user_by_id_service(user_id, current_user):
+    if not check_role_admin(current_user):
+        return my_json(ERROR_USER_HAVE_NOT_ROLE)
+
+    user = db.session.query(Users).filter(Users.id == user_id, Users.is_block == 1).first()
+
+    if not user:
+        return my_json(ERROR_USER_NOT_FOUND)
+
+    try:
+        user.is_block = 0
+
+        db.session.commit()
+        return my_json(f"unblock user {user_id} success")
+    except Exception as e:
+        print(e)
+        return my_json(ERROR_SAVE_DB)
+
+
+def block_list_user_by_id_service(current_user):
+    if not check_role_admin(current_user):
+        return my_json(ERROR_USER_HAVE_NOT_ROLE)
+
+    data = request.json
+    check_data = data and ('list_id' in data)
+
+    if not check_data:
+        return my_json(ERROR_DATA_NOT_MATCH)
+
+    list_id = data['list_id']
+
+    for user_id in list_id:
+        user = db.session.query(Users).filter(Users.id == user_id, Users.is_block == 0).first()
+        if not user:
+            return my_json(ERROR_USER_NOT_FOUND)
+        try:
+            user.is_block = 1
+
+            db.session.commit()
+        except Exception as e:
+            print(e)
+            return my_json(ERROR_SAVE_DB)
+
+    return my_json(f"block users success")
 
 
 def count_user_for_year(year):
@@ -129,7 +174,10 @@ def count_post_for_year(year):
     return rs
 
 
-def statistical_service():
+def statistical_service(current_user):
+    if not check_role_admin(current_user):
+        return my_json(ERROR_USER_HAVE_NOT_ROLE)
+
     num_user = db.session.query(Users).count()
     num_user_male = db.session.query(Users).filter(Users.gender == 1).count()
     num_user_female = db.session.query(Users).filter(Users.gender == 2).count()

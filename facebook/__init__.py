@@ -5,7 +5,7 @@ from .posts.controller import posts
 from .notification.controller import notifications
 from .admin.controller import admin
 from .chat.controller import chats
-from .extension import db, ma, jwt, migrate
+from .extension import db, ma, jwt, migrate, get_current_time
 from .model import Users, Friends, Posts, Comments, Likes, TokenBlocklist
 import os
 from datetime import timedelta
@@ -72,6 +72,25 @@ def jwt_handel():
             return token is not None
 
 
+def create_admin_account():
+    user = db.session.query(Users).filter(Users.email == 'admin@gmail.com').first()
+    if user:
+        return
+
+    try:
+        new_user = Users('Admin', 'admin@gmail.com', '', '',
+                         1046926800, 'avt_default_male.png', 'cover_default.jpeg', 1,
+                         get_current_time(), 1)
+
+        new_user.set_password('123456')
+        db.session.add(new_user)
+        db.session.commit()
+        print('create admin account')
+    except Exception as e:
+        print(e)
+        return
+
+
 def create_app(config_file="config.py"):
     app = Flask(__name__)
     CORS(app)
@@ -86,6 +105,10 @@ def create_app(config_file="config.py"):
     app.register_blueprint(notifications)
     app.register_blueprint(chats)
     app.register_blueprint(admin)
+
+    # set up db
+    with app.app_context():
+        create_admin_account()
 
     # Set up the Flask-JWT-Extended extension
     app.config["JWT_SECRET_KEY"] = os.environ.get("JWT_SECRET_KEY")
