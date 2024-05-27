@@ -2244,8 +2244,7 @@
       <change beforePath="$PROJECT_DIR$/facebook/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/facebook/__init__.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/facebook/admin/controller.py" beforeDir="false" afterPath="$PROJECT_DIR$/facebook/admin/controller.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/facebook/admin/services.py" beforeDir="false" afterPath="$PROJECT_DIR$/facebook/admin/services.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/facebook/config_error_code.py" beforeDir="false" afterPath="$PROJECT_DIR$/facebook/config_error_code.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/facebook/users/services.py" beforeDir="false" afterPath="$PROJECT_DIR$/facebook/users/services.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/facebook/posts/services.py" beforeDir="false" afterPath="$PROJECT_DIR$/facebook/posts/services.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/instance/facebook.db" beforeDir="false" afterPath="$PROJECT_DIR$/instance/facebook.db" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -2437,14 +2436,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1705236449798</updated>
-    </task>
-    <task id="LOCAL-00036" summary="Api posts: update api new feed, list likes, list comments">
-      <option name="closed" value="true" />
-      <created>1710244825687</created>
-      <option name="number" value="00036" />
-      <option name="presentableId" value="LOCAL-00036" />
-      <option name="project" value="LOCAL" />
-      <updated>1710244825687</updated>
     </task>
     <task id="LOCAL-00037" summary="change method some get api to post">
       <option name="closed" value="true" />
@@ -2830,7 +2821,15 @@
       <option name="project" value="LOCAL" />
       <updated>1716741386391</updated>
     </task>
-    <option name="localTasksCounter" value="85" />
+    <task id="LOCAL-00085" summary="Update feature: block user, Create api block users with admin">
+      <option name="closed" value="true" />
+      <created>1716798589182</created>
+      <option name="number" value="00085" />
+      <option name="presentableId" value="LOCAL-00085" />
+      <option name="project" value="LOCAL" />
+      <updated>1716798589182</updated>
+    </task>
+    <option name="localTasksCounter" value="86" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -2846,7 +2845,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="Update socket video call" />
     <MESSAGE value="Config message fetch limit 10 to 20, fix notification when save mess" />
     <MESSAGE value="Update db image" />
     <MESSAGE value="change file setup to requirements" />
@@ -2869,9 +2867,10 @@
     <MESSAGE value="fix logic notification for user when like, comment" />
     <MESSAGE value="Update api for admin dashboard" />
     <MESSAGE value="Update admin api: block user, unblock/ Update create admin account when create app" />
-    <MESSAGE value="fix notification for user" />
     <MESSAGE value="fix commit" />
-    <option name="LAST_COMMIT_MESSAGE" value="fix commit" />
+    <MESSAGE value="fix notification for user" />
+    <MESSAGE value="Update feature: block user, Create api block users with admin" />
+    <option name="LAST_COMMIT_MESSAGE" value="Update feature: block user, Create api block users with admin" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

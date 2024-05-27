@@ -342,6 +342,10 @@ def delete_post_service(id_post, current_user):
     if id_post and user_id:
         try:
             post = db.session.query(Posts).filter(Posts.id == id_post).first()
+
+            if post.user_id == user_id or current_user.role != 1:
+                return my_json(ERROR_USER_HAVE_NOT_ROLE)
+
             post.isDeleted = 1
 
             post_data = post_schema.dump(post)

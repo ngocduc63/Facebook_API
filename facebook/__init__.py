@@ -40,7 +40,7 @@ def jwt_handel():
             return None
 
         if user.is_block == 1:
-            abort(405, description="User is blocked")
+            abort(405, description="User is block")
 
         return user
 
