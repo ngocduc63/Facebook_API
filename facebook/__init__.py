@@ -1,4 +1,4 @@
-from flask import Flask, jsonify
+from flask import Flask, jsonify, abort
 from .users.controller import users
 from .friends.controller import friends
 from .posts.controller import posts
@@ -34,7 +34,15 @@ def jwt_handel():
     @jwt.user_lookup_loader
     def user_lookup_callback(_jwt_headers, jwt_data):
         identity = jwt_data["sub"]
-        return Users.query.filter_by(email=identity).one_or_none()
+        user = Users.query.filter_by(email=identity).one_or_none()
+
+        if user is None:
+            return None
+
+        if user.is_block == 1:
+            abort(405, description="User is blocked")
+
+        return user
 
     # jwt error handlers
     @jwt.expired_token_loader

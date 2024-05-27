@@ -1,20 +1,15 @@
 from flask import Blueprint
-from flask_jwt_extended import jwt_required, get_jwt, current_user, get_jwt_identity
-from .services import (get_all_user_service, block_user_by_id_service, admin_login_service, statistical_service,
-                       block_list_user_by_id_service, unblock_user_by_id_service)
+from flask_jwt_extended import jwt_required, current_user
+from .services import (get_all_user_service, block_user_by_id_service, statistical_service,
+                       block_list_user_by_id_service, unblock_user_by_id_service, unblock_list_user_by_id_service)
 
 admin = Blueprint("admin", __name__)
 
 
-@admin.route("/admin/login", methods=["POST"])
-def user_login():
-    return admin_login_service()
-
-
-@admin.route("/admin/get-all-user/<int:page>", methods=["GET"])
+@admin.route("/admin/get-all-user", methods=["POST"])
 @jwt_required()
-def get_all_user(page):
-    return get_all_user_service(page, current_user)
+def get_all_user():
+    return get_all_user_service(current_user)
 
 
 @admin.route("/admin/block-user/<int:user_id>", methods=["PUT"])
@@ -33,6 +28,12 @@ def unblock_user_by_id(user_id):
 @jwt_required()
 def block_users_by_id():
     return block_list_user_by_id_service(current_user)
+
+
+@admin.route("/admin/unblock-users", methods=["PUT"])
+@jwt_required()
+def unblock_users_by_id():
+    return unblock_list_user_by_id_service(current_user)
 
 
 @admin.route("/admin/statistical", methods=["GET"])

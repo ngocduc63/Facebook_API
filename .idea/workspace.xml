@@ -2241,6 +2241,11 @@
       <change afterPath="$PROJECT_DIR$/venv/Scripts/unidecode.exe" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/venv/pyvenv.cfg" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/facebook/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/facebook/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/facebook/admin/controller.py" beforeDir="false" afterPath="$PROJECT_DIR$/facebook/admin/controller.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/facebook/admin/services.py" beforeDir="false" afterPath="$PROJECT_DIR$/facebook/admin/services.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/facebook/config_error_code.py" beforeDir="false" afterPath="$PROJECT_DIR$/facebook/config_error_code.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/facebook/users/services.py" beforeDir="false" afterPath="$PROJECT_DIR$/facebook/users/services.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/instance/facebook.db" beforeDir="false" afterPath="$PROJECT_DIR$/instance/facebook.db" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -2432,14 +2437,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1705236449798</updated>
-    </task>
-    <task id="LOCAL-00035" summary="Update api login, register">
-      <option name="closed" value="true" />
-      <created>1710168185104</created>
-      <option name="number" value="00035" />
-      <option name="presentableId" value="LOCAL-00035" />
-      <option name="project" value="LOCAL" />
-      <updated>1710168185104</updated>
     </task>
     <task id="LOCAL-00036" summary="Api posts: update api new feed, list likes, list comments">
       <option name="closed" value="true" />
@@ -2825,7 +2822,15 @@
       <option name="project" value="LOCAL" />
       <updated>1716741135704</updated>
     </task>
-    <option name="localTasksCounter" value="84" />
+    <task id="LOCAL-00084" summary="fix commit">
+      <option name="closed" value="true" />
+      <created>1716741386391</created>
+      <option name="number" value="00084" />
+      <option name="presentableId" value="LOCAL-00084" />
+      <option name="project" value="LOCAL" />
+      <updated>1716741386391</updated>
+    </task>
+    <option name="localTasksCounter" value="85" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -2841,7 +2846,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="Update api search user" />
     <MESSAGE value="Update socket video call" />
     <MESSAGE value="Config message fetch limit 10 to 20, fix notification when save mess" />
     <MESSAGE value="Update db image" />
@@ -2864,9 +2868,10 @@
     <MESSAGE value="Update count notification for user" />
     <MESSAGE value="fix logic notification for user when like, comment" />
     <MESSAGE value="Update api for admin dashboard" />
-    <MESSAGE value="fix notification for user" />
     <MESSAGE value="Update admin api: block user, unblock/ Update create admin account when create app" />
-    <option name="LAST_COMMIT_MESSAGE" value="Update admin api: block user, unblock/ Update create admin account when create app" />
+    <MESSAGE value="fix notification for user" />
+    <MESSAGE value="fix commit" />
+    <option name="LAST_COMMIT_MESSAGE" value="fix commit" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

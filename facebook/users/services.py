@@ -15,7 +15,7 @@ import re
 from ..config_error_code import (ERROR_DATA_NOT_MATCH, ERROR_FORMAT_EMAIL, ERROR_FORMAT_PASSWORD,
                                  ERROR_FORMAT_DATE, ERROR_NOT_FOUND_EMAIL, ERROR_PASSWORD_NOT_MATCH,
                                  ERROR_USER_NOT_FOUND, ERROR_FILE_NULL, ERROR_UPLOAD_FILE,
-                                 ERROR_CHECK_TOKEN,  ERROR_SAVE_DB, ERROR_ACCOUNT_EXIST)
+                                 ERROR_CHECK_TOKEN,  ERROR_SAVE_DB, ERROR_ACCOUNT_EXIST, ERROR_USER_WAS_BLOCKED)
 from sqlalchemy import or_, and_
 from ..chat.db_chat import update_username_in_room, update_avatar_in_room
 
@@ -266,7 +266,7 @@ def user_login_service():
         return my_json(ERROR_NOT_FOUND_EMAIL)
 
     if user.is_block == 1:
-        return my_json(ERROR_USER_NOT_FOUND)
+        return my_json(ERROR_USER_WAS_BLOCKED)
 
     if not user.check_password(password=password_data):
         return my_json(ERROR_PASSWORD_NOT_MATCH)
