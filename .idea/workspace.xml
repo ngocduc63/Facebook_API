@@ -2242,8 +2242,7 @@
       <change afterPath="$PROJECT_DIR$/venv/Scripts/unidecode.exe" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/venv/pyvenv.cfg" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/facebook/chat/db_chat.py" beforeDir="false" afterPath="$PROJECT_DIR$/facebook/chat/db_chat.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/facebook/notification/db_notification.py" beforeDir="false" afterPath="$PROJECT_DIR$/facebook/notification/db_notification.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/facebook/config.py" beforeDir="false" afterPath="$PROJECT_DIR$/facebook/config.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/instance/facebook.db" beforeDir="false" afterPath="$PROJECT_DIR$/instance/facebook.db" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -2435,14 +2434,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1705236449798</updated>
-    </task>
-    <task id="LOCAL-00041" summary="Add flask-migrate">
-      <option name="closed" value="true" />
-      <created>1710682788949</created>
-      <option name="number" value="00041" />
-      <option name="presentableId" value="LOCAL-00041" />
-      <option name="project" value="LOCAL" />
-      <updated>1710682788949</updated>
     </task>
     <task id="LOCAL-00042" summary="update responsive with paginate">
       <option name="closed" value="true" />
@@ -2828,7 +2819,15 @@
       <option name="project" value="LOCAL" />
       <updated>1716879009981</updated>
     </task>
-    <option name="localTasksCounter" value="90" />
+    <task id="LOCAL-00090" summary="fix bug connect mongo db product">
+      <option name="closed" value="true" />
+      <created>1716879386604</created>
+      <option name="number" value="00090" />
+      <option name="presentableId" value="LOCAL-00090" />
+      <option name="project" value="LOCAL" />
+      <updated>1716879386604</updated>
+    </task>
+    <option name="localTasksCounter" value="91" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -2844,7 +2843,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="config cors" />
     <MESSAGE value="update vercel config" />
     <MESSAGE value="update file index" />
     <MESSAGE value="fix bug" />
@@ -2867,9 +2865,10 @@
     <MESSAGE value="Update: api get all post with admin, role delete post" />
     <MESSAGE value="Update config connection mongodb" />
     <MESSAGE value="update config mongodb" />
-    <MESSAGE value="fix notification for user" />
     <MESSAGE value="fix bug connect mongo" />
-    <option name="LAST_COMMIT_MESSAGE" value="fix bug connect mongo" />
+    <MESSAGE value="fix notification for user" />
+    <MESSAGE value="fix bug connect mongo db product" />
+    <option name="LAST_COMMIT_MESSAGE" value="fix bug connect mongo db product" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
