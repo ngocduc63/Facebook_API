@@ -4,7 +4,7 @@ from bson import ObjectId
 from ..config import MESSAGE_FETCH_LIMIT, LIST_ROOM_CHAT_FETCH_LIMIT, CONNECT_MONGO_DEV, CONNECT_MONGO_PRODUCT
 
 #
-client = MongoClient(CONNECT_MONGO_PRODUCT)
+client = MongoClient('mongodb+srv://ducdotb63:0918273645abc@facebook.hltsvun.mongodb.net/?retryWrites=true&w=majority&appName=Facebook')
 
 chat_db = client.get_database("ChatDB")
 rooms_collection = chat_db.get_collection("rooms")

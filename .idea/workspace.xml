@@ -2242,6 +2242,8 @@
       <change afterPath="$PROJECT_DIR$/venv/Scripts/unidecode.exe" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/venv/pyvenv.cfg" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/facebook/chat/db_chat.py" beforeDir="false" afterPath="$PROJECT_DIR$/facebook/chat/db_chat.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/facebook/notification/db_notification.py" beforeDir="false" afterPath="$PROJECT_DIR$/facebook/notification/db_notification.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/instance/facebook.db" beforeDir="false" afterPath="$PROJECT_DIR$/instance/facebook.db" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -2433,14 +2435,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1705236449798</updated>
-    </task>
-    <task id="LOCAL-00039" summary="Update api register: format email, password">
-      <option name="closed" value="true" />
-      <created>1710406323700</created>
-      <option name="number" value="00039" />
-      <option name="presentableId" value="LOCAL-00039" />
-      <option name="project" value="LOCAL" />
-      <updated>1710406323700</updated>
     </task>
     <task id="LOCAL-00040" summary="Fix responsive error is http 400, update api post to get">
       <option name="closed" value="true" />
@@ -2826,7 +2820,15 @@
       <option name="project" value="LOCAL" />
       <updated>1716877294177</updated>
     </task>
-    <option name="localTasksCounter" value="88" />
+    <task id="LOCAL-00088" summary="update config mongodb">
+      <option name="closed" value="true" />
+      <created>1716878106534</created>
+      <option name="number" value="00088" />
+      <option name="presentableId" value="LOCAL-00088" />
+      <option name="project" value="LOCAL" />
+      <updated>1716878106534</updated>
+    </task>
+    <option name="localTasksCounter" value="89" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -2842,7 +2844,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="change file setup to requirements" />
     <MESSAGE value="config host, cors" />
     <MESSAGE value="config cors" />
     <MESSAGE value="update vercel config" />
@@ -2865,9 +2866,10 @@
     <MESSAGE value="fix commit" />
     <MESSAGE value="Update feature: block user, Create api block users with admin" />
     <MESSAGE value="Update: api get all post with admin, role delete post" />
-    <MESSAGE value="fix notification for user" />
     <MESSAGE value="Update config connection mongodb" />
-    <option name="LAST_COMMIT_MESSAGE" value="Update config connection mongodb" />
+    <MESSAGE value="fix notification for user" />
+    <MESSAGE value="update config mongodb" />
+    <option name="LAST_COMMIT_MESSAGE" value="update config mongodb" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

@@ -2,7 +2,7 @@ from pymongo import MongoClient, DESCENDING
 from ..extension import get_current_time
 from ..config import NOTIFICATION_FETCH_LIMIT, CONNECT_MONGO_PRODUCT, CONNECT_MONGO_DEV
 
-client = MongoClient(CONNECT_MONGO_PRODUCT)
+client = MongoClient("mongodb+srv://ducdotb63:0918273645abc@facebook.hltsvun.mongodb.net/?retryWrites=true&w=majority&appName=Facebook")
 
 notification_db = client.get_database("NotificationDB")
 notifications = notification_db.get_collection("notifications")
