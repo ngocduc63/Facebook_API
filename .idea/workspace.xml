@@ -10,7 +10,8 @@
       <change afterPath="$PROJECT_DIR$/facebook/upload/avatar/gojo_1_3_1716820079.jpg" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/facebook/upload/post/avt_tet_1_1715790821.jpg" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/facebook/upload/post/avt_tet_2_1715440656.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/migrations/versions/1e9db022059b_update_share_post.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/facebook/upload/post/cover_default_3_1716908755.jpeg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/facebook/upload/post/img_test_3_1716908729.jpeg" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/venv/Include/site/python3.12/greenlet/greenlet.h" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/venv/Lib/site-packages/Flask_Cors-4.0.0.dist-info/INSTALLER" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/venv/Lib/site-packages/Flask_Cors-4.0.0.dist-info/LICENSE" afterDir="false" />
@@ -2242,15 +2243,8 @@
       <change afterPath="$PROJECT_DIR$/venv/Scripts/pythonw.exe" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/venv/Scripts/unidecode.exe" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/venv/pyvenv.cfg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/facebook/admin/services.py" beforeDir="false" afterPath="$PROJECT_DIR$/facebook/admin/services.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/facebook/chat/db_chat.py" beforeDir="false" afterPath="$PROJECT_DIR$/facebook/chat/db_chat.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/facebook/config_error_code.py" beforeDir="false" afterPath="$PROJECT_DIR$/facebook/config_error_code.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/facebook/facebook_ma.py" beforeDir="false" afterPath="$PROJECT_DIR$/facebook/facebook_ma.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/facebook/model.py" beforeDir="false" afterPath="$PROJECT_DIR$/facebook/model.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/facebook/notification/db_notification.py" beforeDir="false" afterPath="$PROJECT_DIR$/facebook/notification/db_notification.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/facebook/posts/controller.py" beforeDir="false" afterPath="$PROJECT_DIR$/facebook/posts/controller.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/facebook/posts/services.py" beforeDir="false" afterPath="$PROJECT_DIR$/facebook/posts/services.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/instance/facebook.db" beforeDir="false" afterPath="$PROJECT_DIR$/instance/facebook.db" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -2442,14 +2436,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1705236449798</updated>
-    </task>
-    <task id="LOCAL-00043" summary="Update db: count comment, like; fix api post, fix obj paginate">
-      <option name="closed" value="true" />
-      <created>1710831535012</created>
-      <option name="number" value="00043" />
-      <option name="presentableId" value="LOCAL-00043" />
-      <option name="project" value="LOCAL" />
-      <updated>1710831535012</updated>
     </task>
     <task id="LOCAL-00044" summary="Fix migration: update table (friend -&gt; post)">
       <option name="closed" value="true" />
@@ -2835,7 +2821,15 @@
       <option name="project" value="LOCAL" />
       <updated>1716880572191</updated>
     </task>
-    <option name="localTasksCounter" value="92" />
+    <task id="LOCAL-00092" summary="BigUpdate: share post">
+      <option name="closed" value="true" />
+      <created>1716920303512</created>
+      <option name="number" value="00092" />
+      <option name="presentableId" value="LOCAL-00092" />
+      <option name="project" value="LOCAL" />
+      <updated>1716920303512</updated>
+    </task>
+    <option name="localTasksCounter" value="93" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -2851,7 +2845,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="update file index" />
     <MESSAGE value="fix bug" />
     <MESSAGE value="update cors" />
     <MESSAGE value="Update logic get new feed" />
@@ -2876,7 +2869,8 @@
     <MESSAGE value="fix bug connect mongo db product" />
     <MESSAGE value="fix notification for user" />
     <MESSAGE value="Update config mongodb" />
-    <option name="LAST_COMMIT_MESSAGE" value="Update config mongodb" />
+    <MESSAGE value="BigUpdate: share post" />
+    <option name="LAST_COMMIT_MESSAGE" value="BigUpdate: share post" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
