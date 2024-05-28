@@ -17,7 +17,8 @@ class FriendSchema(ma.Schema):
 
 class PostSchema(ma.Schema):
     class Meta:
-        fields = ('_sa_instance_state', "id", "title", "image", "user_id", "status", "isDelete", "create_at", 'category')
+        fields = ('_sa_instance_state', "id", "title", "image", "user_id", "status", "isDelete", "create_at",
+                  'category', 'type_post', 'count_like', 'count_comment', 'count_share')
         exclude = ('_sa_instance_state',)
 
 

@@ -4,12 +4,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="23cb2c54-3c39-4df6-92f4-23e60e3d4d48" name="Changes" comment="fix notification for user">
+    <list default="true" id="23cb2c54-3c39-4df6-92f4-23e60e3d4d48" name="Changes" comment="Update config mongodb">
       <change afterPath="$PROJECT_DIR$/facebook/upload/avatar/gojo_1_1_1715442346.jpg" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/facebook/upload/avatar/gojo_1_1_1715614023.jpg" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/facebook/upload/avatar/gojo_1_3_1716820079.jpg" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/facebook/upload/post/avt_tet_1_1715790821.jpg" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/facebook/upload/post/avt_tet_2_1715440656.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/migrations/versions/1e9db022059b_update_share_post.py" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/venv/Include/site/python3.12/greenlet/greenlet.h" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/venv/Lib/site-packages/Flask_Cors-4.0.0.dist-info/INSTALLER" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/venv/Lib/site-packages/Flask_Cors-4.0.0.dist-info/LICENSE" afterDir="false" />
@@ -2242,7 +2243,14 @@
       <change afterPath="$PROJECT_DIR$/venv/Scripts/unidecode.exe" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/venv/pyvenv.cfg" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/facebook/config.py" beforeDir="false" afterPath="$PROJECT_DIR$/facebook/config.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/facebook/admin/services.py" beforeDir="false" afterPath="$PROJECT_DIR$/facebook/admin/services.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/facebook/chat/db_chat.py" beforeDir="false" afterPath="$PROJECT_DIR$/facebook/chat/db_chat.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/facebook/config_error_code.py" beforeDir="false" afterPath="$PROJECT_DIR$/facebook/config_error_code.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/facebook/facebook_ma.py" beforeDir="false" afterPath="$PROJECT_DIR$/facebook/facebook_ma.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/facebook/model.py" beforeDir="false" afterPath="$PROJECT_DIR$/facebook/model.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/facebook/notification/db_notification.py" beforeDir="false" afterPath="$PROJECT_DIR$/facebook/notification/db_notification.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/facebook/posts/controller.py" beforeDir="false" afterPath="$PROJECT_DIR$/facebook/posts/controller.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/facebook/posts/services.py" beforeDir="false" afterPath="$PROJECT_DIR$/facebook/posts/services.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/instance/facebook.db" beforeDir="false" afterPath="$PROJECT_DIR$/instance/facebook.db" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -2434,14 +2442,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1705236449798</updated>
-    </task>
-    <task id="LOCAL-00042" summary="update responsive with paginate">
-      <option name="closed" value="true" />
-      <created>1710745757599</created>
-      <option name="number" value="00042" />
-      <option name="presentableId" value="LOCAL-00042" />
-      <option name="project" value="LOCAL" />
-      <updated>1710745757599</updated>
     </task>
     <task id="LOCAL-00043" summary="Update db: count comment, like; fix api post, fix obj paginate">
       <option name="closed" value="true" />
@@ -2827,7 +2827,15 @@
       <option name="project" value="LOCAL" />
       <updated>1716879386604</updated>
     </task>
-    <option name="localTasksCounter" value="91" />
+    <task id="LOCAL-00091" summary="Update config mongodb">
+      <option name="closed" value="true" />
+      <created>1716880572189</created>
+      <option name="number" value="00091" />
+      <option name="presentableId" value="LOCAL-00091" />
+      <option name="project" value="LOCAL" />
+      <updated>1716880572191</updated>
+    </task>
+    <option name="localTasksCounter" value="92" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -2843,7 +2851,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="update vercel config" />
     <MESSAGE value="update file index" />
     <MESSAGE value="fix bug" />
     <MESSAGE value="update cors" />
@@ -2866,9 +2873,10 @@
     <MESSAGE value="Update config connection mongodb" />
     <MESSAGE value="update config mongodb" />
     <MESSAGE value="fix bug connect mongo" />
-    <MESSAGE value="fix notification for user" />
     <MESSAGE value="fix bug connect mongo db product" />
-    <option name="LAST_COMMIT_MESSAGE" value="fix bug connect mongo db product" />
+    <MESSAGE value="fix notification for user" />
+    <MESSAGE value="Update config mongodb" />
+    <option name="LAST_COMMIT_MESSAGE" value="Update config mongodb" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

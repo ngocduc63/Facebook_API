@@ -9,7 +9,7 @@ from facebook.extension import db
 from flask import request
 from datetime import datetime
 from sqlalchemy import func
-from ..posts.services import check_user_like_post
+from ..posts.services import get_obj_post
 
 user_schema = UserSchema()
 users_schema = UserSchema(many=True)
@@ -222,21 +222,10 @@ def get_all_post_service(page, current_user):
     if posts:
         data_rs = []
         for result in posts:
-            data = {
-                "id": result[0].id,
-                "user": {
-                    "id": result[1].id,
-                    "username": result[1].username,
-                    "avatar": result[1].avatar
-                },
-                "title": result[0].title,
-                "image": result[0].image,
-                "category": result[0].category,
-                "create_at": result[0].create_at,
-                "num_like": result[0].count_like,
-                "num_comment": result[0].count_comment,
-                'liked': check_user_like_post(current_user.id, result[0].id)
-            }
+            if result[0].type_post == 0:
+                data = get_obj_post(result, current_user)
+            else:
+                data = get_obj_post(result, current_user, result[0].type_post)
             data_rs.append(data)
 
         return my_json(obj_success_paginate(data_rs, cur_page, max_page))

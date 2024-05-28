@@ -4,7 +4,7 @@ from .services import (get_new_feed_service, create_post_service, update_post_se
                        user_like_post_service, user_unlike_post_service, user_comment_post_service,
                        user_delete_comment_post_service, image_post_service, get_users_like_post_service,
                        get_users_comment_post_service, get_posts_by_user_service, update_comment_service,
-                       get_post_by_id_service)
+                       get_post_by_id_service, create_post_share_service)
 from flask_socketio import join_room, leave_room
 from facebook.socketio_instance import socketio
 
@@ -34,6 +34,12 @@ def get_posts(post_id):
 @jwt_required()
 def create_post():
     return create_post_service(current_user)
+
+
+@posts.route("/post-management/post/share", methods=["POST"])
+@jwt_required()
+def share_post():
+    return create_post_share_service(current_user)
 
 
 @posts.route("/post-management/post/likes", methods=["POST"])

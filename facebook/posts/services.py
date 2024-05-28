@@ -10,7 +10,7 @@ import math
 from ..socketio_instance import socketio
 from ..config_error_code import (ERROR_DATA_NOT_MATCH, ERROR_FILE_NULL, ERROR_UPLOAD_FILE, ERROR_CHECK_TOKEN,
                                  ERROR_SAVE_DB, ERROR_USER_HAVE_NOT_ROLE, ERROR_POST_NOT_FOUND, ERROR_LIKE_NOT_FOUND,
-                                 ERROR_COMMENT_NOT_FOUND, ERROR_LIKE_IN_POST_EXIST)
+                                 ERROR_COMMENT_NOT_FOUND, ERROR_LIKE_IN_POST_EXIST, ERROR_SHARE_YOUR_SELF_POST)
 from sqlalchemy import or_
 from ..notification.db_notification import add_notification_collection
 
@@ -25,6 +25,64 @@ comment_schema = CommentSchema()
 def check_user_like_post(user_id, post_id):
     data = db.session.query(Likes).filter(Likes.user_id == user_id, Likes.post_id == post_id).first()
     return 1 if data else 0
+
+
+def get_obj_post(data, current_user, type_post=0):
+    # 0 normal, 1 post share
+    result = {
+            "id": data[0].id,
+            "user": {
+                "id": data[1].id,
+                "username": data[1].username,
+                "avatar": data[1].avatar
+            },
+            "title": data[0].title,
+            "image": data[0].image,
+            "category": data[0].category,
+            "create_at": data[0].create_at,
+            "num_like": data[0].count_like,
+            "num_comment": data[0].count_comment,
+            "num_share": data[0].count_share,
+            'liked': check_user_like_post(current_user.id, data[0].id)
+        }
+
+    if type_post == 0:
+        return result
+    else:
+        post = (db.session.query(Posts, Users)
+                .outerjoin(Users, Users.id == Posts.user_id)
+                .filter(Posts.id == type_post, Posts.isDeleted == 0)
+                .first())
+        if not post:
+            result['post_share'] = {
+                "id": None,
+                "is_deleted": 1,
+                "title": None,
+                "image": None,
+                "category": None,
+                "create_at": data[0].create_at,
+                "user": {
+                    "id": None,
+                    "username": None,
+                    "avatar": None
+                }
+            }
+        else:
+            result['post_share'] = {
+                "id": data[0].id,
+                "is_deleted": 0,
+                "title": data[0].title,
+                "image": data[0].image,
+                "category": data[0].category,
+                "create_at": data[0].create_at,
+                "user": {
+                    "id": post[1].id,
+                    "username": post[1].username,
+                    "avatar": post[1].avatar
+                },
+            }
+
+        return result
 
 
 def get_posts_by_user_service(current_user):
@@ -49,21 +107,12 @@ def get_posts_by_user_service(current_user):
     if posts:
         data_rs = []
         for result in posts:
-            data = {
-                "id": result[0].id,
-                "user": {
-                    "id": result[1].id,
-                    "username": result[1].username,
-                    "avatar": result[1].avatar
-                },
-                "title": result[0].title,
-                "image": result[0].image,
-                "category": result[0].category,
-                "create_at": result[0].create_at,
-                "num_like": result[0].count_like,
-                "num_comment": result[0].count_comment,
-                'liked': check_user_like_post(current_user.id, result[0].id)
-            }
+            print(result[0].type_post)
+            if result[0].type_post == 0:
+                data = get_obj_post(result, current_user)
+            else:
+                data = get_obj_post(result, current_user, result[0].type_post)
+
             data_rs.append(data)
 
         return my_json(obj_success_paginate(data_rs, cur_page, max_page))
@@ -80,21 +129,10 @@ def get_post_by_id_service(post_id, current_user):
     if not post:
         return my_json(ERROR_POST_NOT_FOUND)
 
-    result = {
-        "id": post[0].id,
-        "user": {
-            "id": post[1].id,
-            "username": post[1].username,
-            "avatar": post[1].avatar
-        },
-        "title": post[0].title,
-        "image": post[0].image,
-        "category": post[0].category,
-        "create_at": post[0].create_at,
-        "num_like": post[0].count_like,
-        "num_comment": post[0].count_comment,
-        'liked': check_user_like_post(current_user.id, post[0].id)
-    }
+    if post.type_post == 0:
+        result = get_obj_post(post, current_user)
+    else:
+        result = get_obj_post(post, current_user, post.type_post)
 
     return my_json(result)
 
@@ -123,21 +161,11 @@ def get_new_feed_service(page_num, current_user):
     if posts:
         data_rs = []
         for result in posts:
-            data = {
-                "id": result[0].id,
-                "user": {
-                    "id": result[1].id,
-                    "username": result[1].username,
-                    "avatar": result[1].avatar
-                },
-                "title": result[0].title,
-                "image": result[0].image,
-                "category": result[0].category,
-                "create_at": result[0].create_at,
-                "num_like": result[0].count_like,
-                "num_comment": result[0].count_comment,
-                'liked': check_user_like_post(user_id, result[0].id)
-            }
+            if result[0].type_post == 0:
+                data = get_obj_post(result, current_user)
+            else:
+                data = get_obj_post(result, current_user, result[0].type_post)
+
             data_rs.append(data)
 
         return my_json(obj_success_paginate(data_rs, cur_page, max_page))
@@ -277,6 +305,76 @@ def create_post_service(current_user):
         return my_json(ERROR_DATA_NOT_MATCH)
 
 
+def notification_share(post_share, current_user, post, total_notification):
+    data_notification = {
+        "mess": "đã chia sẻ bài viết của bạn",
+        "post_id": post.id,
+        "user_id": current_user.id,
+        "user_name": current_user.username,
+        "avatar": current_user.avatar,
+        "num_share": post.count_share,
+        "post_share_id": post_share['id'],
+        "create_post": post_share['user_id'],
+        "create_at": post_share['create_at'],
+        "total_notification": total_notification
+    }
+
+    socketio.emit('notification_post', data_notification, room=f'post_{post.id}')
+
+    if current_user.id != post.user_id:
+        add_notification_collection(post.user_id, data_notification, type_notification=5)
+        socketio.emit('join_notification', data_notification, room=f'user_id_{post.user_id}')
+
+
+def create_post_share_service(current_user):
+    try:
+        user_id = current_user.id
+    except Exception as e:
+        print(e)
+        return my_json(ERROR_CHECK_TOKEN)
+
+    data = request.json
+
+    check_data = data and ('title' in data) and ('status' in data) and ('post_id' in data)
+
+    if check_data and user_id:
+
+        title = data["title"]
+        status = data['status']
+        post_share_id = data['post_id']
+        create_at = get_current_time()
+
+        try:
+            post = db.session.query(Posts).filter(Posts.id == post_share_id).first()
+            if not post:
+                return my_json(ERROR_POST_NOT_FOUND)
+
+            if post.user_id == user_id:
+                return my_json(ERROR_SHARE_YOUR_SELF_POST)
+
+            # update count share
+            post.count_share = post.count_share + 1
+
+            # update count notification
+            user = db.session.query(Users).filter(Users.id == post.user_id).first()
+            user.count_notification = user.count_notification + 1
+
+            new_post = Posts(title, '', user_id, status, 0, 0, create_at, post_share_id)
+
+            db.session.add(new_post)
+            db.session.commit()
+
+            post_share = post_schema.dump(new_post)
+            notification_share(post_share, current_user, post, user.count_notification)
+
+            return my_json(post_schema.dump(new_post))
+        except IndentationError:
+            db.session.rollback()
+            return my_json(ERROR_SAVE_DB)
+    else:
+        return my_json(ERROR_DATA_NOT_MATCH)
+
+
 def update_post_service(current_user):
     try:
         user_id = current_user.id
@@ -343,13 +441,25 @@ def delete_post_service(id_post, current_user):
         try:
             post = db.session.query(Posts).filter(Posts.id == id_post).first()
 
-            if post.user_id == user_id or current_user.role != 1:
-                return my_json(ERROR_USER_HAVE_NOT_ROLE)
+            if current_user.role != 1:
+                if post.user_id != user_id:
+                    return my_json(ERROR_USER_HAVE_NOT_ROLE)
+
+            if post.type_post != 0:
+                post_share = db.session.query(Posts).filter(Posts.id == post.type_post).first()
+                post_share.count_share = post_share.count_share - 1
+
+                data_notification = {
+                    "post_id": post_share.id,
+                    "num_share": post_share.count_share,
+                }
+                socketio.emit('notification_post', data_notification, room=f'post_{post_share.id}')
 
             post.isDeleted = 1
 
             post_data = post_schema.dump(post)
             db.session.commit()
+
             return my_json(post_data)
         except IndentationError:
             db.session.rollback()
@@ -555,7 +665,9 @@ def user_delete_comment_post_service(current_user, id_comment):
         post.count_comment = post.count_comment - 1
         db.session.commit()
 
+        data_comment = comment_schema.dump(comment)
         data_notification = {
+            "post_id": data_comment['post_id'],
             "num_comment": post.count_comment,
         }
         socketio.emit('notification_post', data_notification, room=f'post_{post.id}')
