@@ -2250,7 +2250,8 @@
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/facebook/chat/db_chat.py" beforeDir="false" afterPath="$PROJECT_DIR$/facebook/chat/db_chat.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/facebook/notification/db_notification.py" beforeDir="false" afterPath="$PROJECT_DIR$/facebook/notification/db_notification.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/facebook/posts/services.py" beforeDir="false" afterPath="$PROJECT_DIR$/facebook/posts/services.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/facebook/users/controller.py" beforeDir="false" afterPath="$PROJECT_DIR$/facebook/users/controller.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/facebook/users/services.py" beforeDir="false" afterPath="$PROJECT_DIR$/facebook/users/services.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/instance/facebook.db" beforeDir="false" afterPath="$PROJECT_DIR$/instance/facebook.db" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -2442,14 +2443,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1705236449798</updated>
-    </task>
-    <task id="LOCAL-00046" summary="Update feature: notification add friend">
-      <option name="closed" value="true" />
-      <created>1711606862785</created>
-      <option name="number" value="00046" />
-      <option name="presentableId" value="LOCAL-00046" />
-      <option name="project" value="LOCAL" />
-      <updated>1711606862785</updated>
     </task>
     <task id="LOCAL-00047" summary="Update api get new feed: fix user liked">
       <option name="closed" value="true" />
@@ -2835,7 +2828,15 @@
       <option name="project" value="LOCAL" />
       <updated>1716963739138</updated>
     </task>
-    <option name="localTasksCounter" value="95" />
+    <task id="LOCAL-00095" summary="Fix bug api get post by id">
+      <option name="closed" value="true" />
+      <created>1716968385260</created>
+      <option name="number" value="00095" />
+      <option name="presentableId" value="LOCAL-00095" />
+      <option name="project" value="LOCAL" />
+      <updated>1716968385260</updated>
+    </task>
+    <option name="localTasksCounter" value="96" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -2851,7 +2852,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="Update logic get new feed" />
     <MESSAGE value="Reset db" />
     <MESSAGE value="reset db" />
     <MESSAGE value="Update avatar, cover default" />
@@ -2874,9 +2874,10 @@
     <MESSAGE value="fix notification for user" />
     <MESSAGE value="BigUpdate: share post" />
     <MESSAGE value="Update db for share post" />
-    <MESSAGE value="Update config mongodb" />
     <MESSAGE value="Fix share post when post deleted" />
-    <option name="LAST_COMMIT_MESSAGE" value="Fix share post when post deleted" />
+    <MESSAGE value="Update config mongodb" />
+    <MESSAGE value="Fix bug api get post by id" />
+    <option name="LAST_COMMIT_MESSAGE" value="Fix bug api get post by id" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

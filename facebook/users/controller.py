@@ -3,7 +3,7 @@ from .services import (add_user_service, get_user_by_id_service,
                        update_profile_by_id_service, search_user_service,
                        user_login_service, upload_avatar_service, get_avatar_from_filename_service,
                        upload_cover_photo_service, get_cover_photo_from_filename_service, logout_user, refresh_service,
-                       find_user_service
+                       find_user_service, change_password_service
                        )
 from flask_jwt_extended import jwt_required, get_jwt, current_user, get_jwt_identity
 
@@ -78,3 +78,9 @@ def get_cover_photo(filename):
 def user_logout():
     claims = get_jwt()
     return logout_user(claims)
+
+
+@users.route("/user-management/user/change-password", methods=["PUT"])
+@jwt_required()
+def change_password():
+    return change_password_service(current_user)

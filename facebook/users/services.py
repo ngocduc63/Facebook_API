@@ -395,3 +395,31 @@ def logout_user(claims):
         return my_json("logout success")
     else:
         return my_json(ERROR_CHECK_TOKEN)
+
+
+def change_password_service(current_user):
+    try:
+        user_id = current_user.id
+    except Exception as e:
+        print(e)
+        return my_json(ERROR_CHECK_TOKEN)
+
+    data = request.json
+    check_data = data and ('password_last' in data) and ('password_new' in data)
+
+    if not check_data:
+        return my_json(ERROR_DATA_NOT_MATCH)
+
+    user = db.session.query(Users).filter(Users.id == user_id).first()
+
+    password_last = data['password_last']
+    password_new = data['password_new']
+    if len(password_new) < 6:
+        return my_json(ERROR_FORMAT_PASSWORD)
+
+    if not user.check_password(password=password_last):
+        my_json(ERROR_PASSWORD_NOT_MATCH)
+
+    user.set_password(password=password_new)
+    db.session.commit()
+    return my_json('change password success')
