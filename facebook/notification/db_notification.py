@@ -12,6 +12,7 @@ notifications = notification_db.get_collection("notifications")
 # type 2: notification for accept friend
 # type 3: notification for like
 # type 4: notification for comment
+# type 5: notification for share
 
 
 def add_notification_collection(user_id, data, type_notification):
@@ -26,7 +27,7 @@ def add_notification_collection(user_id, data, type_notification):
         }
     elif type_notification == 3:
         data = {
-            'user_id': data['post_id'],
+            'user_id': data['user_id'],
             'category_react': data['category_react'],
             'post_id': data['post_id'],
         }
@@ -34,6 +35,12 @@ def add_notification_collection(user_id, data, type_notification):
         data = {
             'user_id': data['user_id'],
             'post_id': data['post_id'],
+        }
+    elif type_notification == 5:
+        data = {
+            'user_id': data['user_id'],
+            'post_id': data['post_id'],
+            'post_share': data['post_share_id']
         }
 
     notifications.insert_one({
@@ -56,4 +63,3 @@ def get_notifications_collection(user_id, page):
         total_page += 1
 
     return result, total_page
-

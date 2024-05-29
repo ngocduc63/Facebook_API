@@ -475,7 +475,7 @@ def notification_like(data_like, current_user, post, total_notification):
     socketio.emit('notification_post', data_notification, room=f'post_{data_like["post_id"]}')
 
     if current_user.id != post.user_id:
-        add_notification_collection(post, data_notification, type_notification=3)
+        add_notification_collection(post.user_id, data_notification, type_notification=3)
         socketio.emit('join_notification', data_notification, room=f'user_id_{post.user_id}')
 
 
