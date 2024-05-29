@@ -119,10 +119,10 @@ def get_post_by_id_service(post_id, current_user):
     if not post:
         return my_json(ERROR_POST_NOT_FOUND)
 
-    if post.type_post == 0:
+    if post[0].type_post == 0:
         result = get_obj_post(post, current_user)
     else:
-        result = get_obj_post(post, current_user, post.type_post)
+        result = get_obj_post(post, current_user, post[0].type_post)
 
     return my_json(result)
 

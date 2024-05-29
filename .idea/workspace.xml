@@ -7,8 +7,12 @@
     <list default="true" id="23cb2c54-3c39-4df6-92f4-23e60e3d4d48" name="Changes" comment="Update config mongodb">
       <change afterPath="$PROJECT_DIR$/facebook/upload/avatar/gojo_1_1_1715442346.jpg" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/facebook/upload/avatar/gojo_1_1_1715614023.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/facebook/upload/avatar/gojo_1_1_1716957472.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/facebook/upload/avatar/gojo_1_1_1716957564.jpg" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/facebook/upload/avatar/gojo_1_3_1716820079.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/facebook/upload/avatar/gojo_2_1_1716957816.png" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/facebook/upload/post/avt_tet_1_1715790821.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/facebook/upload/post/avt_tet_1_1716961603.jpg" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/facebook/upload/post/avt_tet_2_1715440656.jpg" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/facebook/upload/post/cover_default_3_1716908755.jpeg" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/facebook/upload/post/img_test_3_1716908729.jpeg" afterDir="false" />
@@ -2439,14 +2443,6 @@
       <option name="presentableId" value="Default" />
       <updated>1705236449798</updated>
     </task>
-    <task id="LOCAL-00045" summary="Create config error code">
-      <option name="closed" value="true" />
-      <created>1711123339775</created>
-      <option name="number" value="00045" />
-      <option name="presentableId" value="LOCAL-00045" />
-      <option name="project" value="LOCAL" />
-      <updated>1711123339775</updated>
-    </task>
     <task id="LOCAL-00046" summary="Update feature: notification add friend">
       <option name="closed" value="true" />
       <created>1711606862785</created>
@@ -2831,7 +2827,15 @@
       <option name="project" value="LOCAL" />
       <updated>1716921007066</updated>
     </task>
-    <option name="localTasksCounter" value="94" />
+    <task id="LOCAL-00094" summary="Fix share post when post deleted">
+      <option name="closed" value="true" />
+      <created>1716963739137</created>
+      <option name="number" value="00094" />
+      <option name="presentableId" value="LOCAL-00094" />
+      <option name="project" value="LOCAL" />
+      <updated>1716963739138</updated>
+    </task>
+    <option name="localTasksCounter" value="95" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -2847,7 +2851,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="update cors" />
     <MESSAGE value="Update logic get new feed" />
     <MESSAGE value="Reset db" />
     <MESSAGE value="reset db" />
@@ -2870,9 +2873,10 @@
     <MESSAGE value="fix bug connect mongo db product" />
     <MESSAGE value="fix notification for user" />
     <MESSAGE value="BigUpdate: share post" />
-    <MESSAGE value="Update config mongodb" />
     <MESSAGE value="Update db for share post" />
-    <option name="LAST_COMMIT_MESSAGE" value="Update db for share post" />
+    <MESSAGE value="Update config mongodb" />
+    <MESSAGE value="Fix share post when post deleted" />
+    <option name="LAST_COMMIT_MESSAGE" value="Fix share post when post deleted" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
