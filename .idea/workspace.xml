@@ -5,17 +5,6 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="23cb2c54-3c39-4df6-92f4-23e60e3d4d48" name="Changes" comment="Update config mongodb">
-      <change afterPath="$PROJECT_DIR$/facebook/upload/avatar/gojo_1_1_1715442346.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/facebook/upload/avatar/gojo_1_1_1715614023.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/facebook/upload/avatar/gojo_1_1_1716957472.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/facebook/upload/avatar/gojo_1_1_1716957564.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/facebook/upload/avatar/gojo_1_3_1716820079.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/facebook/upload/avatar/gojo_2_1_1716957816.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/facebook/upload/post/avt_tet_1_1715790821.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/facebook/upload/post/avt_tet_1_1716961603.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/facebook/upload/post/avt_tet_2_1715440656.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/facebook/upload/post/cover_default_3_1716908755.jpeg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/facebook/upload/post/img_test_3_1716908729.jpeg" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/venv/Include/site/python3.12/greenlet/greenlet.h" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/venv/Lib/site-packages/Flask_Cors-4.0.0.dist-info/INSTALLER" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/venv/Lib/site-packages/Flask_Cors-4.0.0.dist-info/LICENSE" afterDir="false" />
@@ -2248,8 +2237,20 @@
       <change afterPath="$PROJECT_DIR$/venv/Scripts/unidecode.exe" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/venv/pyvenv.cfg" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/facebook/chat/db_chat.py" beforeDir="false" afterPath="$PROJECT_DIR$/facebook/chat/db_chat.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/facebook/notification/db_notification.py" beforeDir="false" afterPath="$PROJECT_DIR$/facebook/notification/db_notification.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/facebook/posts/services.py" beforeDir="false" afterPath="$PROJECT_DIR$/facebook/posts/services.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/facebook/upload/avatar/gojo_1_1_1715442346.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/facebook/upload/avatar/gojo_1_1_1715614023.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/facebook/upload/avatar/gojo_1_1_1716957472.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/facebook/upload/avatar/gojo_1_1_1716957564.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/facebook/upload/avatar/gojo_1_3_1716820079.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/facebook/upload/avatar/gojo_2_1_1716957816.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/facebook/upload/post/avt_tet_1_1715790821.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/facebook/upload/post/avt_tet_1_1716961603.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/facebook/upload/post/avt_tet_2_1715440656.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/facebook/upload/post/cover_default_3_1716908755.jpeg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/facebook/upload/post/gojo3.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/facebook/upload/post/img_test_3_1716908729.jpeg" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/instance/facebook.db" beforeDir="false" afterPath="$PROJECT_DIR$/instance/facebook.db" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -2441,14 +2442,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1705236449798</updated>
-    </task>
-    <task id="LOCAL-00049" summary="update db post with category, fix bug socket cors, add api get post by user">
-      <option name="closed" value="true" />
-      <created>1712936262773</created>
-      <option name="number" value="00049" />
-      <option name="presentableId" value="LOCAL-00049" />
-      <option name="project" value="LOCAL" />
-      <updated>1712936262773</updated>
     </task>
     <task id="LOCAL-00050" summary="upodate api message, save room chat id in friend table">
       <option name="closed" value="true" />
@@ -2834,7 +2827,15 @@
       <option name="project" value="LOCAL" />
       <updated>1716994349436</updated>
     </task>
-    <option name="localTasksCounter" value="98" />
+    <task id="LOCAL-00098" summary="Fix notification like">
+      <option name="closed" value="true" />
+      <created>1716997490996</created>
+      <option name="number" value="00098" />
+      <option name="presentableId" value="LOCAL-00098" />
+      <option name="project" value="LOCAL" />
+      <updated>1716997490996</updated>
+    </task>
+    <option name="localTasksCounter" value="99" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -2850,7 +2851,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="Update avatar, cover default" />
     <MESSAGE value="Update cors fe, uodate post image default" />
     <MESSAGE value="Update db notification(mongo), fix but socket with post (like, comment)" />
     <MESSAGE value="Update api get post by id" />
@@ -2873,9 +2873,10 @@
     <MESSAGE value="Fix share post when post deleted" />
     <MESSAGE value="Fix bug api get post by id" />
     <MESSAGE value="Update api change password" />
-    <MESSAGE value="Update config mongodb" />
     <MESSAGE value="Fix bug load notification" />
-    <option name="LAST_COMMIT_MESSAGE" value="Fix bug load notification" />
+    <MESSAGE value="Update config mongodb" />
+    <MESSAGE value="Fix notification like" />
+    <option name="LAST_COMMIT_MESSAGE" value="Fix notification like" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
