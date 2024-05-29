@@ -27,8 +27,23 @@ def check_user_like_post(user_id, post_id):
     return 1 if data else 0
 
 
+def create_obj_post_share(post=None):
+    return {
+            "id": post[0].id if post else None,
+            "is_deleted": 0 if post else 1,
+            "title": post[0].title if post else None,
+            "image": post[0].image if post else None,
+            "category": post[0].category if post else None,
+            "create_at": post[0].create_at if post else None,
+            "user": {
+                "id": post[1].id if post else None,
+                "username": post[1].username if post else None,
+                "avatar": post[1].avatar if post else None
+            },
+    }
+
+
 def get_obj_post(data, current_user, type_post=0):
-    # 0 normal, 1 post share
     result = {
             "id": data[0].id,
             "user": {
@@ -54,33 +69,9 @@ def get_obj_post(data, current_user, type_post=0):
                 .filter(Posts.id == type_post, Posts.isDeleted == 0)
                 .first())
         if not post:
-            result['post_share'] = {
-                "id": None,
-                "is_deleted": 1,
-                "title": None,
-                "image": None,
-                "category": None,
-                "create_at": data[0].create_at,
-                "user": {
-                    "id": None,
-                    "username": None,
-                    "avatar": None
-                }
-            }
+            result['post_share'] = create_obj_post_share()
         else:
-            result['post_share'] = {
-                "id": data[0].id,
-                "is_deleted": 0,
-                "title": data[0].title,
-                "image": data[0].image,
-                "category": data[0].category,
-                "create_at": data[0].create_at,
-                "user": {
-                    "id": post[1].id,
-                    "username": post[1].username,
-                    "avatar": post[1].avatar
-                },
-            }
+            result['post_share'] = create_obj_post_share(post)
 
         return result
 
@@ -107,7 +98,6 @@ def get_posts_by_user_service(current_user):
     if posts:
         data_rs = []
         for result in posts:
-            print(result[0].type_post)
             if result[0].type_post == 0:
                 data = get_obj_post(result, current_user)
             else:
@@ -345,7 +335,7 @@ def create_post_share_service(current_user):
         create_at = get_current_time()
 
         try:
-            post = db.session.query(Posts).filter(Posts.id == post_share_id).first()
+            post = db.session.query(Posts).filter(Posts.id == post_share_id, Posts.isDeleted == 0).first()
             if not post:
                 return my_json(ERROR_POST_NOT_FOUND)
 
