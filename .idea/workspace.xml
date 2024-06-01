@@ -2236,7 +2236,6 @@
       <change afterPath="$PROJECT_DIR$/venv/Scripts/pythonw.exe" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/venv/Scripts/unidecode.exe" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/venv/pyvenv.cfg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/facebook/chat/db_chat.py" beforeDir="false" afterPath="$PROJECT_DIR$/facebook/chat/db_chat.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/facebook/notification/db_notification.py" beforeDir="false" afterPath="$PROJECT_DIR$/facebook/notification/db_notification.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/instance/facebook.db" beforeDir="false" afterPath="$PROJECT_DIR$/instance/facebook.db" afterDir="false" />
@@ -2430,14 +2429,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1705236449798</updated>
-    </task>
-    <task id="LOCAL-00053" summary="Update api: update comment">
-      <option name="closed" value="true" />
-      <created>1713423172649</created>
-      <option name="number" value="00053" />
-      <option name="presentableId" value="LOCAL-00053" />
-      <option name="project" value="LOCAL" />
-      <updated>1713423172651</updated>
     </task>
     <task id="LOCAL-00054" summary="Config rooms member colection, update api get list chat">
       <option name="closed" value="true" />
@@ -2823,7 +2814,15 @@
       <option name="project" value="LOCAL" />
       <updated>1717250365016</updated>
     </task>
-    <option name="localTasksCounter" value="102" />
+    <task id="LOCAL-00102" summary="Update db">
+      <option name="closed" value="true" />
+      <created>1717252023201</created>
+      <option name="number" value="00102" />
+      <option name="presentableId" value="LOCAL-00102" />
+      <option name="project" value="LOCAL" />
+      <updated>1717252023201</updated>
+    </task>
+    <option name="localTasksCounter" value="103" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -2839,7 +2838,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="Update logic unfriend" />
     <MESSAGE value="fix notification for friend" />
     <MESSAGE value="Update count notification for user" />
     <MESSAGE value="fix logic notification for user when like, comment" />
@@ -2862,9 +2860,10 @@
     <MESSAGE value="Fix notification like" />
     <MESSAGE value="Update data base test" />
     <MESSAGE value="Update image test" />
-    <MESSAGE value="Update config mongodb" />
     <MESSAGE value="Fix get room chat and notification when not found user" />
-    <option name="LAST_COMMIT_MESSAGE" value="Fix get room chat and notification when not found user" />
+    <MESSAGE value="Update config mongodb" />
+    <MESSAGE value="Update db" />
+    <option name="LAST_COMMIT_MESSAGE" value="Update db" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
