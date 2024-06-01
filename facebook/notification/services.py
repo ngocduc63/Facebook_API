@@ -25,7 +25,7 @@ def get_notifications_for_user_service(current_user, page):
     for data in datas:
         user = Users.query.get(data['data']['user_id'])
         if not user:
-            return my_json(ERROR_USER_NOT_FOUND)
+            continue
 
         user_data = user_schema.dump(user)
         user_rs = {

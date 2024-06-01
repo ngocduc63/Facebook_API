@@ -6,7 +6,7 @@ from flask import request
 from facebook.model import Friends, Users
 from facebook.extension import db
 from facebook.facebook_ma import FriendSchema, UserSchema
-from bson import json_util
+from bson import json_util, ObjectId
 
 friend_schema = FriendSchema()
 user_schema = UserSchema()
@@ -51,6 +51,15 @@ def get_messages_room_service(current_user):
         return my_json(ERROR_FOUND_ROOM_CHAT)
 
 
+def check_exist_room(room_id):
+    friend = db.session.query(Friends).filter(Friends.id_room_chat == room_id).first()
+
+    if friend:
+        return True
+    else:
+        return False
+
+
 def get_messages_chat_list_service(current_user, page):
     try:
         user_id = current_user.id
@@ -60,4 +69,10 @@ def get_messages_chat_list_service(current_user, page):
 
     chat_list, total_page = get_rooms_for_user(user_id, page - 1)
 
-    return my_json(obj_success_paginate(json_util.dumps(chat_list), page, total_page))
+    chat_rs = []
+    for chat_item in chat_list:
+        room_id = str(ObjectId(chat_item['_id']['room_id']))
+        if check_exist_room(room_id):
+            chat_rs.append(chat_item)
+
+    return my_json(obj_success_paginate(json_util.dumps(chat_rs), page, total_page))

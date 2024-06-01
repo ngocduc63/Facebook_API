@@ -2238,19 +2238,9 @@
       <change afterPath="$PROJECT_DIR$/venv/pyvenv.cfg" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/facebook/chat/db_chat.py" beforeDir="false" afterPath="$PROJECT_DIR$/facebook/chat/db_chat.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/facebook/chat/services.py" beforeDir="false" afterPath="$PROJECT_DIR$/facebook/chat/services.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/facebook/notification/db_notification.py" beforeDir="false" afterPath="$PROJECT_DIR$/facebook/notification/db_notification.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/facebook/upload/avatar/gojo_1_1_1715442346.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/facebook/upload/avatar/gojo_1_1_1715614023.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/facebook/upload/avatar/gojo_1_1_1716957472.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/facebook/upload/avatar/gojo_1_1_1716957564.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/facebook/upload/avatar/gojo_1_3_1716820079.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/facebook/upload/avatar/gojo_2_1_1716957816.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/facebook/upload/post/avt_tet_1_1715790821.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/facebook/upload/post/avt_tet_1_1716961603.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/facebook/upload/post/avt_tet_2_1715440656.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/facebook/upload/post/cover_default_3_1716908755.jpeg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/facebook/upload/post/gojo3.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/facebook/upload/post/img_test_3_1716908729.jpeg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/facebook/notification/services.py" beforeDir="false" afterPath="$PROJECT_DIR$/facebook/notification/services.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/instance/facebook.db" beforeDir="false" afterPath="$PROJECT_DIR$/instance/facebook.db" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -2442,22 +2432,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1705236449798</updated>
-    </task>
-    <task id="LOCAL-00050" summary="upodate api message, save room chat id in friend table">
-      <option name="closed" value="true" />
-      <created>1713026286648</created>
-      <option name="number" value="00050" />
-      <option name="presentableId" value="LOCAL-00050" />
-      <option name="project" value="LOCAL" />
-      <updated>1713026286648</updated>
-    </task>
-    <task id="LOCAL-00051" summary="change notification add friend to notification common for user, update api get room chat">
-      <option name="closed" value="true" />
-      <created>1713112264977</created>
-      <option name="number" value="00051" />
-      <option name="presentableId" value="LOCAL-00051" />
-      <option name="project" value="LOCAL" />
-      <updated>1713112264977</updated>
     </task>
     <task id="LOCAL-00052" summary="Update api get post: config delete post">
       <option name="closed" value="true" />
@@ -2835,7 +2809,23 @@
       <option name="project" value="LOCAL" />
       <updated>1716997490996</updated>
     </task>
-    <option name="localTasksCounter" value="99" />
+    <task id="LOCAL-00099" summary="Update data base test">
+      <option name="closed" value="true" />
+      <created>1716999429209</created>
+      <option name="number" value="00099" />
+      <option name="presentableId" value="LOCAL-00099" />
+      <option name="project" value="LOCAL" />
+      <updated>1716999429209</updated>
+    </task>
+    <task id="LOCAL-00100" summary="Update image test">
+      <option name="closed" value="true" />
+      <created>1716999632080</created>
+      <option name="number" value="00100" />
+      <option name="presentableId" value="LOCAL-00100" />
+      <option name="project" value="LOCAL" />
+      <updated>1716999632080</updated>
+    </task>
+    <option name="localTasksCounter" value="101" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -2851,8 +2841,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="Update cors fe, uodate post image default" />
-    <MESSAGE value="Update db notification(mongo), fix but socket with post (like, comment)" />
     <MESSAGE value="Update api get post by id" />
     <MESSAGE value="Update logic unfriend" />
     <MESSAGE value="fix notification for friend" />
@@ -2874,9 +2862,11 @@
     <MESSAGE value="Fix bug api get post by id" />
     <MESSAGE value="Update api change password" />
     <MESSAGE value="Fix bug load notification" />
-    <MESSAGE value="Update config mongodb" />
     <MESSAGE value="Fix notification like" />
-    <option name="LAST_COMMIT_MESSAGE" value="Fix notification like" />
+    <MESSAGE value="Update data base test" />
+    <MESSAGE value="Update config mongodb" />
+    <MESSAGE value="Update image test" />
+    <option name="LAST_COMMIT_MESSAGE" value="Update image test" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
