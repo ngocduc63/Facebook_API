@@ -3,13 +3,30 @@ from .services import (add_user_service, get_user_by_id_service,
                        update_profile_by_id_service, search_user_service,
                        user_login_service, upload_avatar_service, get_avatar_from_filename_service,
                        upload_cover_photo_service, get_cover_photo_from_filename_service, logout_user, refresh_service,
-                       find_user_service, change_password_service
+                       find_user_service, change_password_service, handel_user_connect_service,
+                       handel_user_disconnect_service
                        )
 from flask_jwt_extended import jwt_required, get_jwt, current_user, get_jwt_identity
+from facebook.socketio_instance import socketio
+from flask_socketio import join_room, leave_room, emit
 
 users = Blueprint("users", __name__)
 
 
+# socket
+@socketio.on('connect')
+def handle_connect():
+    data_user_online = handel_user_connect_service()
+    emit('user_online', data_user_online, broadcast=True)
+
+
+@socketio.on('user_disconnecting')
+def handle_user_disconnecting(data):
+    data_user_online = handel_user_disconnect_service(data)
+    emit('user_online', data_user_online, broadcast=True)
+
+
+# api
 @users.route("/user-management/user/search", methods=["POST"])
 @jwt_required()
 def search_user():

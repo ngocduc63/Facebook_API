@@ -1,21 +1,9 @@
 from flask_socketio import SocketIO
-from flask import request
-import jwt
-from .config import JWT_SECRET_KEY
-from flask_jwt_extended import jwt_required
-from .extension import jwt
 from flask_socketio import join_room, leave_room
 from .chat.db_chat import get_room_collection
-from bson import json_util
 
 socketio = SocketIO(cors_allowed_origins="*")
 
-
-# @socketio.on('connect')
-# def handle_connect():
-#     query_string = request.query_string.decode("utf-8")
-#     query_params = dict(item.split("=") for item in query_string.split("&"))
-#     token = query_params.get('refresh_token')
 
 @socketio.on('create_room_call')
 def handel_create_room_call(data):

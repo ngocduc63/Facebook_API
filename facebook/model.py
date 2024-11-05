@@ -16,6 +16,7 @@ class Users(db.Model):
     gender = db.Column(db.Integer, nullable=False)
     role = db.Column(db.Integer)
     is_block = db.Column(db.Integer)
+    is_active = db.Column(db.Integer)
     count_notification = db.Column(db.Integer)
     create_at = db.Column(db.Integer, nullable=False)
 
@@ -33,9 +34,16 @@ class Users(db.Model):
         self.create_at = create_at
         self.is_block = 0
         self.count_notification = 0
+        self.is_active = 0
 
     def set_password(self, password):
         self.password_hash = generate_password_hash(password)
+
+    def set_active(self):
+        self.is_active = 1
+
+    def set_inactive(self):
+        self.is_active = 0
 
     def check_password(self, password):
         return check_password_hash(self.password_hash, password)

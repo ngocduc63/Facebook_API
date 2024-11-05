@@ -423,3 +423,36 @@ def change_password_service(current_user):
     user.set_password(password=password_new)
     db.session.commit()
     return my_json('change password success')
+
+
+def get_list_user_online():
+    users = db.session.query(Users).filter(Users.is_active == 1).all()
+    if users:
+        data_rs = []
+        for result in users:
+            data = {
+                "id": result.id,
+                "username": result.username,
+                "avatar": result.avatar,
+            }
+            data_rs.append(data)
+
+        return data_rs
+    else:
+        return []
+
+
+def handel_user_connect_service():
+    user_id = request.args.get('user_id')
+    user_info = db.session.query(Users).filter(Users.id == user_id).first()
+    user_info.set_active()
+    db.session.commit()
+    return get_list_user_online()
+
+
+def handel_user_disconnect_service(data):
+    user_id = data.get('user_id')
+    user_info = db.session.query(Users).filter(Users.id == user_id).first()
+    user_info.set_inactive()
+    db.session.commit()
+    return get_list_user_online()
