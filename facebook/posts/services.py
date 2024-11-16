@@ -387,6 +387,9 @@ def update_post_service(current_user):
     if check_data and user_id:
         id_post = data["id"]
         title_new = data["title"]
+        if contains_word_ignore_case(title_new):
+            return my_json(ERROR_CHECK_WORD)
+
         status_new = data['status']
 
         post = db.session.query(Posts).filter(Posts.id == id_post).first()
