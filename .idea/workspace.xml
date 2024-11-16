@@ -5,7 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="23cb2c54-3c39-4df6-92f4-23e60e3d4d48" name="Changes" comment="Update config mongodb">
-      <change afterPath="$PROJECT_DIR$/migrations/versions/a5c689498bc0_update_user_active.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/facebook/config_block_word.py" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/venv/Include/site/python3.12/greenlet/greenlet.h" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/venv/Lib/site-packages/Flask_Cors-4.0.0.dist-info/INSTALLER" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/venv/Lib/site-packages/Flask_Cors-4.0.0.dist-info/LICENSE" afterDir="false" />
@@ -2238,12 +2238,8 @@
       <change afterPath="$PROJECT_DIR$/venv/Scripts/unidecode.exe" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/venv/pyvenv.cfg" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/facebook/config.py" beforeDir="false" afterPath="$PROJECT_DIR$/facebook/config.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/facebook/model.py" beforeDir="false" afterPath="$PROJECT_DIR$/facebook/model.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/facebook/socketio_instance.py" beforeDir="false" afterPath="$PROJECT_DIR$/facebook/socketio_instance.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/facebook/users/controller.py" beforeDir="false" afterPath="$PROJECT_DIR$/facebook/users/controller.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/facebook/users/services.py" beforeDir="false" afterPath="$PROJECT_DIR$/facebook/users/services.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/instance/facebook.db" beforeDir="false" afterPath="$PROJECT_DIR$/instance/facebook.db" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/facebook/config_error_code.py" beforeDir="false" afterPath="$PROJECT_DIR$/facebook/config_error_code.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/facebook/posts/services.py" beforeDir="false" afterPath="$PROJECT_DIR$/facebook/posts/services.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -2434,14 +2430,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1705236449798</updated>
-    </task>
-    <task id="LOCAL-00055" summary="Config message fetch limit 10 to 20, fix notification when save mess">
-      <option name="closed" value="true" />
-      <created>1713718532040</created>
-      <option name="number" value="00055" />
-      <option name="presentableId" value="LOCAL-00055" />
-      <option name="project" value="LOCAL" />
-      <updated>1713718532041</updated>
     </task>
     <task id="LOCAL-00056" summary="update paginate for api get list room chat">
       <option name="closed" value="true" />
@@ -2827,7 +2815,15 @@
       <option name="project" value="LOCAL" />
       <updated>1717252352134</updated>
     </task>
-    <option name="localTasksCounter" value="104" />
+    <task id="LOCAL-00104" summary="Update feature user online">
+      <option name="closed" value="true" />
+      <created>1730791315995</created>
+      <option name="number" value="00104" />
+      <option name="presentableId" value="LOCAL-00104" />
+      <option name="project" value="LOCAL" />
+      <updated>1730791315995</updated>
+    </task>
+    <option name="localTasksCounter" value="105" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -2843,7 +2839,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="fix notification for friend" />
     <MESSAGE value="Update count notification for user" />
     <MESSAGE value="fix logic notification for user when like, comment" />
     <MESSAGE value="Update api for admin dashboard" />
@@ -2868,7 +2863,8 @@
     <MESSAGE value="Fix get room chat and notification when not found user" />
     <MESSAGE value="Update db" />
     <MESSAGE value="Update config mongodb" />
-    <option name="LAST_COMMIT_MESSAGE" value="Update config mongodb" />
+    <MESSAGE value="Update feature user online" />
+    <option name="LAST_COMMIT_MESSAGE" value="Update feature user online" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

@@ -10,9 +10,11 @@ import math
 from ..socketio_instance import socketio
 from ..config_error_code import (ERROR_DATA_NOT_MATCH, ERROR_FILE_NULL, ERROR_UPLOAD_FILE, ERROR_CHECK_TOKEN,
                                  ERROR_SAVE_DB, ERROR_USER_HAVE_NOT_ROLE, ERROR_POST_NOT_FOUND, ERROR_LIKE_NOT_FOUND,
-                                 ERROR_COMMENT_NOT_FOUND, ERROR_LIKE_IN_POST_EXIST, ERROR_SHARE_YOUR_SELF_POST)
+                                 ERROR_COMMENT_NOT_FOUND, ERROR_LIKE_IN_POST_EXIST, ERROR_SHARE_YOUR_SELF_POST,
+                                 ERROR_CHECK_WORD)
 from sqlalchemy import or_
 from ..notification.db_notification import add_notification_collection
+from ..config_block_word import contains_word_ignore_case
 
 UPLOAD_POST_FOLDER = "upload/post"
 
@@ -262,6 +264,9 @@ def create_post_service(current_user):
     if check_data and user_id:
 
         title = data["title"]
+        if contains_word_ignore_case(title):
+            return my_json(ERROR_CHECK_WORD)
+
         status = data['status']
         image_str = ""
         is_delete = 0
@@ -330,6 +335,9 @@ def create_post_share_service(current_user):
     if check_data and user_id:
 
         title = data["title"]
+        if contains_word_ignore_case(title):
+            return my_json(ERROR_CHECK_WORD)
+
         status = data['status']
         post_share_id = data['post_id']
         create_at = get_current_time()
@@ -597,6 +605,8 @@ def user_comment_post_service(current_user):
     if check_data:
         id_post = data['id_post']
         content = data['content']
+        if contains_word_ignore_case(content):
+            return my_json(ERROR_CHECK_WORD)
 
         post = db.session.query(Posts).filter(Posts.id == id_post).first()
         if not post:
@@ -677,6 +687,8 @@ def update_comment_service():
 
     id_comment = data['id_comment']
     content = data['content']
+    if contains_word_ignore_case(content):
+        return my_json(ERROR_CHECK_WORD)
 
     comment = db.session.query(Comments).filter(Comments.id == id_comment, Comments.isDeleted != 1).first()
 
