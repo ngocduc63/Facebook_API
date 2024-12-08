@@ -21,6 +21,7 @@ from ..chat.db_chat import update_username_in_room, update_avatar_in_room
 
 
 regex_email = r'\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,7}\b'
+regex = r"^(?=.*[A-Z])(?=.*\d)(?=.*[@#$%^&*!()_+=\-\\|`~[\]{};:'\",.<>?/]).{8,16}$"
 UPLOAD_AVATAR_FOLDER = "upload/avatar"
 UPLOAD_COVER_PHOTO_FOLDER = "upload/cover_photo"
 
@@ -40,7 +41,7 @@ def add_user_service():
         if not re.fullmatch(regex_email, email):
             return my_json(ERROR_FORMAT_EMAIL)
 
-        if len(password) < 6:
+        if not re.match(regex, password):
             return my_json(ERROR_FORMAT_PASSWORD)
 
         try:
